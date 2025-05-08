@@ -1,9 +1,9 @@
 {
   "mainAssemblyName": "lwa",
   "resources": {
-    "hash": "sha256-SYtVH5avhIIS0OhMQHRuXPzZBVaDPpfczr/xo6PZYIc=",
+    "hash": "sha256-hCA0ZhXpv3UFWy37nY5BYmGRIldtPnq+h03Nw0mmR3c=",
     "fingerprinting": {
-      "lwa.hleagk6f1z.wasm": "lwa.wasm",
+      "lwa.rkyril9xka.wasm": "lwa.wasm",
       "Microsoft.AspNetCore.Components.py7zoml2z4.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.pq1s9tpl5w.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.ojjbeuchn6.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
@@ -64,7 +64,7 @@
       "System.Runtime.InteropServices.JavaScript.era55l3sbb.wasm": "sha256-uo4WQ39eiOB+w/weMzCVCfXQey09VlzpTm+e6aR83IA="
     },
     "assembly": {
-      "lwa.hleagk6f1z.wasm": "sha256-m5dsPToC9JTvNqNSPNOxnH8irqQoW/DbiLZ6QIFC/I0=",
+      "lwa.rkyril9xka.wasm": "sha256-y30Kos9ipRVZ+4N0Y404mwyURpboXy+1DIfZJFaP/BQ=",
       "Microsoft.AspNetCore.Components.py7zoml2z4.wasm": "sha256-7+x5PTgKh+K55/ec3dctC+YfXUurYbxmUPLfnIQYHGU=",
       "Microsoft.AspNetCore.Components.Web.pq1s9tpl5w.wasm": "sha256-L/vXNWFdWzaeEfyWsCdr4529OiDf9c+AR/CT6Lw5ZCw=",
       "Microsoft.AspNetCore.Components.WebAssembly.ojjbeuchn6.wasm": "sha256-TMJrwxmh7raq50FXlf8OFb9/PXWC0dJ48IVhshQE3jE=",
