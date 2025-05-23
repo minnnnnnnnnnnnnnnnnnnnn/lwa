@@ -1,0 +1,87 @@
+table 
+{
+    text-align : center ; 
+}
+table a , table a:visited 
+{
+     color : #000 ; 
+}
+tr 
+{
+    border-bottom : 1px solid #000 ; 
+    margin : .2rem ; 
+}
+td 
+{
+    margin : .25rem .5rem ; 
+}
+.pq form 
+{
+  width : 20rem ; 
+  height : 2rem ; 
+  display : flex ; 
+  justify-content : center ; 
+  align-items : center ; 
+}
+.pq form input:first-child 
+{
+  width : 17rem ; 
+  height : 2rem ; 
+  border-radius : 1rem ; 
+  border : 1px solid #000 ; 
+  outline : 0 ; 
+}
+.pq form input:first-child::placeholder 
+{
+  font-family : "Noto Sans TC" ; 
+  font-weight : 500 ; 
+  opacity : .65 ; 
+  text-indent : .5rem ; 
+}
+.p h1 
+{
+    font-family : "Noto Sans Display" , "Noto Serif TC" ; 
+}
+.p tr td:first-child 
+{
+    width : 2em ; 
+}
+.p tr td:nth-child(2) 
+{
+    text-align : left ; 
+}
+.p tr td:last-child 
+{
+    width : 4em ; 
+}
+dt 
+{
+    font-weight : 700 ; 
+    font-size : 1.15rem ; 
+}
+/* dd 
+{
+    font-size : 1.25rem ; 
+} */
+.ex-link 
+{
+    width : 1em ; 
+    height : 1em ; 
+}
+.c tr td:first-child 
+{
+    width : 7.5em ; 
+    height : 3em ; 
+}
+.c tr td:nth-child(2) 
+{
+    width : 5em ; 
+}
+.c tr td:nth-child(3) 
+{
+    width : 4.5em ; 
+}
+.c tr td:last-child 
+{
+    width : 4em ; 
+}

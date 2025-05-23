@@ -1,0 +1,77 @@
+@page "/laws"
+@inject HttpClient Http
+
+<div class="bread">
+    <span>現在位置：</span>
+    <ul>
+        <li><a href="/">首頁</a></li>
+        <li>法規查詢</li>
+    </ul>
+</div>
+<PageTitle>法規查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+
+@if (laws == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var law in laws[0].Laws)
+            {
+                <tr>
+                    <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private LawRoot[]? laws;
+
+    protected override async Task OnInitializedAsync()
+    {
+        laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
+    }
+
+    public class LawRoot
+    {
+        public string UpdateDate { get; set; }
+        public L[] Laws { get; set; }
+    }
+    public class L 
+    {
+        public string LawLevel { get; set; }
+        public string LawName { get; set; }
+        public string LawURL { get; set; }
+        public string LawCategory { get; set; }
+        public string LawModifiedDate { get; set; }
+        public string? LawEffectiveDate { get; set; }
+        public string? LawEffectiveNote { get; set; }
+        public string? LawAbandonNote { get; set; }
+        public string LawHasEngVersion { get; set; }
+        public string? EngLawName { get; set; }
+        public Attachements[]? LawAttachements { get; set; }
+        public string LawHistories { get; set; }
+        public string? LawForeword { get; set; }
+        public A[] LawArticles { get; set; }
+    }
+    public class A 
+    {
+        public string ArticleType { get; set; }
+        public string? ArticleNo { get; set; }
+        public string ArticleContent { get; set; }
+    }
+    public class Attachements 
+    {
+        public string FileName { get; set; }
+        public string FileURL { get; set; }
+    }
+}

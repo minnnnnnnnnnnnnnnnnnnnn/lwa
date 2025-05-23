@@ -1,0 +1,13 @@
+:root 
+{
+    --header-bg : #057b7b ; 
+    --header-top-bg : #135858 ; 
+    --header-padding-lr : 1rem ; 
+    --header-hr : #5ca9a9 ; 
+    --header-a : #fff ; 
+    --header-a-hover : #fc0 ; 
+    --header-a-focus : #fc0 ; 
+    --footer-padding-lr : 1rem ; 
+    --selection-color : #fff ; 
+    --selection-bg : #000 ; 
+}

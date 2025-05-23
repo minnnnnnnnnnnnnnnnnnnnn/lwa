@@ -1,0 +1,109 @@
+@page "/cases"
+@inject HttpClient Http
+@* @inject NavigationManager NavManager *@
+
+<PageTitle>判例查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+
+@if (cases == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>判決字號</th>
+                <th>類別</th>
+                @* <th>判決日期</th>
+                <th>聲請人</th>
+                <th>原告</th>
+                <th>被告</th> *@
+                <th>標題或案由</th>
+                @* <th>主文</th>
+                <th>狀態</th>
+                <th>判決全文（URL）</th> *@
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var cass in @cases[0].Cases)
+        {
+            <tr>
+                <td><a href="/cases/detail?case=@cass.No" target="_self">@cass.No</a></td>
+                <td>@cass.Category</td>
+                @* <td>@cass.DeliberationDate</td>
+                <td>@cass.Petitioner</td>
+                <td>@cass.Plaintiff</td>
+                <td>@cass.Defendant</td> *@
+                @if( cass.Title != "" ) 
+                {
+                    <td>@cass.Title</td>
+                }
+                else 
+                {
+                    <td>@cass.Cause</td>
+                }@*
+                <td>@cass.Syllabus</td>
+                <td>@cass.State</td>
+                <td>@cass.FullJudgement</td> *@
+            </tr>
+            @* @foreach (var cassr in @cass.Rulings)
+            {
+                <tr>
+                    <td>@cassr.RulingNo</td>
+                    <td>@cassr.FullRulingURL</td>
+                </tr>
+            }
+            @foreach (var casso in @cass.Opinions)
+            {
+                <tr>
+                    <td>@casso.Type</td> 
+                    <td>@casso.Member</td> 
+                    <td>@casso.URL</td> 
+                </tr>
+            } *@
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Casess[]? cases;
+    protected override async Task OnInitializedAsync()
+    {
+        cases = await Http.GetFromJsonAsync<Casess[]>("json/cases.json");
+    }
+
+    public class Casess
+    {
+        public string UpdateDate { get; set; }
+        public Case[] Cases { get; set; }
+    }
+    public class Case 
+    {
+        public string No { get; set; }
+        public string Category { get; set; }
+        public string? DeliberationDate { get; set; }
+        public string? Petitioner { get; set; }
+        public string? Plaintiff { get; set; }
+        public string? Defendant { get; set; }
+        public string? Title { get; set; }
+        public string? Cause { get; set; }
+        public string? Syllabus { get; set; }
+        public string? State { get; set; }
+        public string? FullJudgement { get; set; }
+        public R[]? Rulings { get; set; }
+        public O[]? Opinions { get; set; } 
+    }
+    public class R 
+    {
+        public string RulingNo { get; set; }
+        public string FullRulingURL { get; set; }
+    }
+    public class O 
+    {
+        public string Type { get; set; }
+        public string Member { get; set; }
+        public string URL { get; set; }
+    }
+}

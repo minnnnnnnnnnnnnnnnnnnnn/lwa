@@ -1,0 +1,57 @@
+@page "/parties"
+@inject HttpClient Http
+
+<PageTitle>政黨查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+
+@if (p == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>政黨名稱</th>
+                <th>負責人</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var partiess in p[0].Parties)
+            {
+                <tr>
+                    <td>@partiess.Party</td>
+                    <td>@partiess.PartyName</td>
+                    <td>@partiess.Chairman</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Py[]? p;
+
+    protected override async Task OnInitializedAsync()
+    {
+        p = await Http.GetFromJsonAsync<Py[]>("json/parties.json");
+    }
+
+    public class Py
+    {
+        public string UpdateDate { get; set; }
+        public P[]? Parties { get; set; }
+    }
+    public class P 
+    {
+        public int Party { get; set; }
+        public string PartyName { get; set; }
+        public string? PartyAbbreviation { get; set; }
+        public string Chairman { get; set; }
+        public string PartyState { get; set; }
+        public string? PartyEstablishedDate { get; set; }
+        public string? PartyRegisteredDate { get; set; }
+        public string? PartyURL { get; set; }
+    }
+}

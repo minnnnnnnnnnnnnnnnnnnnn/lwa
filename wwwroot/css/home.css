@@ -1,0 +1,29 @@
+/* guide */
+.guide 
+{}
+
+
+/* open */
+.open 
+{}
+
+
+/* privacy */
+.priv 
+{}
+
+
+/* relatives */
+.rel a 
+{
+    color : #c7a001 ; 
+}
+.rel div > ul > li:first-child 
+{
+    font-size : 1.5rem ; 
+    font-weight : 700 ; 
+}
+.rel div > ul > li:not(:first-child) , div > ul > ul li 
+{
+    text-indent : 1em ; 
+}

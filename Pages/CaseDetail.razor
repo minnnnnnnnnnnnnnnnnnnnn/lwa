@@ -1,0 +1,201 @@
+@page "/cases/detail"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+
+<PageTitle>@a - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+@if( a == "" || a == null ) 
+{
+    <span>沒有這個東西啦！</span>
+}
+<h1>@a</h1>
+@if (cases == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>判決字號</th>
+                <th>類別</th>
+                @if( @cases[0].Cases[i].DeliberationDate != "" ) 
+                {
+                    <th>判決日期</th>
+                }
+                @if( @cases[0].Cases[i].Petitioner != "" ) 
+                {
+                <th>聲請人</th>
+                }
+                @if( @cases[0].Cases[i].Plaintiff != "" ) 
+                {
+                    <th>原告</th>
+                }
+                @if( @cases[0].Cases[i].Defendant != "" ) 
+                {
+                    <th>被告</th>
+                }
+                @if( @cases[0].Cases[i].Title != "" ) 
+                {
+                    <th>標題</th>
+                }
+                @if( @cases[0].Cases[i].Cause != "" ) 
+                {
+                    <th>案由</th>
+                }
+                @if( @cases[0].Cases[i].Syllabus != "" ) 
+                {
+                    <th>主文</th>
+                }
+                @if( @cases[0].Cases[i].State != "" ) 
+                {
+                    <th>狀態</th>
+                }
+                @if( @cases[0].Cases[i].FullJudgement != "" ) 
+                {
+                    <th>判決全文（URL）</th>
+                }
+                @if (@cases[0].Cases[i].Rulings.Length != 0)
+                {
+                    <th>裁定</th>
+                }
+                @if (@cases[0].Cases[i].Opinions.Length != 0)
+                {
+                    <th>意見書</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@cases[0].Cases[i].No</td>
+                <td>@cases[0].Cases[i].Category</td>
+                @if( @cases[0].Cases[i].DeliberationDate != "" ) 
+                {
+                    <td>@cases[0].Cases[i].DeliberationDate</td>
+                }
+                @if( @cases[0].Cases[i].Petitioner != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Petitioner</td>
+                }
+                @if( @cases[0].Cases[i].Plaintiff != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Plaintiff</td>
+                }
+                @if( @cases[0].Cases[i].Defendant != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Defendant</td>
+                }
+                @if( @cases[0].Cases[i].Title != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Title</td>
+                }
+                @if( @cases[0].Cases[i].Cause != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Cause</td>
+                }
+                @if( @cases[0].Cases[i].Syllabus != "" ) 
+                {
+                    <td>@cases[0].Cases[i].Syllabus</td>
+                }
+                @if( @cases[0].Cases[i].State != "" ) 
+                {
+                    <td>@cases[0].Cases[i].State</td>
+                }
+                @if( @cases[0].Cases[i].FullJudgement != "" ) 
+                {
+                    <td><a href="@cases[0].Cases[i].FullJudgement" target="_blank">@cases[0].Cases[i].FullJudgement</a></td>
+                }
+                @foreach (var cassr in @cases[0].Cases[i].Rulings)
+                {
+                    <table class="table">
+                        <thead>
+                            <th>裁定字號</th>
+                            <th>全文網址</th>
+                        </thead>
+                        <tbody>
+                            <td>@cassr.RulingNo</td>
+                            <td><a href="@cassr.FullRulingURL" target="_blank">@cassr.FullRulingURL</a></td>
+                        </tbody>
+                    </table>
+                }
+                @foreach (var casso in @cases[0].Cases[i].Opinions)
+                {
+                    <table class="table">
+                        <thead>
+                            <th>類型</th>
+                            <th>委員</th>
+                            <th>全文網址</th>
+                        </thead>
+                        <tbody>
+                            <td>@casso.Type</td> 
+                            <td>@casso.Member</td> 
+                            <td><a href="@casso.URL" target="_blank">@casso.URL</a></td>
+                        </tbody>
+                    </table>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private Casess[]? cases;
+    private string a;
+    int i ; 
+    protected override void OnInitialized()
+    {
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        var aaaaaa = NavManager.Uri ; 
+        var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        if(queryStrings.TryGetValue("case", out var aaa))
+        {
+            a = aaa;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        cases = await Http.GetFromJsonAsync<Casess[]>("json/cases.json");
+        for (int iii = 0; iii < cases[0].Cases.Length; iii++)
+        {
+            if (a == cases[0].Cases[iii].No)
+            {
+                i = iii;
+                break;
+            }
+        }
+    }
+
+    public class Casess
+    {
+        public string UpdateDate { get; set; }
+        public Case[] Cases { get; set; }
+    }
+    public class Case 
+    {
+        public string No { get; set; }
+        public string Category { get; set; }
+        public string? DeliberationDate { get; set; }
+        public string? Petitioner { get; set; }
+        public string? Plaintiff { get; set; }
+        public string? Defendant { get; set; }
+        public string? Title { get; set; }
+        public string? Cause { get; set; }
+        public string? Syllabus { get; set; }
+        public string? State { get; set; }
+        public string? FullJudgement { get; set; }
+        public R[]? Rulings { get; set; }
+        public O[]? Opinions { get; set; } 
+    }
+    public class R 
+    {
+        public string RulingNo { get; set; }
+        public string FullRulingURL { get; set; }
+    }
+    public class O 
+    {
+        public string Type { get; set; }
+        public string Member { get; set; }
+        public string URL { get; set; }
+    }
+}
