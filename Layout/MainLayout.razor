@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject HttpClient Http
 <div>
     <header>
         <div class="top-guide">
@@ -82,6 +83,46 @@
 </div>
 
 @code {
+    private L[]? l;
+    private P[]? p;
+    private C[]? c;
+    public int lty ;
+    public int ltm ;
+    public int ltd ;
+    public int pty ;
+    public int ptm ;
+    public int ptd ;
+    public int cty ;
+    public int ctm ;
+    public int ctd ;
+    protected override async Task OnInitializedAsync()
+    {
+        l = await Http.GetFromJsonAsync<L[]>("json/laws.json");
+        p = await Http.GetFromJsonAsync<P[]>("json/parties.json");
+        c = await Http.GetFromJsonAsync<C[]>("json/cases.json");
+        lty = Int32.Parse(l[0].UpdateDate.Split('/')[0]) - 1911 ;
+        pty = Int32.Parse(p[0].UpdateDate.Split('/')[0]) - 1911 ;
+        cty = Int32.Parse(c[0].UpdateDate.Split('/')[0]) - 1911 ;
+        lty = Int32.Parse(l[0].UpdateDate.Split('/')[1]);
+        pty = Int32.Parse(p[0].UpdateDate.Split('/')[1]);
+        cty = Int32.Parse(c[0].UpdateDate.Split('/')[1]);
+        lty = Int32.Parse(l[0].UpdateDate.Split('/')[2]);
+        pty = Int32.Parse(p[0].UpdateDate.Split('/')[2]);
+        cty = Int32.Parse(c[0].UpdateDate.Split('/')[2]);
+    }
+    public class L
+    {
+        public string UpdateDate { get; set; }
+    }
+    public class P
+    {
+        public string UpdateDate { get; set; }
+    }
+
+    public class C
+    {
+        public string UpdateDate { get; set; }
+    }
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
