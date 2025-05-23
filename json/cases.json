@@ -1,0 +1,95 @@
+[
+    {
+        "UpdateDate": "2025/05/03",
+        "Cases": [
+            {
+                "No": "110學年中一中釋裁字第1號",
+                "Category": "章程訴訟",
+                "DeliberationDate": "20220309",
+                "Petitioner": "學生議員 朱永城等15人。",
+                "Plaintiff": "",
+                "Defendant": "",
+                "Title": "確認學生議會幹部與議員關係身份案",
+                "Cause": "學生議員聲請確認學生議會幹部與議員關係身份案，聲請解釋案。",
+                "Syllabus": "本件不受理。",
+                "State": "最終判決",
+                "FullJudgement": "",
+                "Rulings": [
+                    {
+                        "RulingNo": "110學年中一中釋裁字第1號裁定",
+                        "FullRulingURL": "https://drive.google.com/file/d/1Pq6MkzO_LftLh5UiLoYDBBB2fJBBNxAT/view"
+                    }
+                ],
+                "Opinions": [
+                    {
+                        "Type": "協同意見書",
+                        "Member": "林佑韋",
+                        "URL": "https://drive.google.com/file/d/1CdsZiP_LLC8TwOYu52O6HZpTavqFxOYG/view"
+                    }
+                ]
+            },
+            {
+                "No": "中一中評委第二庭訴字第1號",
+                "Category": "一般訴訟",
+                "DeliberationDate": "20221101",
+                "Petitioner": "",
+                "Plaintiff": "曾奕翔",
+                "Defendant": "臺中一中學生會選舉委員會",
+                "Title": "",
+                "Cause": "選舉無效之訴",
+                "Syllabus": "原告之訴駁回",
+                "State": "最終判決",
+                "FullJudgement": "https://drive.google.com/file/d/1xS2QQ_XKnrNCfCPx1X8KCQcRA5Xv_X8u/view",
+                "Rulings": [],
+                "Opinions": []
+            },
+            {
+                "No": "中一中評委第二庭訴字第2號",
+                "Category": "一般訴訟",
+                "DeliberationDate": "20240920",
+                "Petitioner": "",
+                "Plaintiff": "陳宣丞",
+                "Defendant": "臺中一中學生議會",
+                "Title": "",
+                "Cause": "選舉無效之訴",
+                "Syllabus": "被告於民國 113 年 9 月 11 日召開之期初大會所為之常務委員選舉之決議，應予撤銷。",
+                "State": "最終判決",
+                "FullJudgement": "https://drive.google.com/file/d/1O5bUixwpn9YgCI_7t_3oXPe4aqsrAV8q/view",
+                "Rulings": [
+                    {
+                        "RulingNo": "中一中評委第二庭訴字第2號裁定-1",
+                        "FullRulingURL": "https://drive.google.com/file/d/1nXddK3MuqipbVYFFT9WgCB_mqzfifLDV/view?usp=sharing"
+                    },
+                    {
+                        "RulingNo": "中一中評委第二庭訴字第2號裁定-2",
+                        "FullRulingURL": "https://drive.google.com/file/d/1cvCeRjdo5AlPCapTGrXqELGEwRXmvXEN/view?usp=sharing"
+                    },
+                    {
+                        "RulingNo": "中一中評委第二庭訴字第2號裁定-3",
+                        "FullRulingURL": "https://drive.google.com/file/d/1Im3oSlSdH1wSAz7Quh2ihjV5A6Av9aPh/view?usp=sharing"
+                    },
+                    {
+                        "RulingNo": "中一中評委第二庭訴字第2號裁定-4",
+                        "FullRulingURL": "https://drive.google.com/file/d/12GL4X5GPgVEYFqOIGp8eiE0m9SWLOyzD/view?usp=sharing"
+                    }
+                ],
+                "Opinions": []
+            },
+            {
+                "No": "中一中評委第二庭訴字第3號",
+                "Category": "一般訴訟",
+                "DeliberationDate": "",
+                "Petitioner": "",
+                "Plaintiff": "梁睿頤",
+                "Defendant": "臺中一中學生會秘書處",
+                "Title": "",
+                "Cause": "確認行政處分無效合併請求損害賠償之訴",
+                "Syllabus": "",
+                "State": "準備程序終結。",
+                "FullJudgement": "",
+                "Rulings": [],
+                "Opinions": []
+            }
+        ]
+    }
+]
