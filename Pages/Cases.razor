@@ -108,7 +108,7 @@ else
                         }
                     }
                 }
-                else if( cas.Opinions.Length != 0 ) 
+                @if( cas.Opinions.Length != 0 ) 
                 {
                     @foreach (var o in cas.Opinions)
                     { 
@@ -130,7 +130,7 @@ else
                         }
                     }
                 }
-                else if ( cas.No.Contains(a) || cas.Category.Contains(a) )
+                @if ( cas.No.Contains(a) || cas.Category.Contains(a) )
                 {
                     <tr>
                         <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
