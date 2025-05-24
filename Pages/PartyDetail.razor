@@ -1,0 +1,111 @@
+@page "/parties/detail"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+<PageTitle>@p[0].Parties[Int32.Parse(a)].PartyName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+@* @if (a == 0 || a == null)
+{
+    <PageTitle>Loading - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <span>沒有這個東西啦！</span>
+} *@
+<h1>@p[0].Parties[Int32.Parse(a)].PartyName</h1>
+@if (p == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>政黨名稱</th>
+                @if (@p[0].Parties[i].PartyAbbreviation != "")
+                {
+                    <th>政黨簡稱</th>
+                }
+                <th>政黨負責人</th>
+                <th>狀態</th>
+                @if (@p[0].Parties[i].PartyRegisteredDate != "")
+                {
+                    <th>註冊日期</th>
+                }
+                @if (@p[0].Parties[i].PartyEstablishedDate != "")
+                {
+                    <th>成立日期</th>
+                }
+                @if (@p[0].Parties[i].PartyURL != "")
+                {
+                    <th>政黨官網</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@p[0].Parties[i].PartyName</td>
+                @if (@p[0].Parties[i].PartyAbbreviation != "")
+                {
+                    <td>@p[0].Parties[i].PartyAbbreviation</td>
+                }
+                <td>@p[0].Parties[i].Chairman</td>
+                <td>@p[0].Parties[i].PartyState</td>
+                @if (@p[0].Parties[i].PartyRegisteredDate != "")
+                {
+                    <td>@p[0].Parties[i].PartyRegisteredDate</td>
+                }
+                @if (@p[0].Parties[i].PartyEstablishedDate != "")
+                {
+                    <td>@p[0].Parties[i].PartyEstablishedDate</td>
+                }
+                @if (@p[0].Parties[i].PartyURL != "")
+                {
+                    <td><a href="@p[0].Parties[i].PartyURL" target="_blank">@p[0].Parties[i].PartyURL</a></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
+
+@code {
+    private Py[]? p;
+    private string a;
+    int i;
+    protected override void OnInitialized()
+    {
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        var aaaaaa = NavManager.Uri;
+        var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        if (queryStrings.TryGetValue("party", out var aaa))
+        {
+            a = aaa; 
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        p = await Http.GetFromJsonAsync<Py[]>("json/parties.json");
+        for (int iii = 0; iii < p[0].Parties.Length; iii++)
+        {
+            if (Int32.Parse(a) == p[0].Parties[iii].Party)
+            {
+                i = iii;
+                break;
+            }
+        }
+    }
+
+    public class Py
+    {
+        public string UpdateDate { get; set; }
+        public P[]? Parties { get; set; }
+    }
+    public class P
+    {
+        public int Party { get; set; }
+        public string PartyName { get; set; }
+        public string? PartyAbbreviation { get; set; }
+        public string Chairman { get; set; }
+        public string PartyState { get; set; }
+        public string? PartyEstablishedDate { get; set; }
+        public string? PartyRegisteredDate { get; set; }
+        public string? PartyURL { get; set; }
+    }
+}
