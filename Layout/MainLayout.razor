@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject HttpClient Http
+@inject NavigationManager N
 <div>
     <header>
         <div class="top-guide">
@@ -24,14 +25,14 @@
         </div>
         <nav @onclick="ToggleNavMenu" class="@NavMenuCssClass">
             <ul>
-                <li><a href="">中央法規</a></li>
-                <li><a href="">行政法規</a></li>
-                <li><a href="">立法法規</a></li>
-                <li><a href="">司法法規</a></li>
-                <li><a href="">選舉法規</a></li>
-                <li><a href="cases">判例查詢</a></li>
-                <li><a href="parties">政黨查詢</a></li>
-                <li><a href="rel">相關連結</a></li>
+                <li><a @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
+                <li><a @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
+                <li><a @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
+                <li><a @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
+                <li><a @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
+                <li><a @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
+                <li><a @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
+                <li><a @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
             </ul>
         </nav>
     </header>
@@ -43,14 +44,14 @@
     <footer>
         <div class="footer-upper">
             <ul>
-                <li><a href="">中央法規</a></li>
-                <li><a href="">行政法規</a></li>
-                <li><a href="">立法法規</a></li>
-                <li><a href="">司法法規</a></li>
-                <li><a href="">選舉法規</a></li>
-                <li><a href="cases">判例查詢</a></li>
-                <li><a href="parties">政黨查詢</a></li>
-                <li><a href="rel">相關連結</a></li>
+                <li><a @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
+                <li><a @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
+                <li><a @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
+                <li><a @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
+                <li><a @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
+                <li><a @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
+                <li><a @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
+                <li><a @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
             </ul>
         </div>
         <div class="footer-note">
@@ -66,9 +67,9 @@
         </div>
         <div class="footer-bottom">
             <ul>
-                <li><a href="open">資料開放宣告</a></li>
-                <li><a href="privacy">隱私保護宣告</a></li>
-                <li><a href="print">法規彙編列印</a></li>
+                <li><a @onclick="ToO" @onclick:preventDefault>資料開放宣告</a></li>
+                <li><a @onclick="ToPriv" @onclick:preventDefault>隱私保護宣告</a></li>
+                <li><a @onclick="ToPrint" @onclick:preventDefault>法規彙編列印</a></li>
             </ul>
             <span>本網站由臺中市立臺中第一高級中等學校學生自治聯合會學生會自治部及評議委員會共同維運管理</span><br/>
             <span><span>臺中市立臺中第一高級中等學校學生自治聯合會辦公室地址：</span><span>404臺中市北區育才街2號 敬業樓3樓</span></span><br/>
@@ -110,6 +111,50 @@
         ltd = l[0].UpdateDate.Split('/')[2];
         ptd = p[0].UpdateDate.Split('/')[2];
         ctd = c[0].UpdateDate.Split('/')[2];
+    }
+    void ToLC()
+    { 
+        N.NavigateTo("laws?c=c",true);
+    }
+    void ToLEx()
+    {
+        N.NavigateTo("laws?c=ex", true);
+    }
+    void ToLL()
+    {
+        N.NavigateTo("laws?c=l", true);
+    }
+    void ToLJ()
+    {
+        N.NavigateTo("laws?c=j", true);
+    }
+    void ToLEl()
+    {
+        N.NavigateTo("laws?c=el", true);
+    }
+    void ToC()
+    {
+        N.NavigateTo("cases", true);
+    }
+    void ToP()
+    {
+        N.NavigateTo("parties", true);
+    }
+    void ToRel()
+    {
+        N.NavigateTo("rel", true);
+    }
+    void ToPrint()
+    {
+        N.NavigateTo("print", true);
+    }
+    void ToO()
+    {
+        N.NavigateTo("open", true);
+    }
+    void ToPriv()
+    {
+        N.NavigateTo("privacy", true);
     }
     public class L
     {

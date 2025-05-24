@@ -1,20 +1,20 @@
 @page "/laws"
 @inject HttpClient Http
+@inject NavigationManager N
 
 <div class="bread">
     <span>現在位置：</span>
     <ul>
-        <li><a href="/">首頁</a></li>
+        <li><a href="">首頁</a></li>
         <li>法規查詢</li>
     </ul>
 </div>
 <PageTitle>法規查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
-
 @if (laws == null)
 {
     <p><em>Loading...</em></p>
 }
-else
+else if( a == "" || a == null)
 {
     <table class="table">
         <thead>
@@ -23,10 +23,134 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var law in laws[0].Laws)
+            <tr>
+                <h3>中央法規</h3>
+                @foreach (var lawc in lc)
+                {
+                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                }
+            </tr>
+            <tr>
+                <h3>行政法規</h3>
+                @foreach (var lawex in lex)
+                {
+                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                }
+            </tr>
+            <tr>
+                <h3>立法法規</h3>
+                @foreach (var lawl in ll)
+                {
+                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                }
+            </tr>
+            <tr>
+                <h3>司法法規</h3>
+                @foreach (var lawj in lj)
+                {
+                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                }
+            </tr>
+            <tr>
+                <h3>選舉法規</h3>
+                @foreach (var lawel in lel)
+                {
+                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "C")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>中央法規</h3>
+            @foreach (var lawc in lc)
             {
                 <tr>
-                    <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                    <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "EX")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>行政法規</h3>
+            @foreach (var lawex in lex)
+            {
+                <tr>
+                    <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "L")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>立法法規</h3>
+            @foreach (var lawl in ll)
+            {
+                <tr>
+                    <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "J")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>司法法規</h3>
+            @foreach (var lawj in lj)
+            {
+                <tr>
+                    <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "EL")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>選舉法規</h3>
+            @foreach (var lawel in lel)
+            {
+                <tr>
+                    <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -35,10 +159,59 @@ else
 
 @code {
     private LawRoot[]? laws;
+    private int ic = 0;
+    private int iex = 0;
+    private int il = 0;
+    private int ij = 0;
+    private int iel = 0;
+    public string a ; 
+    public List<L> lc = new List<L>();
+    public List<L> lex = new List<L>();
+    public List<L> ll = new List<L>();
+    public List<L> lj = new List<L>();
+    public List<L> lel = new List<L>();
+    protected override void OnInitialized()
+    {
+        var uri = N.ToAbsoluteUri(N.Uri);
+        var aaaaaa = N.Uri;
+        var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        if (queryStrings.TryGetValue("c", out var aaa))
+        {
+            a = aaa;
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
+        for( int i = 0 ; i < laws[0].Laws.Length ; i++ )
+        {
+            if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
+            { 
+                lc.Add(laws[0].Laws[i]); 
+                ic ++; 
+            }
+            else if (laws[0].Laws[i].LawCategory.Contains("選舉法規"))
+            {
+                lel.Add(laws[0].Laws[i]);
+                iel++;
+            }
+            else if (laws[0].Laws[i].LawCategory.Contains("行政法規"))
+            {
+                lex.Add(laws[0].Laws[i]);
+                iex++;
+            }
+            else if (laws[0].Laws[i].LawCategory.Contains("立法法規"))
+            {
+                ll.Add(laws[0].Laws[i]);
+                il++;
+            }
+            else if (laws[0].Laws[i].LawCategory.Contains("司法法規"))
+            {
+                lj.Add(laws[0].Laws[i]);
+                ij++;
+            }
+        }
     }
 
     public class LawRoot

@@ -3,6 +3,13 @@
 
 <PageTitle>政黨查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 
+<div class="bread">
+    <span>現在位置：</span>
+    <ul>
+        <li><a href="">首頁</a></li>
+        <li>政黨查詢</li>
+    </ul>
+</div>
 @if (p == null)
 {
     <p><em>Loading...</em></p>
@@ -21,8 +28,8 @@ else
             @foreach (var partiess in p[0].Parties)
             {
                 <tr>
-                    <td>@partiess.Party</td>
-                    <td>@partiess.PartyName</td>
+                    <td><a href="parties/detail?party=@partiess.Party">@partiess.Party</a></td>
+                    <td><a href="parties/detail?party=@partiess.Party">@partiess.PartyName</a></td>
                     <td>@partiess.Chairman</td>
                 </tr>
             }
