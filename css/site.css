@@ -44,11 +44,13 @@ ul , ol
 }
 a , a:visited 
 {
+  cursor: pointer;
   color : #057b7b ; 
   text-decoration : none ; 
 }
 a:hover , a:focus 
 {
+  cursor: pointer;
   color : #c03 ; 
   text-decoration : underline ; 
 }
