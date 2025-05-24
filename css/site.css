@@ -171,11 +171,19 @@ header .top > :last-child svg
   top : .3rem ; 
   left : .3rem ; 
 }
+.collapse 
+{
+  display : none ; 
+}
 @media ( min-width : 768px ) 
 {
   header .top > :last-child 
   {
     display : none ; 
+  }
+  .collapse 
+  {
+    display : block ; 
   }
 }
 header nav 
