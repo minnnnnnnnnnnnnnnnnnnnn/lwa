@@ -14,7 +14,7 @@
 {
     <p><em>Loading...</em></p>
 }
-else if( a == "" || a == null)
+else if ( ( a == "" || a == null ) && (b == "" || b == null))
 {
     <table class="table">
         <thead>
@@ -61,7 +61,7 @@ else if( a == "" || a == null)
         </tbody>
     </table>
 }
-else if (a.ToUpper() == "C")
+else if (a.ToUpper() == "C" && ( b == "" || b == null ) )
 {
     <table class="table">
         <thead>
@@ -80,7 +80,7 @@ else if (a.ToUpper() == "C")
         </tbody>
     </table>
 }
-else if (a.ToUpper() == "EX")
+else if (a.ToUpper() == "EX" && (b == "" || b == null))
 {
     <table class="table">
         <thead>
@@ -99,7 +99,7 @@ else if (a.ToUpper() == "EX")
         </tbody>
     </table>
 }
-else if (a.ToUpper() == "L")
+else if (a.ToUpper() == "L" && (b == "" || b == null))
 {
     <table class="table">
         <thead>
@@ -118,7 +118,7 @@ else if (a.ToUpper() == "L")
         </tbody>
     </table>
 }
-else if (a.ToUpper() == "J")
+else if (a.ToUpper() == "J" && (b == "" || b == null))
 {
     <table class="table">
         <thead>
@@ -137,7 +137,7 @@ else if (a.ToUpper() == "J")
         </tbody>
     </table>
 }
-else if (a.ToUpper() == "EL")
+else if (a.ToUpper() == "EL" && (b == "" || b == null))
 {
     <table class="table">
         <thead>
@@ -164,7 +164,8 @@ else if (a.ToUpper() == "EL")
     private int il = 0;
     private int ij = 0;
     private int iel = 0;
-    public string a ; 
+    public string a;
+    public string b;
     public List<L> lc = new List<L>();
     public List<L> lex = new List<L>();
     public List<L> ll = new List<L>();
@@ -178,6 +179,10 @@ else if (a.ToUpper() == "EL")
         if (queryStrings.TryGetValue("c", out var aaa))
         {
             a = aaa;
+        }
+        if (queryStrings.TryGetValue("q", out var bbb))
+        {
+            b = bbb;
         }
     }
 
