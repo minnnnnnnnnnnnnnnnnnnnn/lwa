@@ -1,13 +1,19 @@
 ﻿@inherits LayoutComponentBase
 @inject HttpClient Http
 @inject NavigationManager N
+<style>
+    :root 
+    {
+        zoom: @z ; 
+    }
+</style>
 <div>
     <header>
         <div class="top-guide">
             <ul>
                 <li><a href="guide">網站導覽</a></li>
                 <li id="zoom">
-                    <span style="font-size:13.6px;" onclick="">A</span><span style="font-size:16px;">A</span><span style="font-size:18.4px;">A</span>
+                    <span style="font-size:13.6px;" @onclick="@(() => Zoom('s'))" @onclick:preventDefault>A</span><span style="font-size:16px;" @onclick="@(() => Zoom('m'))" @onclick:preventDefault>A</span><span style="font-size:18.4px;" @onclick="@(() => Zoom('l'))" @onclick:preventDefault>A</span>
                 </li>
             </ul>
         </div>
@@ -155,6 +161,22 @@
     void ToPriv()
     {
         N.NavigateTo("privacy", true);
+    }
+    private string z; 
+    void Zoom(char a) 
+    {
+        if (a == 's')
+        {
+            z = "85%";
+        }
+        else if (a == 'm')
+        {
+            z = "100%";
+        }
+        else if (a == 'l')
+        {
+            z = "115%";
+        }
     }
     public class L
     {

@@ -1,6 +1,6 @@
 @page "/cases"
 @inject HttpClient Http
-@* @inject NavigationManager NavManager *@
+@inject NavigationManager N
 
 <PageTitle>判例查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 
@@ -15,7 +15,7 @@
 {
     <p><em>Loading...</em></p>
 }
-else
+else if( a == "" || a == null )
 {
     <table class="table">
         <thead>
@@ -33,49 +33,242 @@ else
             </tr>
         </thead>
         <tbody>
-        @foreach (var cass in @cases[0].Cases)
+        @foreach (var cas in @cases[0].Cases)
         {
             <tr>
-                <td><a href="cases/detail?case=@cass.No" target="_self">@cass.No</a></td>
-                <td>@cass.Category</td>
-                @* <td>@cass.DeliberationDate</td>
-                <td>@cass.Petitioner</td>
-                <td>@cass.Plaintiff</td>
-                <td>@cass.Defendant</td> *@
-                @if( cass.Title != "" ) 
+                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                <td>@cas.Category</td>
+                @* <td>@cas.DeliberationDate</td>
+                <td>@cas.Petitioner</td>
+                <td>@cas.Plaintiff</td>
+                <td>@cas.Defendant</td> *@
+                @if( cas.Title != "" ) 
                 {
-                    <td>@cass.Title</td>
+                    <td>@cas.Title</td>
                 }
                 else 
                 {
-                    <td>@cass.Cause</td>
+                    <td>@cas.Cause</td>
                 }@*
-                <td>@cass.Syllabus</td>
-                <td>@cass.State</td>
-                <td>@cass.FullJudgement</td> *@
+                <td>@cas.Syllabus</td>
+                <td>@cas.State</td>
+                <td>@cas.FullJudgement</td> *@
             </tr>
-            @* @foreach (var cassr in @cass.Rulings)
+            @* @foreach (var casr in @cas.Rulings)
             {
                 <tr>
-                    <td>@cassr.RulingNo</td>
-                    <td>@cassr.FullRulingURL</td>
+                    <td>@casr.RulingNo</td>
+                    <td>@casr.FullRulingURL</td>
                 </tr>
             }
-            @foreach (var casso in @cass.Opinions)
+            @foreach (var caso in @cas.Opinions)
             {
                 <tr>
-                    <td>@casso.Type</td> 
-                    <td>@casso.Member</td> 
-                    <td>@casso.URL</td> 
+                    <td>@caso.Type</td> 
+                    <td>@caso.Member</td> 
+                    <td>@caso.URL</td> 
                 </tr>
             } *@
         }
         </tbody>
     </table>
 }
+else 
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>判決字號</th>
+                <th>類別</th>
+                <th>標題或案由</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach( var cas in cases[0].Cases )
+            {
+                @if( cas.Rulings.Length != 0 ) 
+                {
+                    @foreach (var rul in cas.Rulings)
+                    {
+                        @if ( rul.RulingNo.Contains(a) )
+                        {
+                            <tr>
+                                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                <td>@cas.Category</td>
+                                @if (cas.Title != "")
+                                {
+                                    <td>@cas.Title</td>
+                                }
+                                else
+                                {
+                                    <td>@cas.Cause</td>
+                                }
+                            </tr>
+                            break;
+                        }
+                    }
+                }
+                else if( cas.Opinions.Length != 0 ) 
+                {
+                    @foreach (var o in cas.Opinions)
+                    { 
+                        @if ( o.Type.Contains(a) || o.Member.Contains(a) )
+                        {
+                            <tr>
+                                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                <td>@cas.Category</td>
+                                @if (cas.Title != "")
+                                {
+                                    <td>@cas.Title</td>
+                                }
+                                else
+                                {
+                                    <td>@cas.Cause</td>
+                                }
+                            </tr>
+                            break;
+                        }
+                    }
+                }
+                else if ( cas.No.Contains(a) || cas.Category.Contains(a) )
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.DeliberationDate != null && cas.DeliberationDate.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.Petitioner != null && cas.Petitioner.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.Plaintiff != null && cas.Plaintiff.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.Defendant != null && cas.Defendant.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.Title != null && cas.Title.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        <td>@cas.Title</td>
+                    </tr>
+                }
+                else if (cas.Cause != null && cas.Cause.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        <td>@cas.Cause</td>
+                    </tr>
+                }
+                else if (cas.Syllabus != null && cas.Syllabus.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+                else if (cas.State != null && cas.State.Contains(a))
+                {
+                    <tr>
+                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                        <td>@cas.Category</td>
+                        @if (cas.Title != "")
+                        {
+                            <td>@cas.Title</td>
+                        }
+                        else
+                        {
+                            <td>@cas.Cause</td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
 
 @code {
     private Casess[]? cases;
+    public string a; 
+    protected override void OnInitialized()
+    {
+        var uri = N.ToAbsoluteUri(N.Uri);
+        var aaaaaa = N.Uri;
+        var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        if (queryStrings.TryGetValue("q", out var aaa))
+        {
+            a = aaa;
+        }
+    }
     protected override async Task OnInitializedAsync()
     {
         cases = await Http.GetFromJsonAsync<Casess[]>("json/cases.json");
