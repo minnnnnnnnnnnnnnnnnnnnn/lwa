@@ -271,7 +271,6 @@ else
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
-        var aaaaaa = N.Uri;
         var queryStrings = QueryHelpers.ParseQuery(uri.Query);
         if (queryStrings.TryGetValue("q", out var aaa))
         {

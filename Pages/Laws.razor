@@ -231,7 +231,56 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
                 @if( lawc.LawName.Contains( b ) || lawc.LawLevel.Contains( b ) || lawc.LawHistories.Contains( b ) || (lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains( b ) ) || ( lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b) ) ) 
                 {
                     <tr>
-                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                        <td>
+                            <a href="@lawc.LawURL" target="_self">
+                                <span>@lawc.LawName</span>
+                                @if (lawc.LawName.Contains(b))
+                                {
+                                    <span>
+                                        @for (int i = lawc.LawName.IndexOf(b) - 10; i < lawc.LawName.IndexOf(b) + 10; i++)
+                                        {
+                                            @lawc.LawName[i]
+                                        }
+                                    </span>
+                                }
+                                else if (lawc.LawLevel.Contains(b))
+                                {
+                                    <span>
+                                        @for (int i = lawc.LawLevel.IndexOf(b) - 10; i < lawc.LawLevel.IndexOf(b) + 10; i++)
+                                        {
+                                            @lawc.LawLevel[i]
+                                        }
+                                    </span>
+                                }
+                                else if (lawc.LawHistories.Contains(b))
+                                {
+                                    <span>
+                                        @for (int i = lawc.LawHistories.IndexOf(b) - 10; i < lawc.LawHistories.IndexOf(b) + 10; i++)
+                                        {
+                                            @lawc.LawHistories[i]
+                                        }
+                                    </span>
+                                }
+                                else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)) ) 
+                                {
+                                    <span>
+                                        @for (int i = lawc.EngLawName.IndexOf(b) - 10; i < lawc.EngLawName.IndexOf(b) + 10; i++)
+                                        {
+                                            @lawc.EngLawName[i]
+                                        }
+                                    </span>
+                                }
+                                else if ((lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b)) ) 
+                                {
+                                    <span>
+                                        @for (int i = lawc.LawForeword.IndexOf(b) - 10; i < lawc.LawForeword.IndexOf(b) + 10; i++)
+                                        {
+                                            @lawc.LawForeword[i]
+                                        }
+                                    </span>
+                                }
+                            </a>
+                        </td>
                     </tr>
                 }
                 else if( lawc.LawAttachements.Length != 0 )
