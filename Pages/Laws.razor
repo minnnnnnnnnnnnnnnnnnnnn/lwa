@@ -14,52 +14,112 @@
 {
     <p><em>Loading...</em></p>
 }
-else if ( ( a == "" || a == null ) && (b == "" || b == null))
+else if ( a == "" || a == null )
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>法規列表</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <h3>中央法規</h3>
-                @foreach (var lawc in lc)
+    @if (b == "" || b == null ) 
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>法規列表</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <h3>中央法規</h3>
+                    @foreach (var lawc in lc)
+                    {
+                            <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                    }
+                </tr>
+                <tr>
+                    <h3>行政法規</h3>
+                    @foreach (var lawex in lex)
+                    {
+                            <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                    }
+                </tr>
+                <tr>
+                    <h3>立法法規</h3>
+                    @foreach (var lawl in ll)
+                    {
+                            <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                    }
+                </tr>
+                <tr>
+                    <h3>司法法規</h3>
+                    @foreach (var lawj in lj)
+                    {
+                            <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                    }
+                </tr>
+                <tr>
+                    <h3>選舉法規</h3>
+                    @foreach (var lawel in lel)
+                    {
+                            <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    }
+    else 
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>法規列表</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var law in laws[0].Laws)
                 {
-                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                    @if( law.LawName.Contains( b ) || law.LawLevel.Contains( b ) || (law.LawHasEngVersion == "Y" && law.EngLawName.Contains( b ) ) || ( law.LawForeword != "" && law.LawForeword != null && law.LawForeword.Contains(b) ) ) 
+                    {
+                        <tr>
+                            <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                        </tr>
+                    }
+                    else if( law.LawAttachements.Length != 0 )
+                    {
+                        @foreach( var att in law.LawAttachements ) 
+                        {
+                            @if( att.FileName.Contains( b ) ) 
+                            {
+                                <tr>
+                                    <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                                </tr>
+                            }
+                            else 
+                            {
+                                @foreach( var art in law.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                                    {
+                                        <tr>
+                                            <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        @foreach( var art in law.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                                </tr>
+                            }
+                        }
+                    }
                 }
-            </tr>
-            <tr>
-                <h3>行政法規</h3>
-                @foreach (var lawex in lex)
-                {
-                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
-                }
-            </tr>
-            <tr>
-                <h3>立法法規</h3>
-                @foreach (var lawl in ll)
-                {
-                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
-                }
-            </tr>
-            <tr>
-                <h3>司法法規</h3>
-                @foreach (var lawj in lj)
-                {
-                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
-                }
-            </tr>
-            <tr>
-                <h3>選舉法規</h3>
-                @foreach (var lawel in lel)
-                {
-                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
-                }
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
 }
 else if (a.ToUpper() == "C" && ( b == "" || b == null ) )
 {
@@ -152,6 +212,302 @@ else if (a.ToUpper() == "EL" && (b == "" || b == null))
                 <tr>
                     <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
                 </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "C" && (b != "" && b != null))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>中央法規</h3>
+            @foreach (var lawc in lc)
+            {
+                @if( lawc.LawName.Contains( b ) || lawc.LawLevel.Contains( b ) || (lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains( b ) ) || ( lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b) ) ) 
+                {
+                    <tr>
+                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                    </tr>
+                }
+                else if( lawc.LawAttachements.Length != 0 )
+                {
+                    @foreach( var att in lawc.LawAttachements ) 
+                    {
+                        @if( att.FileName.Contains( b ) ) 
+                        {
+                            <tr>
+                                <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                            </tr>
+                        }
+                        else 
+                        {
+                            @foreach( var art in lawc.LawArticles ) 
+                            {
+                                @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                                {
+                                    <tr>
+                                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+                else 
+                {
+                    @foreach( var art in lawc.LawArticles ) 
+                    {
+                        @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                        {
+                            <tr>
+                                <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "EX" && (b != "" && b != null))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>行政法規</h3>
+            @foreach (var lawex in lex)
+            {
+                @if (lawex.LawName.Contains(b) || lawex.LawLevel.Contains(b) || ( lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b) ) || ( lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b) ) )
+                {
+                    <tr>
+                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                    </tr>
+                }
+                else if (lawex.LawAttachements.Length != 0)
+                {
+                    @foreach (var att in lawex.LawAttachements)
+                    {
+                        @if (att.FileName.Contains(b))
+                        {
+                            <tr>
+                                <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var art in lawex.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    <tr>
+                                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    @foreach (var art in lawex.LawArticles)
+                    {
+                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                        {
+                            <tr>
+                                <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "L" && (b != "" && b != null))
+{ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>行政法規</h3>
+            @foreach (var lawl in ll)
+            {
+                @if (lawl.LawName.Contains(b) || lawl.LawLevel.Contains(b) || (lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)) || (lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b)))
+                {
+                    <tr>
+                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                    </tr>
+                }
+                else if (lawl.LawAttachements.Length != 0)
+                {
+                    @foreach (var att in lawl.LawAttachements)
+                    {
+                        @if (att.FileName.Contains(b))
+                        {
+                            <tr>
+                                <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var art in lawl.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                        null && art.ArticleNo.Contains(b)))
+                                {
+                                    <tr>
+                                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    @foreach (var art in lawl.LawArticles)
+                    {
+                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                null && art.ArticleNo.Contains(b)))
+                        {
+                            <tr>
+                                <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "J" && (b != "" && b != null))
+{ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>行政法規</h3>
+            @foreach (var lawj in lj)
+            {
+                @if (lawj.LawName.Contains(b) || lawj.LawLevel.Contains(b) || (lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)) || (lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b)))
+                {
+                    <tr>
+                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                    </tr>
+                }
+                else if (lawj.LawAttachements.Length != 0)
+                {
+                    @foreach (var att in lawj.LawAttachements)
+                    {
+                        @if (att.FileName.Contains(b))
+                        {
+                            <tr>
+                                <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var art in lawj.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                        null && art.ArticleNo.Contains(b)))
+                                {
+                                    <tr>
+                                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    @foreach (var art in lawj.LawArticles)
+                    {
+                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                null && art.ArticleNo.Contains(b)))
+                        {
+                            <tr>
+                                <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+else if (a.ToUpper() == "EL" && (b != "" && b != null))
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>法規列表</th>
+            </tr>
+        </thead>
+        <tbody>
+            <h3>行政法規</h3>
+            @foreach (var lawel in lel)
+            {
+                @if (lawel.LawName.Contains(b) || lawel.LawLevel.Contains(b) || (lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)) || (lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b)))
+                {
+                    <tr>
+                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                    </tr>
+                }
+                else if (lawel.LawAttachements.Length != 0)
+                {
+                    @foreach (var att in lawel.LawAttachements)
+                    {
+                        @if (att.FileName.Contains(b))
+                        {
+                            <tr>
+                                <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var art in lawel.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                        null && art.ArticleNo.Contains(b)))
+                                {
+                                    <tr>
+                                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    @foreach (var art in lawel.LawArticles)
+                    {
+                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
+                                null && art.ArticleNo.Contains(b)))
+                        {
+                            <tr>
+                                <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                            </tr>
+                        }
+                    }
+                }
             }
         </tbody>
     </table>

@@ -90,21 +90,24 @@ else
                 {
                     @foreach (var rul in cas.Rulings)
                     {
-                        @if ( rul.RulingNo.Contains(a) )
+                        @foreach( var a in a.Split(' ') ) 
                         {
-                            <tr>
-                                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                                <td>@cas.Category</td>
-                                @if (cas.Title != "")
-                                {
-                                    <td>@cas.Title</td>
-                                }
-                                else
-                                {
-                                    <td>@cas.Cause</td>
-                                }
-                            </tr>
-                            break;
+                            @if ( rul.RulingNo.Contains(a) )
+                            {
+                                <tr>
+                                    <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                    <td>@cas.Category</td>
+                                    @if (cas.Title != "")
+                                    {
+                                        <td>@cas.Title</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@cas.Cause</td>
+                                    }
+                                </tr>
+                                break;
+                            }
                         }
                     }
                 }
@@ -112,144 +115,150 @@ else
                 {
                     @foreach (var o in cas.Opinions)
                     { 
-                        @if ( o.Type.Contains(a) || o.Member.Contains(a) )
+                        @foreach( var a in a.Split( ' ' ) ) 
                         {
-                            <tr>
-                                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                                <td>@cas.Category</td>
-                                @if (cas.Title != "")
-                                {
-                                    <td>@cas.Title</td>
-                                }
-                                else
-                                {
-                                    <td>@cas.Cause</td>
-                                }
-                            </tr>
-                            break;
+                            @if ( o.Type.Contains(a) || o.Member.Contains(a) )
+                            {
+                                <tr>
+                                    <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                    <td>@cas.Category</td>
+                                    @if (cas.Title != "")
+                                    {
+                                        <td>@cas.Title</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@cas.Cause</td>
+                                    }
+                                </tr>
+                                break;
+                            }
                         }
                     }
                 }
-                @if ( cas.No.Contains(a) || cas.Category.Contains(a) )
+                @foreach( var a in a.Split( ' ' ) ) 
                 {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
+                    @if ( cas.No.Contains(a) || cas.Category.Contains(a) )
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.DeliberationDate != null && cas.DeliberationDate.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.Petitioner != null && cas.Petitioner.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.Plaintiff != null && cas.Plaintiff.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.Defendant != null && cas.Defendant.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.Title != null && cas.Title.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
                             <td>@cas.Title</td>
-                        }
-                        else
-                        {
+                        </tr>
+                    }
+                    else if (cas.Cause != null && cas.Cause.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
                             <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.DeliberationDate != null && cas.DeliberationDate.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.Petitioner != null && cas.Petitioner.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.Plaintiff != null && cas.Plaintiff.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.Defendant != null && cas.Defendant.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.Title != null && cas.Title.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        <td>@cas.Title</td>
-                    </tr>
-                }
-                else if (cas.Cause != null && cas.Cause.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        <td>@cas.Cause</td>
-                    </tr>
-                }
-                else if (cas.Syllabus != null && cas.Syllabus.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
-                }
-                else if (cas.State != null && cas.State.Contains(a))
-                {
-                    <tr>
-                        <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
-                        <td>@cas.Category</td>
-                        @if (cas.Title != "")
-                        {
-                            <td>@cas.Title</td>
-                        }
-                        else
-                        {
-                            <td>@cas.Cause</td>
-                        }
-                    </tr>
+                        </tr>
+                    }
+                    else if (cas.Syllabus != null && cas.Syllabus.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
+                    else if (cas.State != null && cas.State.Contains(a))
+                    {
+                        <tr>
+                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td>@cas.Category</td>
+                            @if (cas.Title != "")
+                            {
+                                <td>@cas.Title</td>
+                            }
+                            else
+                            {
+                                <td>@cas.Cause</td>
+                            }
+                        </tr>
+                    }
                 }
             }
         </tbody>
