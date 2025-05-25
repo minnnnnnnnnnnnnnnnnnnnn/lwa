@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "lwa",
   "resources": {
-    "hash": "sha256-uscEWDdJ5TGxBrce9/D/Ue4NJRO6GPYBmMpsk+46q34=",
+    "hash": "sha256-5xhMNfObEEUTsFoERazLZ79/smf319G3wxtEzMZqIzw=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.toq9fyr4tv.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.z9ousaivew.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
@@ -36,8 +36,8 @@
       "System.Text.Encodings.Web.suy6578t21.wasm": "System.Text.Encodings.Web.wasm",
       "System.Text.Json.i3nljiynhv.wasm": "System.Text.Json.wasm",
       "System.Text.RegularExpressions.k0eu65ve7y.wasm": "System.Text.RegularExpressions.wasm",
-      "System.Private.CoreLib.8s8gq1mn2z.wasm": "System.Private.CoreLib.wasm",
-      "lwa.vx6pdswu3i.wasm": "lwa.wasm",
+      "System.Private.CoreLib.fkbwx5b9ga.wasm": "System.Private.CoreLib.wasm",
+      "lwa.tzcp3mhugf.wasm": "lwa.wasm",
       "dotnet.js": "dotnet.js",
       "dotnet.native.uhsveqo9bs.js": "dotnet.native.js",
       "dotnet.native.swgexbmoy7.wasm": "dotnet.native.wasm",
@@ -62,7 +62,7 @@
     },
     "coreAssembly": {
       "System.Runtime.InteropServices.JavaScript.5pcrya9j00.wasm": "sha256-92zUoi9qwW2rZalWHIYTUNdUv+uUJLg6ZLS4Aj0eqHk=",
-      "System.Private.CoreLib.8s8gq1mn2z.wasm": "sha256-eK6hrtMC4pUApi5rvHp7NKJhFh89Mfh7XC8zOSIS9gM="
+      "System.Private.CoreLib.fkbwx5b9ga.wasm": "sha256-j+dnccMsH8dFioMhzFbZhNZInbKDkxwbGZXIoMSIazY="
     },
     "assembly": {
       "Microsoft.AspNetCore.Components.toq9fyr4tv.wasm": "sha256-oym2w9Ugny75zPLuGVkYXNorS9jT4q4PRFIbfeCKw5I=",
@@ -97,7 +97,7 @@
       "System.Text.Encodings.Web.suy6578t21.wasm": "sha256-9FZLttu5iPwF9M7jckzJNogrhKhsHb9VlRtzW9+OH44=",
       "System.Text.Json.i3nljiynhv.wasm": "sha256-LsOq/NtaNucS5JUS2by+8WOtmUp2eAK8EM343ipBAQ0=",
       "System.Text.RegularExpressions.k0eu65ve7y.wasm": "sha256-dAw+dIKra7ljgRE+eVWL5wTVKKXPJi7x/AdHfLLcFDs=",
-      "lwa.vx6pdswu3i.wasm": "sha256-nXOuU4QVAMXP1XVDl77W8mlQqLe1Hcgq1K8RI9+GQus="
+      "lwa.tzcp3mhugf.wasm": "sha256-CZnw7zOv45wqABtvRWRAXJK63qn8RkHH+h2l04Q9Bf4="
     }
   },
   "cacheBootResources": true,
