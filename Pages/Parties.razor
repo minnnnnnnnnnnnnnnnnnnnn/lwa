@@ -10,6 +10,12 @@
         <li>政黨查詢</li>
     </ul>
 </div>
+<form action="parties" method="get">
+    <p>
+        <input type="search" placeholder="輸入關鍵字以搜尋政黨" name="q" />
+        <input type="submit" style="background-image:url(i/icon/search.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
+    </p>
+</form>
 @if (p == null)
 {
     <p><em>Loading...</em></p>

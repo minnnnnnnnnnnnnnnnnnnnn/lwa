@@ -4,7 +4,7 @@ table
 }
 table a , table a:visited 
 {
-     color : #000 ; 
+    color : #000 ; 
 }
 tr 
 {
@@ -84,4 +84,24 @@ dt
 .c tr td:last-child 
 {
     width : 4em ; 
+}
+
+form 
+{
+    height: 2rem;
+}
+form input:first-child 
+{
+    width: 70%;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 1px solid #000 ; 
+    outline: 0;
+}
+form input:first-child::placeholder 
+{
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    opacity: .65;
+    text-indent: .5rem;
 }

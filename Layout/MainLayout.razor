@@ -19,10 +19,18 @@
         </div>
         <div class="top">
             <a class=""href=""><img src="i/icon/logo.png" alt="首頁" /></a>
-            <form href="laws" method="get">
+            <form action="laws" method="get">
+                <select name="c" id="">
+                    <option value="">綜合查詢</option>
+                    <option value="c">中央法規</option>
+                    <option value="ex">行政法規</option>
+                    <option value="l">立法法規</option>
+                    <option value="j">司法法規</option>
+                    <option value="el">選舉法規</option>
+                </select>
                 <p>
-                    <input type="search" placeholder="輸入關鍵字以搜尋法規" name="q">
-                    <input type="submit" style="background-image:url(i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！">
+                    <input type="search" placeholder="輸入關鍵字以搜尋" name="q">
+                    <input type="submit" style="background-image:url(i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
                 </p>
             </form>
             <div @onclick="ToggleNavMenu">
@@ -162,6 +170,18 @@
     {
         N.NavigateTo("privacy", true);
     }
+    @* void SearchL(string c , string q ) 
+    {
+        N.NavigateTo("laws?c=" + c + "&q=" + q, true);
+    }
+    void SearchP(string q)
+    {
+        N.NavigateTo("parties?q=" + q, true);
+    }
+    void SearchC(string q)
+    {
+        N.NavigateTo("cases?q=" + q, true);
+    } *@
     private string z;
     private bool sIsActivated = false; 
     private bool mIsActivated = true; 
