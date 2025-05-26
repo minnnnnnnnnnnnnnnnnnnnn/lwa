@@ -29,7 +29,7 @@ else if ( a == "" || a == null )
                     <h3>中央法規</h3>
                     @foreach (var lawc in lc)
                     {
-                            <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
                     }
                 </tr>
                 <tr>
@@ -72,37 +72,150 @@ else if ( a == "" || a == null )
                 </tr>
             </thead>
             <tbody>
+            @if( !b.Contains( ' ' ) ) 
+            {
                 @foreach (var law in laws[0].Laws)
                 {
                     @if( law.LawName.Contains( b ) || law.LawLevel.Contains( b ) || law.LawHistories.Contains( b ) || (law.LawHasEngVersion == "Y" && law.EngLawName.Contains( b ) ) || ( law.LawForeword != "" && law.LawForeword != null && law.LawForeword.Contains(b) ) ) 
                     {
                         <tr>
-                            <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
+                            <td>
+                                <a href="@law.LawURL" target="_self">
+                                    @if( law.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((law.LawHasEngVersion == "Y" && law.EngLawName.Contains(b)))
+                                    {
+                                        <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                        <small><span>@law.EngLawName.Split(b)[0]<span class="matched">@b</span>@law.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@law.LawName</span>
+                                    }
+                                    @if (law.LawName.Contains(b)){}else 
+                                    if (law.LawLevel.Contains(b))
+                                    {
+                                        <span>@law.LawLevel.Split( b )[0]<span class="matched">@b</span>@law.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (law.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < law.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( law.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@law.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@law.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((law.LawForeword != "" && law.LawForeword != null && law.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( law.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < law.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @law.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = law.LawForeword.IndexOf(b) - 10; i < law.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @law.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
                         </tr>
                     }
                     else if( law.LawAttachements.Length != 0 )
                     {
-                        @foreach( var att in law.LawAttachements ) 
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in law.LawAttachements)
                         {
-                            @if( att.FileName.Contains( b ) ) 
+                            @if (att.FileName.Contains(b))
                             {
-                                <tr>
-                                    <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
-                                </tr>
+                                AttcontainsB = true ; 
                             }
-                            else 
+                        }
+                        @foreach (var art in law.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
                             {
-                                @foreach( var art in law.LawArticles ) 
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@law.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@law.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in law.LawAttachements ) 
                                 {
-                                    @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                                    @if( att.FileName.Contains( b ) ) 
                                     {
-                                        <tr>
-                                            <td><a href="@law.LawURL" target="_self">@law.LawName</a></td>
-                                        </tr>
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
                                     }
                                 }
                             }
-                        }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in law.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
                     }
                     else 
                     {
@@ -117,6 +230,160 @@ else if ( a == "" || a == null )
                         }
                     }
                 }
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
+                {
+                    @foreach( var law in laws[0].Laws ) 
+                    {
+                        @if( law.LawName.Contains( b ) || law.LawLevel.Contains( b ) || law.LawHistories.Contains( b ) || (law.LawHasEngVersion == "Y" && law.EngLawName.Contains( b ) ) || ( law.LawForeword != "" && law.LawForeword != null && law.LawForeword.Contains(b) ) ) 
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@law.LawURL" target="_self">
+                                        @if( law.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((law.LawHasEngVersion == "Y" && law.EngLawName.Contains(b)))
+                                        {
+                                            <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                            <small><span>@law.EngLawName.Split(b)[0]<span class="matched">@b</span>@law.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@law.LawName</span>
+                                        }
+                                        @if (law.LawName.Contains(b)){}else 
+                                        if (law.LawLevel.Contains(b))
+                                        {
+                                            <span>@law.LawLevel.Split( b )[0]<span class="matched">@b</span>@law.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (law.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < law.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( law.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@law.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@law.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((law.LawForeword != "" && law.LawForeword != null && law.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( law.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < law.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @law.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = law.LawForeword.IndexOf(b) - 10; i < law.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @law.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( law.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in law.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in law.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@law.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@law.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in law.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in law.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
+                        }
+                    }
+                }
+            }
             </tbody>
         </table>
     }
@@ -226,96 +493,314 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>中央法規</h3>
-            @foreach (var lawc in lc)
+            @if( !b.Contains( ' ' ) ) 
             {
-                @if( lawc.LawName.Contains( b ) || lawc.LawLevel.Contains( b ) || lawc.LawHistories.Contains( b ) || (lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains( b ) ) || ( lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b) ) ) 
+                @foreach (var lawc in lc)
                 {
-                    <tr>
-                        <td>
-                            <a href="@lawc.LawURL" target="_self">
-                                <span>@lawc.LawName</span>
-                                @if (lawc.LawName.Contains(b))
-                                {
-                                    <span>
-                                        @for (int i = lawc.LawName.IndexOf(b) - 10; i < lawc.LawName.IndexOf(b) + 10; i++)
-                                        {
-                                            @lawc.LawName[i]
-                                        }
-                                    </span>
-                                }
-                                else if (lawc.LawLevel.Contains(b))
-                                {
-                                    <span>
-                                        @for (int i = lawc.LawLevel.IndexOf(b) - 10; i < lawc.LawLevel.IndexOf(b) + 10; i++)
-                                        {
-                                            @lawc.LawLevel[i]
-                                        }
-                                    </span>
-                                }
-                                else if (lawc.LawHistories.Contains(b))
-                                {
-                                    <span>
-                                        @for (int i = lawc.LawHistories.IndexOf(b) - 10; i < lawc.LawHistories.IndexOf(b) + 10; i++)
-                                        {
-                                            @lawc.LawHistories[i]
-                                        }
-                                    </span>
-                                }
-                                else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)) ) 
-                                {
-                                    <span>
-                                        @for (int i = lawc.EngLawName.IndexOf(b) - 10; i < lawc.EngLawName.IndexOf(b) + 10; i++)
-                                        {
-                                            @lawc.EngLawName[i]
-                                        }
-                                    </span>
-                                }
-                                else if ((lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b)) ) 
-                                {
-                                    <span>
-                                        @for (int i = lawc.LawForeword.IndexOf(b) - 10; i < lawc.LawForeword.IndexOf(b) + 10; i++)
-                                        {
-                                            @lawc.LawForeword[i]
-                                        }
-                                    </span>
-                                }
-                            </a>
-                        </td>
-                    </tr>
-                }
-                else if( lawc.LawAttachements.Length != 0 )
-                {
-                    @foreach( var att in lawc.LawAttachements ) 
+                    @if( lawc.LawName.Contains( b ) || lawc.LawLevel.Contains( b ) || lawc.LawHistories.Contains( b ) || (lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains( b ) ) || ( lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b) ) ) 
                     {
-                        @if( att.FileName.Contains( b ) ) 
+                        <tr>
+                            <td>
+                                <a href="@lawc.LawURL" target="_self">
+                                    @if( lawc.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)))
+                                    {
+                                        <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                        <small><span>@lawc.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawc.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@lawc.LawName</span>
+                                    }
+                                    @if (lawc.LawName.Contains(b)){}else 
+                                    if (lawc.LawLevel.Contains(b))
+                                    {
+                                        <span>@lawc.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawc.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (lawc.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < lawc.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( lawc.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@lawc.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawc.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( lawc.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < lawc.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @lawc.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = lawc.LawForeword.IndexOf(b) - 10; i < lawc.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @lawc.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else if( lawc.LawAttachements.Length != 0 )
+                    {
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in lawc.LawAttachements)
                         {
-                            <tr>
-                                <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
-                            </tr>
-                        }
-                        else 
-                        {
-                            @foreach( var art in lawc.LawArticles ) 
+                            @if (att.FileName.Contains(b))
                             {
-                                @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                                AttcontainsB = true ; 
+                            }
+                        }
+                        @foreach (var art in lawc.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                            {
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@lawc.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@lawc.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in lawc.LawAttachements ) 
                                 {
-                                    <tr>
-                                        <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
-                                    </tr>
+                                    @if( att.FileName.Contains( b ) ) 
+                                    {
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                    }
                                 }
+                            }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in lawc.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
+                    }
+                    else 
+                    {
+                        @foreach( var art in lawc.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                                </tr>
                             }
                         }
                     }
                 }
-                else 
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
                 {
-                    @foreach( var art in lawc.LawArticles ) 
+                    @foreach( var lawc in lc ) 
                     {
-                        @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                        @if( lawc.LawName.Contains( b ) || lawc.LawLevel.Contains( b ) || lawc.LawHistories.Contains( b ) || (lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains( b ) ) || ( lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b) ) ) 
                         {
                             <tr>
-                                <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                                <td>
+                                    <a href="@lawc.LawURL" target="_self">
+                                        @if( lawc.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)))
+                                        {
+                                            <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                            <small><span>@lawc.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawc.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@lawc.LawName</span>
+                                        }
+                                        @if (lawc.LawName.Contains(b)){}else 
+                                        if (lawc.LawLevel.Contains(b))
+                                        {
+                                            <span>@lawc.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawc.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (lawc.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < lawc.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( lawc.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@lawc.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawc.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((lawc.LawForeword != "" && lawc.LawForeword != null && lawc.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( lawc.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < lawc.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @lawc.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = lawc.LawForeword.IndexOf(b) - 10; i < lawc.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @lawc.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
                             </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( lawc.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in lawc.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in lawc.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@lawc.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@lawc.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in lawc.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in lawc.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
                         }
                     }
                 }
@@ -333,47 +818,314 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>行政法規</h3>
-            @foreach (var lawex in lex)
+            @if( !b.Contains( ' ' ) ) 
             {
-                @if (lawex.LawName.Contains(b) || lawex.LawLevel.Contains(b) || lawex.LawHistories.Contains( b ) || ( lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b) ) || ( lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b) ) )
+                @foreach (var lawex in lex)
                 {
-                    <tr>
-                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
-                    </tr>
-                }
-                else if (lawex.LawAttachements.Length != 0)
-                {
-                    @foreach (var att in lawex.LawAttachements)
+                    @if( lawex.LawName.Contains( b ) || lawex.LawLevel.Contains( b ) || lawex.LawHistories.Contains( b ) || (lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains( b ) ) || ( lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b) ) ) 
                     {
-                        @if (att.FileName.Contains(b))
+                        <tr>
+                            <td>
+                                <a href="@lawex.LawURL" target="_self">
+                                    @if( lawex.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b)))
+                                    {
+                                        <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                        <small><span>@lawex.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawex.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@lawex.LawName</span>
+                                    }
+                                    @if (lawex.LawName.Contains(b)){}else 
+                                    if (lawex.LawLevel.Contains(b))
+                                    {
+                                        <span>@lawex.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawex.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (lawex.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < lawex.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( lawex.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@lawex.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawex.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( lawex.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < lawex.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @lawex.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = lawex.LawForeword.IndexOf(b) - 10; i < lawex.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @lawex.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else if( lawex.LawAttachements.Length != 0 )
+                    {
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in lawex.LawAttachements)
                         {
-                            <tr>
-                                <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var art in lawex.LawArticles)
+                            @if (att.FileName.Contains(b))
                             {
-                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                AttcontainsB = true ; 
+                            }
+                        }
+                        @foreach (var art in lawex.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                            {
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@lawex.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@lawex.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in lawex.LawAttachements ) 
                                 {
-                                    <tr>
-                                        <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
-                                    </tr>
+                                    @if( att.FileName.Contains( b ) ) 
+                                    {
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                    }
                                 }
+                            }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in lawex.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
+                    }
+                    else 
+                    {
+                        @foreach( var art in lawex.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                                </tr>
                             }
                         }
                     }
                 }
-                else
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
                 {
-                    @foreach (var art in lawex.LawArticles)
+                    @foreach( var lawex in lex ) 
                     {
-                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                        @if( lawex.LawName.Contains( b ) || lawex.LawLevel.Contains( b ) || lawex.LawHistories.Contains( b ) || (lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains( b ) ) || ( lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b) ) ) 
                         {
                             <tr>
-                                <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                                <td>
+                                    <a href="@lawex.LawURL" target="_self">
+                                        @if( lawex.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b)))
+                                        {
+                                            <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                            <small><span>@lawex.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawex.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@lawex.LawName</span>
+                                        }
+                                        @if (lawex.LawName.Contains(b)){}else 
+                                        if (lawex.LawLevel.Contains(b))
+                                        {
+                                            <span>@lawex.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawex.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (lawex.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < lawex.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( lawex.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@lawex.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawex.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((lawex.LawForeword != "" && lawex.LawForeword != null && lawex.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( lawex.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < lawex.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @lawex.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = lawex.LawForeword.IndexOf(b) - 10; i < lawex.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @lawex.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
                             </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( lawex.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in lawex.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in lawex.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@lawex.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@lawex.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in lawex.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in lawex.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
                         }
                     }
                 }
@@ -391,49 +1143,314 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>立法法規</h3>
-            @foreach (var lawl in ll)
+            @if( !b.Contains( ' ' ) ) 
             {
-                @if (lawl.LawName.Contains(b) || lawl.LawLevel.Contains(b) || lawl.LawHistories.Contains( b ) || (lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)) || (lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b)))
+                @foreach (var lawl in ll)
                 {
-                    <tr>
-                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
-                    </tr>
-                }
-                else if (lawl.LawAttachements.Length != 0)
-                {
-                    @foreach (var att in lawl.LawAttachements)
+                    @if( lawl.LawName.Contains( b ) || lawl.LawLevel.Contains( b ) || lawl.LawHistories.Contains( b ) || (lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains( b ) ) || ( lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b) ) ) 
                     {
-                        @if (att.FileName.Contains(b))
+                        <tr>
+                            <td>
+                                <a href="@lawl.LawURL" target="_self">
+                                    @if( lawl.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)))
+                                    {
+                                        <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                        <small><span>@lawl.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawl.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@lawl.LawName</span>
+                                    }
+                                    @if (lawl.LawName.Contains(b)){}else 
+                                    if (lawl.LawLevel.Contains(b))
+                                    {
+                                        <span>@lawl.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawl.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (lawl.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < lawl.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( lawl.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@lawl.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawl.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( lawl.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < lawl.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @lawl.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = lawl.LawForeword.IndexOf(b) - 10; i < lawl.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @lawl.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else if( lawl.LawAttachements.Length != 0 )
+                    {
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in lawl.LawAttachements)
                         {
-                            <tr>
-                                <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var art in lawl.LawArticles)
+                            @if (att.FileName.Contains(b))
                             {
-                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
-                                        null && art.ArticleNo.Contains(b)))
+                                AttcontainsB = true ; 
+                            }
+                        }
+                        @foreach (var art in lawl.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                            {
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@lawl.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@lawl.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in lawl.LawAttachements ) 
                                 {
-                                    <tr>
-                                        <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
-                                    </tr>
+                                    @if( att.FileName.Contains( b ) ) 
+                                    {
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                    }
                                 }
+                            }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in lawl.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
+                    }
+                    else 
+                    {
+                        @foreach( var art in lawl.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                                </tr>
                             }
                         }
                     }
                 }
-                else
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
                 {
-                    @foreach (var art in lawl.LawArticles)
+                    @foreach( var lawl in ll ) 
                     {
-                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
-                                null && art.ArticleNo.Contains(b)))
+                        @if( lawl.LawName.Contains( b ) || lawl.LawLevel.Contains( b ) || lawl.LawHistories.Contains( b ) || (lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains( b ) ) || ( lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b) ) ) 
                         {
                             <tr>
-                                <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                                <td>
+                                    <a href="@lawl.LawURL" target="_self">
+                                        @if( lawl.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)))
+                                        {
+                                            <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                            <small><span>@lawl.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawl.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@lawl.LawName</span>
+                                        }
+                                        @if (lawl.LawName.Contains(b)){}else 
+                                        if (lawl.LawLevel.Contains(b))
+                                        {
+                                            <span>@lawl.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawl.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (lawl.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < lawl.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( lawl.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@lawl.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawl.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((lawl.LawForeword != "" && lawl.LawForeword != null && lawl.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( lawl.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < lawl.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @lawl.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = lawl.LawForeword.IndexOf(b) - 10; i < lawl.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @lawl.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
                             </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( lawl.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in lawl.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in lawl.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@lawl.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@lawl.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in lawl.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in lawl.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
                         }
                     }
                 }
@@ -451,49 +1468,314 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>司法法規</h3>
-            @foreach (var lawj in lj)
+            @if( !b.Contains( ' ' ) ) 
             {
-                @if (lawj.LawName.Contains(b) || lawj.LawLevel.Contains(b) || lawj.LawHistories.Contains( b ) || (lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)) || (lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b)))
+                @foreach (var lawj in lj)
                 {
-                    <tr>
-                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
-                    </tr>
-                }
-                else if (lawj.LawAttachements.Length != 0)
-                {
-                    @foreach (var att in lawj.LawAttachements)
+                    @if( lawj.LawName.Contains( b ) || lawj.LawLevel.Contains( b ) || lawj.LawHistories.Contains( b ) || (lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains( b ) ) || ( lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b) ) ) 
                     {
-                        @if (att.FileName.Contains(b))
+                        <tr>
+                            <td>
+                                <a href="@lawj.LawURL" target="_self">
+                                    @if( lawj.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)))
+                                    {
+                                        <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                        <small><span>@lawj.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawj.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@lawj.LawName</span>
+                                    }
+                                    @if (lawj.LawName.Contains(b)){}else 
+                                    if (lawj.LawLevel.Contains(b))
+                                    {
+                                        <span>@lawj.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawj.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (lawj.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < lawj.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( lawj.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@lawj.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawj.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( lawj.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < lawj.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @lawj.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = lawj.LawForeword.IndexOf(b) - 10; i < lawj.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @lawj.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else if( lawj.LawAttachements.Length != 0 )
+                    {
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in lawj.LawAttachements)
                         {
-                            <tr>
-                                <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var art in lawj.LawArticles)
+                            @if (att.FileName.Contains(b))
                             {
-                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
-                                        null && art.ArticleNo.Contains(b)))
+                                AttcontainsB = true ; 
+                            }
+                        }
+                        @foreach (var art in lawj.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                            {
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@lawj.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@lawj.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in lawj.LawAttachements ) 
                                 {
-                                    <tr>
-                                        <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
-                                    </tr>
+                                    @if( att.FileName.Contains( b ) ) 
+                                    {
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                    }
                                 }
+                            }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in lawj.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
+                    }
+                    else 
+                    {
+                        @foreach( var art in lawj.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                                </tr>
                             }
                         }
                     }
                 }
-                else
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
                 {
-                    @foreach (var art in lawj.LawArticles)
+                    @foreach( var lawj in lj ) 
                     {
-                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
-                                null && art.ArticleNo.Contains(b)))
+                        @if( lawj.LawName.Contains( b ) || lawj.LawLevel.Contains( b ) || lawj.LawHistories.Contains( b ) || (lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains( b ) ) || ( lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b) ) ) 
                         {
                             <tr>
-                                <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                                <td>
+                                    <a href="@lawj.LawURL" target="_self">
+                                        @if( lawj.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)))
+                                        {
+                                            <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                            <small><span>@lawj.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawj.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@lawj.LawName</span>
+                                        }
+                                        @if (lawj.LawName.Contains(b)){}else 
+                                        if (lawj.LawLevel.Contains(b))
+                                        {
+                                            <span>@lawj.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawj.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (lawj.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < lawj.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( lawj.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@lawj.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawj.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((lawj.LawForeword != "" && lawj.LawForeword != null && lawj.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( lawj.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < lawj.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @lawj.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = lawj.LawForeword.IndexOf(b) - 10; i < lawj.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @lawj.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
                             </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( lawj.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in lawj.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in lawj.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@lawj.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@lawj.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in lawj.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in lawj.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
                         }
                     }
                 }
@@ -511,48 +1793,314 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>選舉法規</h3>
-            @foreach (var lawel in lel)
+            @if( !b.Contains( ' ' ) ) 
             {
-                @if (lawel.LawName.Contains(b) || lawel.LawLevel.Contains(b) || lawel.LawHistories.Contains( b ) || (lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)) || (lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b)))
+                @foreach (var lawel in lel)
                 {
-                    <tr>
-                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
-                    </tr>
-                }
-                else if (lawel.LawAttachements.Length != 0)
-                {
-                    @foreach (var att in lawel.LawAttachements)
+                    @if( lawel.LawName.Contains( b ) || lawel.LawLevel.Contains( b ) || lawel.LawHistories.Contains( b ) || (lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains( b ) ) || ( lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b) ) ) 
                     {
-                        @if (att.FileName.Contains(b))
+                        <tr>
+                            <td>
+                                <a href="@lawel.LawURL" target="_self">
+                                    @if( lawel.LawName.Contains( b ) ) 
+                                    {
+                                        <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                    }
+                                    else if ((lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)))
+                                    {
+                                        <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                        <small><span>@lawel.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawel.EngLawName.Split(b)[1]</span></small>
+                                    }
+                                    else 
+                                    {
+                                        <span>@lawel.LawName</span>
+                                    }
+                                    @if (lawel.LawName.Contains(b)){}else 
+                                    if (lawel.LawLevel.Contains(b))
+                                    {
+                                        <span>@lawel.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawel.LawLevel.Split( b )[1]</span>
+                                    }
+                                    else if (lawel.LawHistories.Contains(b))
+                                    {
+                                        @for (int i = 0; i < lawel.LawHistories.Split('.').Length ; i ++ ) 
+                                        {
+                                            @if( lawel.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                            {
+                                                <span>…@lawel.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawel.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                            }
+                                        }
+                                    }
+                                    else if ((lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b)) ) 
+                                    {
+                                        <span>
+                                            @if( lawel.LawForeword.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < lawel.LawForeword.IndexOf(b) ; i++)
+                                                {
+                                                    @lawel.LawForeword[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = lawel.LawForeword.IndexOf(b) - 10; i < lawel.LawForeword.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @lawel.LawForeword[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    else if( lawel.LawAttachements.Length != 0 )
+                    {
+                        bool AttcontainsB = false ; 
+                        bool ArtcontainsB = false ; 
+                        @foreach (var att in lawel.LawAttachements)
                         {
-                            <tr>
-                                <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var art in lawel.LawArticles)
+                            @if (att.FileName.Contains(b))
                             {
-                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo !=
-                                        null && art.ArticleNo.Contains(b)))
+                                AttcontainsB = true ; 
+                            }
+                        }
+                        @foreach (var art in lawel.LawArticles)
+                        {
+                            @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                            {
+                                ArtcontainsB = true ; 
+                            }
+                        }
+                        <a href="@lawel.LawURL" target="_self">
+                            @if( ArtcontainsB || AttcontainsB ) 
+                            {
+                                <span>@lawel.LawName</span>
+                            }
+                            @if( AttcontainsB ) 
+                            {
+                                @foreach( var att in lawel.LawAttachements ) 
                                 {
-                                    <tr>
-                                        <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
-                                    </tr>
+                                    @if( att.FileName.Contains( b ) ) 
+                                    {
+                                        <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                    }
                                 }
+                            }
+                            else if( ArtcontainsB ) 
+                            {
+                                @foreach( var art in lawel.LawArticles ) 
+                                {
+                                    @if( art.ArticleContent.Contains( b ) )
+                                    {
+                                        <span>
+                                            @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleContent[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                    else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                    {
+                                        <span>
+                                            @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                            {
+                                                @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                {
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            else 
+                                            {
+                                                <span>…</span>
+                                                @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                { 
+                                                    @art.ArticleNo[i]
+                                                }
+                                            }
+                                            <span class="matched">@b</span>
+                                        …</span>
+                                    }
+                                }
+                            }
+                        </a>
+                    }
+                    else 
+                    {
+                        @foreach( var art in lawel.LawArticles ) 
+                        {
+                            @if( art.ArticleContent.Contains( b ) || art.ArticleType.Contains( b ) || ( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) )
+                            {
+                                <tr>
+                                    <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                                </tr>
                             }
                         }
                     }
                 }
-                else
+            }
+            else 
+            {
+                @foreach( var b in b.Split( ' ' ) ) 
                 {
-                    @foreach (var art in lawel.LawArticles)
+                    @foreach( var lawel in lel ) 
                     {
-                        @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                        @if( lawel.LawName.Contains( b ) || lawel.LawLevel.Contains( b ) || lawel.LawHistories.Contains( b ) || (lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains( b ) ) || ( lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b) ) ) 
                         {
                             <tr>
-                                <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                                <td>
+                                    <a href="@lawel.LawURL" target="_self">
+                                        @if( lawel.LawName.Contains( b ) ) 
+                                        {
+                                            <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                        }
+                                        else if ((lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)))
+                                        {
+                                            <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                            <small><span>@lawel.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawel.EngLawName.Split(b)[1]</span></small>
+                                        }
+                                        else 
+                                        {
+                                            <span>@lawel.LawName</span>
+                                        }
+                                        @if (lawel.LawName.Contains(b)){}else 
+                                        if (lawel.LawLevel.Contains(b))
+                                        {
+                                            <span>@lawel.LawLevel.Split( b )[0]<span class="matched">@b</span>@lawel.LawLevel.Split( b )[1]</span>
+                                        }
+                                        else if (lawel.LawHistories.Contains(b))
+                                        {
+                                            @for (int i = 0; i < lawel.LawHistories.Split('.').Length ; i ++ ) 
+                                            {
+                                                @if( lawel.LawHistories.Split( '.' )[i].Contains( b ) ) 
+                                                {
+                                                    <span>…@lawel.LawHistories.Split('.')[i].Split(b)[0]<span class="matched">@b</span>@lawel.LawHistories.Split('.')[i].Split( b )[1]…</span>
+                                                }
+                                            }
+                                        }
+                                        else if ((lawel.LawForeword != "" && lawel.LawForeword != null && lawel.LawForeword.Contains(b)) ) 
+                                        {
+                                            <span>
+                                                @if( lawel.LawForeword.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < lawel.LawForeword.IndexOf(b) ; i++)
+                                                    {
+                                                        @lawel.LawForeword[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = lawel.LawForeword.IndexOf(b) - 10; i < lawel.LawForeword.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @lawel.LawForeword[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    </a>
+                                </td>
                             </tr>
+                        }
+                        else 
+                        {
+                            bool AttcontainsB = false ; 
+                            bool ArtcontainsB = false ; 
+                            @if( lawel.LawAttachements.Length != 0 ) 
+                            {
+                                @foreach (var att in lawel.LawAttachements)
+                                {
+                                    @if (att.FileName.Contains(b))
+                                    {
+                                        AttcontainsB = true ; 
+                                    }
+                                }
+                            }
+                            @foreach (var art in lawel.LawArticles)
+                            {
+                                @if (art.ArticleContent.Contains(b) || art.ArticleType.Contains(b) || (art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains(b)))
+                                {
+                                    ArtcontainsB = true ; 
+                                }
+                            }
+                            <a href="@lawel.LawURL" target="_self">
+                                @if( ArtcontainsB || AttcontainsB ) 
+                                {
+                                    <span>@lawel.LawName</span>
+                                }
+                                @if( AttcontainsB ) 
+                                {
+                                    @foreach( var att in lawel.LawAttachements ) 
+                                    {
+                                        @if( att.FileName.Contains( b ) ) 
+                                        {
+                                            <small><span>附件：@att.FileName.Split( b )[0]<span class="matched">@b</span>@att.FileName.Split( b )</span></small>
+                                        }
+                                    }
+                                }
+                                else if( ArtcontainsB ) 
+                                {
+                                    @foreach( var art in lawel.LawArticles ) 
+                                    {
+                                        @if( art.ArticleContent.Contains( b ) )
+                                        {
+                                            <span>
+                                                @if( art.ArticleContent.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleContent.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleContent.IndexOf(b) - 10; i < art.ArticleContent.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleContent[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                        else if( art.ArticleNo != "" && art.ArticleNo != null && art.ArticleNo.Contains( b ) ) 
+                                        {
+                                            <span>
+                                                @if( art.ArticleNo.IndexOf(b) < 10 ) 
+                                                {
+                                                    @for (int i = 0 ; i < art.ArticleNo.IndexOf(b) ; i++)
+                                                    {
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                else 
+                                                {
+                                                    <span>…</span>
+                                                    @for (int i = art.ArticleNo.IndexOf(b) - 10; i < art.ArticleNo.IndexOf(b) ; i ++ ) 
+                                                    { 
+                                                        @art.ArticleNo[i]
+                                                    }
+                                                }
+                                                <span class="matched">@b</span>
+                                            …</span>
+                                        }
+                                    }
+                                }
+                            </a>
                         }
                     }
                 }
