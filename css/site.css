@@ -242,6 +242,11 @@ header a:focus
 {
   margin : 1rem 3rem ; 
 }
+.matched 
+{
+  color : #fc0 ; 
+  background : #0009 ; 
+}
 
 
 /* index */
