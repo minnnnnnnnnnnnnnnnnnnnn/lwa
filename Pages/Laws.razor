@@ -2040,13 +2040,13 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
 
 @code {
     private LawRoot[]? laws;
+    public string a;
+    public string b;
     private int ic = 0;
     private int iex = 0;
     private int il = 0;
     private int ij = 0;
     private int iel = 0;
-    public string a;
-    public string b;
     public List<L> lc = new List<L>();
     public List<L> lex = new List<L>();
     public List<L> ll = new List<L>();
@@ -2055,7 +2055,6 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
-        var aaaaaa = N.Uri;
         var queryStrings = QueryHelpers.ParseQuery(uri.Query);
         if (queryStrings.TryGetValue("c", out var aaa))
         {
