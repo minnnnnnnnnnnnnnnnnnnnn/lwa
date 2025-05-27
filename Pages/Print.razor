@@ -66,7 +66,7 @@ else
         </span>
         @for (int i = 0; i < ic; i++)
         {
-            <div id="0">
+            <div id="@i">
                 <div class="title">
                     <span class="abandoned">@lc[i].LawAbandonNote</span>
                     @if (lc[i].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -106,7 +106,7 @@ else
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@art.ArticleNo.Split('條')[1]</span>
+                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
                             }
                             else 
                             {
@@ -144,7 +144,7 @@ else
         </span>
         @for (int i = 0; i < iex; i++)
         {
-            <div id="0">
+            <div id="@( i + ic )">
                 <div class="title">
                     <span class="abandoned">@lex[i].LawAbandonNote</span>
                     @if (lex[i].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -180,7 +180,7 @@ else
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@art.ArticleNo.Split('條')[1]</span>
+                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
                             }
                             else 
                             {
@@ -218,7 +218,7 @@ else
         </span>
         @for (int i = 0; i < il; i++)
         {
-            <div id="0">
+            <div id="@( i + ic + iex )">
                 <div class="title">
                     <span class="abandoned">@ll[i].LawAbandonNote</span>
                     @if (ll[i].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -254,7 +254,7 @@ else
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@art.ArticleNo.Split('條')[1]</span>
+                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
                             }
                             else 
                             {
@@ -292,7 +292,7 @@ else
         </span>
         @for (int i = 0; i < ij; i++)
         {
-            <div id="0">
+            <div id="@( i + ic + iex + il )">
                 <div class="title">
                     <span class="abandoned">@lj[i].LawAbandonNote</span>
                     @if (lj[i].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -328,7 +328,7 @@ else
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@art.ArticleNo.Split('條')[1]</span>
+                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
                             }
                             else 
                             {
@@ -366,7 +366,7 @@ else
         </span>
         @for (int i = 0; i < iel; i++)
         {
-            <div id="0">
+            <div id="@( i + ic + iex + il + ij )">
                 <div class="title">
                     <span class="abandoned">@lel[i].LawAbandonNote</span>
                     @if (lel[i].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -402,7 +402,7 @@ else
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@art.ArticleNo.Split('條')[1]</span>
+                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
                             }
                             else 
                             {
