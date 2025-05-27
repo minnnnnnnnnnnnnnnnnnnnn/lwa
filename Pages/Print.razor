@@ -102,8 +102,38 @@ else
                     {}
                     else 
                     {
-                        <h6>@art.ArticleNo</h6>
-                        <article></article>
+                        <h6>
+                            @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                            {
+                                <span>@art.ArticleNo.Split('【')[0]</span>
+                                <span>@art.ArticleNo.Split('條')[1]</span>
+                            }
+                            else 
+                            {
+                                <span>@art.ArticleNo</span>
+                            }
+                        </h6>
+                        <article>
+                            @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                            {
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                                {
+                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                }
+                                else 
+                                {
+                                    <li class="p">@p</li>
+                                }
+                            }
+                        </article>
                         <br/>
                     }
                 }
@@ -132,6 +162,55 @@ else
                         <li>@his</li>
                     }
                 </ol>
+                <div class="Foreword">
+                    <p>
+                        @foreach (var fw in lex[i].LawForeword.Split( "\r\n" ) )
+                        {
+                            @fw<br/>
+                        }
+                    </p>
+                </div>
+                @foreach( var art in lex[i].LawArticles ) 
+                {
+                    @if( art.ArticleType == "C" ) 
+                    {}
+                    else 
+                    {
+                        <h6>
+                            @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                            {
+                                <span>@art.ArticleNo.Split('【')[0]</span>
+                                <span>@art.ArticleNo.Split('條')[1]</span>
+                            }
+                            else 
+                            {
+                                <span>@art.ArticleNo</span>
+                            }
+                        </h6>
+                        <article>
+                            @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                            {
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                                {
+                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                }
+                                else 
+                                {
+                                    <li class="p">@p</li>
+                                }
+                            }
+                        </article>
+                        <br/>
+                    }
+                }
             </div>
         }
         <span class="break">
@@ -157,6 +236,55 @@ else
                         <li>@his</li>
                     }
                 </ol>
+                <div class="Foreword">
+                    <p>
+                        @foreach (var fw in ll[i].LawForeword.Split( "\r\n" ) )
+                        {
+                            @fw<br/>
+                        }
+                    </p>
+                </div>
+                @foreach( var art in ll[i].LawArticles ) 
+                {
+                    @if( art.ArticleType == "C" ) 
+                    {}
+                    else 
+                    {
+                        <h6>
+                            @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                            {
+                                <span>@art.ArticleNo.Split('【')[0]</span>
+                                <span>@art.ArticleNo.Split('條')[1]</span>
+                            }
+                            else 
+                            {
+                                <span>@art.ArticleNo</span>
+                            }
+                        </h6>
+                        <article>
+                            @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                            {
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                                {
+                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                }
+                                else 
+                                {
+                                    <li class="p">@p</li>
+                                }
+                            }
+                        </article>
+                        <br/>
+                    }
+                }
             </div>
         }
         <span class="break">
@@ -182,6 +310,55 @@ else
                         <li>@his</li>
                     }
                 </ol>
+                <div class="Foreword">
+                    <p>
+                        @foreach (var fw in lj[i].LawForeword.Split( "\r\n" ) )
+                        {
+                            @fw<br/>
+                        }
+                    </p>
+                </div>
+                @foreach( var art in lj[i].LawArticles ) 
+                {
+                    @if( art.ArticleType == "C" ) 
+                    {}
+                    else 
+                    {
+                        <h6>
+                            @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                            {
+                                <span>@art.ArticleNo.Split('【')[0]</span>
+                                <span>@art.ArticleNo.Split('條')[1]</span>
+                            }
+                            else 
+                            {
+                                <span>@art.ArticleNo</span>
+                            }
+                        </h6>
+                        <article>
+                            @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                            {
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                                {
+                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                }
+                                else 
+                                {
+                                    <li class="p">@p</li>
+                                }
+                            }
+                        </article>
+                        <br/>
+                    }
+                }
             </div>
         }
         <span class="break">
@@ -207,6 +384,55 @@ else
                         <li>@his</li>
                     }
                 </ol>
+                <div class="Foreword">
+                    <p>
+                        @foreach (var fw in lel[i].LawForeword.Split( "\r\n" ) )
+                        {
+                            @fw<br/>
+                        }
+                    </p>
+                </div>
+                @foreach( var art in lel[i].LawArticles ) 
+                {
+                    @if( art.ArticleType == "C" ) 
+                    {}
+                    else 
+                    {
+                        <h6>
+                            @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                            {
+                                <span>@art.ArticleNo.Split('【')[0]</span>
+                                <span>@art.ArticleNo.Split('條')[1]</span>
+                            }
+                            else 
+                            {
+                                <span>@art.ArticleNo</span>
+                            }
+                        </h6>
+                        <article>
+                            @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                            {
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                                {
+                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                }
+                                else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                                {
+                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                }
+                                else 
+                                {
+                                    <li class="p">@p</li>
+                                }
+                            }
+                        </article>
+                        <br/>
+                    }
+                }
             </div>
         }
         <span id="COVER-BACK" style="line-height:1.3;">

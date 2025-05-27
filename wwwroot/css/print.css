@@ -147,6 +147,10 @@ div[ahhhhaaaahaha] li , div[ahhhhaaaahaha] ol > span
 {
     display : flex ; 
 }
+div[ahhhhaaaahaha] h1 , div[ahhhhaaaahaha] h2 , div[ahhhhaaaahaha] h3 , div[ahhhhaaaahaha] h4 , div[ahhhhaaaahaha] h5 , div[ahhhhaaaahaha] h6 
+{
+    display : flex ; 
+}
 div[ahhhhaaaahaha] h1 , div[ahhhhaaaahaha] h2 , div[ahhhhaaaahaha] h3 , div[ahhhhaaaahaha] h4 , div[ahhhhaaaahaha] h5 
 {
     margin-left : -3.5rem ; 
@@ -181,7 +185,7 @@ div[ahhhhaaaahaha] h6
     font-weight : bold ; 
     font-size : 12pt ; 
 }
-div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] ol > span :first-child 
+div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] h6 :first-child , div[ahhhhaaaahaha] ol > span :first-child 
 {
     flex-shrink : 0 ; 
 }
