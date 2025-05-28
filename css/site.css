@@ -215,7 +215,7 @@ header nav ul
     align-items : center ; 
     flex-direction : row ; 
   }
-  header nav ul li , li 
+  header nav ul li , li:not(div[ahhhhaaaahaha] li) 
   {
     margin : 0 var(--header-padding-lr) ; 
   }
