@@ -5,6 +5,12 @@
         display : inline-flex ; 
         font-family : "Noto Serif" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
         font-weight : 500 ; 
+        flex-wrap : wrap ; 
+    }
+    .bread ul li 
+    {
+        flex-shrink : 0 ; 
+        max-width : 100% ; 
     }
     .bread ul li a 
     {
