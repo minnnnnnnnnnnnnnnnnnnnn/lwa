@@ -143,7 +143,7 @@ div[ahhhhaaaahaha] li
 {
     list-style : none ; 
 }
-div[ahhhhaaaahaha] li , div[ahhhhaaaahaha] ol > span 
+div[ahhhhaaaahaha] li , div[ahhhhaaaahaha] article > li 
 {
     display : flex ; 
 }
@@ -185,16 +185,16 @@ div[ahhhhaaaahaha] h6
     font-weight : bold ; 
     font-size : 12pt ; 
 }
-div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] h6 :first-child , div[ahhhhaaaahaha] ol > span :first-child 
+div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] h6 :first-child , div[ahhhhaaaahaha] article > li :first-child 
 {
     flex-shrink : 0 ; 
 }
-.showNum > li 
+.showNum > .p 
 {
     counter-increment : paragraph-count ; 
     position : relative ; 
 }
-.showNum > li::before 
+.showNum > .p::before 
 {
     content : counter( paragraph-count ) ; 
     position : absolute ; 
