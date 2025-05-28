@@ -1,4 +1,4 @@
-@page "/laws/law"
+@page "/laws/lawe"
 @inject HttpClient Http 
 @inject NavigationManager N
 
@@ -11,31 +11,27 @@
         {
             @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
             {
-                <li>@laws[0].Laws[aa].LawName</li>
+                <li>@( laws[0].Laws[aa].LawName + "（簡讀版）" )</li>
             }
             else if ( a.ToUpper().Split( '0' )[0] == "X" ) 
             {
-                <li>@lex[aa].LawName</li>
+                <li>@( lex[aa].LawName + "（簡讀版）" )</li>
             }
             else if ( a.ToUpper().Split( '0' )[0] == "L" ) 
             {
-                <li>@ll[aa].LawName</li>
+                <li>@( ll[aa].LawName + "（簡讀版）" )</li>
             }
             else if ( a.ToUpper().Split( '0' )[0] == "J" ) 
             {
-                <li>@lj[aa].LawName</li>
+                <li>@( lj[aa].LawName + "（簡讀版）" )</li>
             }
             else if ( a.ToUpper().Split( '0' )[0] == "E" ) 
             {
-                <li>@lel[aa].LawName</li>
+                <li>@( lel[aa].LawName + "（簡讀版）" )</li>
             }
         }
     </ul>
 </div>
-@if( a != null && a != "" ) 
-{
-    <a href="laws/lawe?a=@a">簡讀版</a>
-}
 @if (laws == null)
 {
     <PageTitle>Loading - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
