@@ -195,7 +195,28 @@ else
                 @foreach( var art in lex[i].LawArticles ) 
                 {
                     @if( art.ArticleType == "C" ) 
-                    {}
+                    {
+                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                        {
+                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                        }
+                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                        {
+                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                        }
+                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                        {
+                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                        }
+                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                        {
+                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                        }
+                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                        {
+                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                        }
+                    }
                     else 
                     {
                         <h6>
@@ -270,7 +291,28 @@ else
                 @foreach( var art in ll[i].LawArticles ) 
                 {
                     @if( art.ArticleType == "C" ) 
-                    {}
+                    {
+                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                        {
+                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                        }
+                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                        {
+                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                        }
+                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                        {
+                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                        }
+                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                        {
+                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                        }
+                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                        {
+                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                        }
+                    }
                     else 
                     {
                         <h6>
@@ -345,7 +387,28 @@ else
                 @foreach( var art in lj[i].LawArticles ) 
                 {
                     @if( art.ArticleType == "C" ) 
-                    {}
+                    {
+                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                        {
+                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                        }
+                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                        {
+                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                        }
+                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                        {
+                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                        }
+                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                        {
+                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                        }
+                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                        {
+                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                        }
+                    }
                     else 
                     {
                         <h6>
@@ -420,7 +483,28 @@ else
                 @foreach( var art in lel[i].LawArticles ) 
                 {
                     @if( art.ArticleType == "C" ) 
-                    {}
+                    {
+                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                        {
+                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                        }
+                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                        {
+                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                        }
+                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                        {
+                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                        }
+                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                        {
+                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                        }
+                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                        {
+                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                        }
+                    }
                     else 
                     {
                         <h6>
