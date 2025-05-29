@@ -95,19 +95,19 @@ else
                         }
                         else if( art.ArticleContent[3] == '第' ) @*章*@
                         {
-                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                            <h2 id=""><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
                         }
                         else if( art.ArticleContent[6] == '第' ) @*節*@
                         {
-                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                            <h3 id=""><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
                         }
                         else if( art.ArticleContent[9] == '第' ) @*款*@
                         {
-                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                            <h4 id=""><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
                         }
                         else if( art.ArticleContent[12] == '第' ) @*目*@
                         {
-                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                            <h5 id=""><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
                         }
                     }
                     else 
@@ -152,8 +152,8 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "X" ) 
         {
-            <div id="@( aa + ic )">
-                <div class="title">
+            <div>
+                <div id="title" class="title">
                     <span class="abandoned">@lex[aa].LawAbandonNote</span>
                     @if (lex[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
                     {
@@ -164,13 +164,13 @@ else
                         <span>臺中第一高級中學<br />@lex[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
-                <ol class="legislativeHistory">
+                <ol id="lHistory" class="legislativeHistory">
                     @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
                     {
                         <li>@his</li>
                     }
                 </ol>
-                <div class="Foreword">
+                <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lex[aa].LawForeword.Split( "\r\n" ) )
                         {
@@ -185,28 +185,28 @@ else
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
                         {
-                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                            <h1 id=""><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
                         }
                         else if( art.ArticleContent[3] == '第' ) @*章*@
                         {
-                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                            <h2 id=""><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
                         }
                         else if( art.ArticleContent[6] == '第' ) @*節*@
                         {
-                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                            <h3 id=""><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
                         }
                         else if( art.ArticleContent[9] == '第' ) @*款*@
                         {
-                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                            <h4 id=""><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
                         }
                         else if( art.ArticleContent[12] == '第' ) @*目*@
                         {
-                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                            <h5 id=""><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
                         }
                     }
                     else 
                     {
-                        <h6>
+                        <h6 id="">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
@@ -217,24 +217,24 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article class="@showNum[iSN]">
+                        <article id="" class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
                                 {
-                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                    <li id=""><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
                                 }
                                 else 
                                 {
-                                    <li class="p">@p</li>
+                                    <li id="" class="p">@p</li>
                                 }
                             }
                         </article>
@@ -246,8 +246,8 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "L" ) 
         {
-            <div id="@( aa + ic + iex )">
-                <div class="title">
+            <div>
+                <div id="title" class="title">
                     <span class="abandoned">@ll[aa].LawAbandonNote</span>
                     @if (ll[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
                     {
@@ -258,13 +258,13 @@ else
                         <span>臺中第一高級中學<br />@ll[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
-                <ol class="legislativeHistory">
+                <ol id="lHistory" class="legislativeHistory">
                     @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
                     {
                         <li>@his</li>
                     }
                 </ol>
-                <div class="Foreword">
+                <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in ll[aa].LawForeword.Split( "\r\n" ) )
                         {
@@ -279,28 +279,28 @@ else
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
                         {
-                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                            <h1 id=""><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
                         }
                         else if( art.ArticleContent[3] == '第' ) @*章*@
                         {
-                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                            <h2 id=""><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
                         }
                         else if( art.ArticleContent[6] == '第' ) @*節*@
                         {
-                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                            <h3 id=""><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
                         }
                         else if( art.ArticleContent[9] == '第' ) @*款*@
                         {
-                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                            <h4 id=""><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
                         }
                         else if( art.ArticleContent[12] == '第' ) @*目*@
                         {
-                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                            <h5 id=""><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
                         }
                     }
                     else 
                     {
-                        <h6>
+                        <h6 id="">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
@@ -311,24 +311,24 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article class="@showNum[iSN]">
+                        <article id="" class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
                                 {
-                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                    <li id=""><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
                                 }
                                 else 
                                 {
-                                    <li class="p">@p</li>
+                                    <li id="" class="p">@p</li>
                                 }
                             }
                         </article>
@@ -340,8 +340,8 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "J" ) 
         {
-            <div id="@( aa + ic + iex + il )">
-                <div class="title">
+            <div>
+                <div id="title" class="title">
                     <span class="abandoned">@lj[aa].LawAbandonNote</span>
                     @if (lj[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
                     {
@@ -352,13 +352,13 @@ else
                         <span>臺中第一高級中學<br />@lj[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
-                <ol class="legislativeHistory">
+                <ol id="lHistory" class="legislativeHistory">
                     @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
                     {
                         <li>@his</li>
                     }
                 </ol>
-                <div class="Foreword">
+                <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lj[aa].LawForeword.Split( "\r\n" ) )
                         {
@@ -373,28 +373,28 @@ else
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
                         {
-                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                            <h1 id=""><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
                         }
                         else if( art.ArticleContent[3] == '第' ) @*章*@
                         {
-                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                            <h2 id=""><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
                         }
                         else if( art.ArticleContent[6] == '第' ) @*節*@
                         {
-                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                            <h3 id=""><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
                         }
                         else if( art.ArticleContent[9] == '第' ) @*款*@
                         {
-                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                            <h4 id=""><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
                         }
                         else if( art.ArticleContent[12] == '第' ) @*目*@
                         {
-                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                            <h5 id=""><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
                         }
                     }
                     else 
                     {
-                        <h6>
+                        <h6 id="">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
@@ -405,24 +405,24 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article class="@showNum[iSN]">
+                        <article id="" class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
                                 {
-                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                    <li id=""><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
                                 }
                                 else 
                                 {
-                                    <li class="p">@p</li>
+                                    <li id="" class="p">@p</li>
                                 }
                             }
                         </article>
@@ -434,8 +434,8 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "E" ) 
         {
-            <div id="@( aa + ic + iex + il + ij )">
-                <div class="title">
+            <div>
+                <div id="title" class="title">
                     <span class="abandoned">@lel[aa].LawAbandonNote</span>
                     @if (lel[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
                     {
@@ -446,13 +446,13 @@ else
                         <span>臺中第一高級中學<br />@lel[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
-                <ol class="legislativeHistory">
+                <ol id="lHistory" class="legislativeHistory">
                     @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
                     {
                         <li>@his</li>
                     }
                 </ol>
-                <div class="Foreword">
+                <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lel[aa].LawForeword.Split( "\r\n" ) )
                         {
@@ -467,28 +467,28 @@ else
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
                         {
-                            <h1><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
+                            <h1 id=""><pre>@( art.ArticleContent.Split( '編' )[0] + "編 " )</pre><span>@art.ArticleContent.Split( '編' )[1]</span></h1><br/>
                         }
                         else if( art.ArticleContent[3] == '第' ) @*章*@
                         {
-                            <h2><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
+                            <h2 id=""><pre>@( art.ArticleContent.Split( '章' )[0] + "章 " )</pre><span>@art.ArticleContent.Split( '章' )[1]</span></h2><br/>
                         }
                         else if( art.ArticleContent[6] == '第' ) @*節*@
                         {
-                            <h3><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
+                            <h3 id=""><pre>@( art.ArticleContent.Split( '節' )[0] + "節 " )</pre><span>@art.ArticleContent.Split( '節' )[1]</span></h3><br/>
                         }
                         else if( art.ArticleContent[9] == '第' ) @*款*@
                         {
-                            <h4><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
+                            <h4 id=""><pre>@( art.ArticleContent.Split( '款' )[0] + "款 " )</pre><span>@art.ArticleContent.Split( '款' )[1]</span></h4><br/>
                         }
                         else if( art.ArticleContent[12] == '第' ) @*目*@
                         {
-                            <h5><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
+                            <h5 id=""><pre>@( art.ArticleContent.Split( '目' )[0] + "目 " )</pre><span>@art.ArticleContent.Split( '目' )[1]</span></h5><br/>
                         }
                     }
                     else 
                     {
-                        <h6>
+                        <h6 id="">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
                                 <span>@art.ArticleNo.Split('【')[0]</span>
@@ -499,24 +499,24 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article class="@showNum[iSN]">
+                        <article id="" class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
                                 {
-                                    <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                                    <li id=""><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
                                 }
                                 else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
                                 {
-                                    <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
+                                    <li id=""><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
                                 }
                                 else 
                                 {
-                                    <li class="p">@p</li>
+                                    <li id="" class="p">@p</li>
                                 }
                             }
                         </article>
@@ -532,6 +532,27 @@ else
 
 @code {
     private LawRoot[]? laws;
+    private int h1c;
+    private int h2c;
+    private int h3c;
+    private int h4c;
+    private int h5c;
+    private int h6c;
+    private int pc;
+    private int subpc;
+    private int itemc;
+    private int ofc;
+    private string[]? h1 ;
+    private string[]? h2 ;
+    private string[]? h3 ;
+    private string[]? h4 ;
+    private string[]? h5 ;
+    private string[]? h6 ;
+    private string[]? article ;
+    private string[]? lip ;
+    private string[]? lisubp ;
+    private string[]? liitem ;
+    private string[]? liof ;
     private int aCount;
     private int[] pCount;
     private string[]? showNum;
@@ -574,6 +595,67 @@ else
         }
         pCount = new int[aCount] ; 
         showNum = new string[aCount] ; 
+        foreach( var l in laws[0].Laws[aa].LawArticles ) 
+        {
+
+            if (l.ArticleType == "C")
+            {
+                if (l.ArticleContent[0] == '第') @*編*@
+                {
+                    h1c++;
+                }
+                else if (l.ArticleContent[3] == '第') @*章*@
+                {
+                    h2c++;
+                }
+                else if (l.ArticleContent[6] == '第') @*節*@
+                {
+                    h3c++;
+                }
+                else if (l.ArticleContent[9] == '第') @*款*@
+                {
+                    h4c++;
+                }
+                else if (l.ArticleContent[12] == '第') @*目*@
+                {
+                    h5c++;
+                }
+            }
+            else if( l.ArticleType == "A" ) 
+            {
+                h6c ++ ; 
+                foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
+                {
+                    if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                    {
+                        ofc ++ ; 
+                    }
+                    else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                    {
+                        itemc ++ ; 
+                    }
+                    else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                    {
+                        subpc ++ ; 
+                    }
+                    else 
+                    {
+                        pc ++ ; 
+                    }
+                }
+            }
+        }
+        h1 = new string[ h1c ] ; 
+        h2 = new string[ h2c ] ; 
+        h3 = new string[ h3c ] ; 
+        h4 = new string[ h4c ] ; 
+        h5 = new string[ h5c ] ; 
+        h6 = new string[ h6c ] ; 
+        article = new string[ h6c ] ; 
+        lip = new string[ pc ] ; 
+        lisubp = new string[ subpc ] ; 
+        liitem = new string[ itemc ] ; 
+        liof = new string[ ofc ] ; 
         for (int i = 0; i < laws[0].Laws.Length; i++)
         {
             if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
@@ -692,6 +774,24 @@ else
         {
             showNum[pc] = pCount[pc] > 1 ? "showNum" : null ; 
         }
+    }
+    
+    public int x(string s)
+    {
+        if( s == "" ) 
+        {
+            return 0 ; 
+        }
+        if( s[0] == '零' ) 
+        {
+            s = s.Substring(1) ; 
+        }
+        if( s[0] == '十' )
+        {
+            s = "一" + s ; 
+        }
+        string t = " 一二三四五六七八九" ; 
+        return s.Length < 2 ? t.IndexOf( s[0] ) : ( t.IndexOf( s[0] ) * ( s[1] == '百' ? 100 : 10) + x( s.Substring(2) ) ) ; 
     }
 
     public class LawRoot
