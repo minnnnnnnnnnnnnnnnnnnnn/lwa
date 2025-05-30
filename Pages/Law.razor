@@ -123,7 +123,7 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article id="" class="@showNum[iSN]">
+                        <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -217,7 +217,7 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article id="" class="@showNum[iSN]">
+                        <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -311,7 +311,7 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article id="" class="@showNum[iSN]">
+                        <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -405,7 +405,7 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article id="" class="@showNum[iSN]">
+                        <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -499,7 +499,7 @@ else
                                 <span>@art.ArticleNo</span>
                             }
                         </h6>
-                        <article id="" class="@showNum[iSN]">
+                        <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
                                 @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -548,7 +548,6 @@ else
     private string[]? h4 ;
     private string[]? h5 ;
     private string[]? h6 ;
-    private string[]? article ;
     private string[]? lip ;
     private string[]? lisubp ;
     private string[]? liitem ;
@@ -651,11 +650,61 @@ else
         h4 = new string[ h4c ] ; 
         h5 = new string[ h5c ] ; 
         h6 = new string[ h6c ] ; 
-        article = new string[ h6c ] ; 
         lip = new string[ pc ] ; 
         lisubp = new string[ subpc ] ; 
         liitem = new string[ itemc ] ; 
         liof = new string[ ofc ] ; 
+        int id = 0 ; 
+        foreach( var l in laws[0].Laws[aa].LawArticles ) 
+        {
+            if( l.ArticleType == "C" ) 
+            {
+                if (l.ArticleContent[0] == '第') @*編*@
+                {
+                    h1[id] = "" ; 
+                }
+                else if (l.ArticleContent[3] == '第') @*章*@
+                {
+                    h2[id] = "" ; 
+                }
+                else if (l.ArticleContent[6] == '第') @*節*@
+                {
+                    h3[id] = "" ; 
+                }
+                else if (l.ArticleContent[9] == '第') @*款*@
+                {
+                    h4[id] = "" ; 
+                }
+                else if (l.ArticleContent[12] == '第') @*目*@
+                {
+                    h5[id] = "" ; 
+                }
+            }
+            else if( l.ArticleType == "A" ) 
+            {
+                h6[id] = x( Regex.Replace( l.ArticleNo.Contains( '【' ) ? l.ArticleNo.Split( "【" )[0] : l.ArticleNo , @"[^一二三四五六七八九十○零百千]" , "" ) ).ToString() ; 
+                foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
+                {
+                    if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
+                    {
+                        liof[id] = "" ; 
+                    }
+                    else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                    {
+                        liitem[id] = "" ; 
+                    }
+                    else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                    {
+                        lisubp[id] = "" ; 
+                    }
+                    else 
+                    {
+                        lip[id] = "" ; 
+                    }
+                }
+            }
+            id ++ ; 
+        }
         for (int i = 0; i < laws[0].Laws.Length; i++)
         {
             if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
