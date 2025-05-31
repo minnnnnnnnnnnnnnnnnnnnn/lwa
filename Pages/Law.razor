@@ -8,6 +8,8 @@
     }
 </style>
 
+@* 目錄要做 *@
+
 <div class="bread">
     <span>現在位置：</span>
     <ul>
@@ -157,6 +159,59 @@ else
                                     <li id="@lip[ip]" class="p">@p</li>
                                     ip ++ ; 
                                 }
+                            }
+                            @if( art.Cases.Length > 0 || art.Ref.Length > 0 || art.Rel.Length > 0 ) 
+                            {
+                                <small>
+                                    @if( art.Cases.Length > 0 ) 
+                                    {
+                                        <div id="@(h6[ih6]+"_cases")" class="cases">
+                                            <span>【判例/解釋】</span>
+                                            <span>
+                                                @for( int c = 0 ; c < art.Cases.Length ; c ++ ) 
+                                                {
+                                                    <a href="@art.Cases[c].CaseUrl">@art.Cases[c].CaseNo</a>
+                                                    @if( c < art.Cases.Length - 1 ) 
+                                                    {
+                                                        <span>,</span>
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    }
+                                    @if( art.Rel.Length > 0 ) 
+                                    {
+                                        <div id="@(h6[ih6]+"_rel")" class="rel">
+                                            <span>【相關法規/條文】</span>
+                                            <span>
+                                                @for( int r = 0 ; r < art.Rel.Length ; r ++ ) 
+                                                {
+                                                    <a href="@art.Rel[r].Url">@art.Rel[r].Name</a>
+                                                    @if( r < art.Rel.Length - 1 ) 
+                                                    {
+                                                        <span>,</span>
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    }
+                                    @if( art.Ref.Length > 0 ) 
+                                    {
+                                        <div id="@(h6[ih6]+"_ref")" class="ref">
+                                            <span>【具參考價值】</span>
+                                            <span>
+                                                @for( int r = 0 ; r < art.Ref.Length ; r ++ ) 
+                                                {
+                                                    <a href="@art.Ref[r].Url">@art.Ref[r].Name</a>
+                                                    @if( r < art.Ref.Length - 1 ) 
+                                                    {
+                                                        <span>,</span>
+                                                    }
+                                                }
+                                            </span>
+                                        </div>
+                                    }
+                                </small>
                             }
                         </article>
                         <br/>
@@ -1515,13 +1570,28 @@ else
         public string ArticleType { get; set; }
         public string? ArticleNo { get; set; }
         public string ArticleContent { get; set; }
-        public string? Cases { get; set; } 
-        public string? Rel { get; set; } 
-        public string? Ref { get; set; } 
+        public Cases[]? Cases { get; set; } 
+        public Rel[]? Rel { get; set; } 
+        public Ref[]? Ref { get; set; } 
     }
     public class Attachements
     {
         public string FileName { get; set; }
         public string FileURL { get; set; }
+    }
+    public class Cases 
+    {
+        public string CaseNo { get; set; } 
+        public string CaseUrl { get; set; } 
+    }
+    public class Rel 
+    {
+        public string Name { get; set; } 
+        public string Url { get; set; } 
+    }
+    public class Ref 
+    {
+        public string Name { get; set; } 
+        public string Url { get; set; } 
     }
 }
