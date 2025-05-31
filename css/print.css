@@ -66,6 +66,10 @@ div[ahhhhaaaahaha] a , div[ahhhhaaaahaha] a:visited , div[ahhhhaaaahaha] a:hover
     text-decoration : none ; 
     display : block ; 
 }
+div[ahhhhaaaahaha] .cases a , div[ahhhhaaaahaha] .rel a , div[ahhhhaaaahaha] .ref a 
+{
+    display : inline-block ; 
+}
 .break[ class = "break" ] , #COVER , #COVER h1 
 {
     font-size : 50pt ; 
