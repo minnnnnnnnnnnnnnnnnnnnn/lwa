@@ -85,7 +85,7 @@ else if( c == "histories" )
             }
     </ol>
 }
-else if( c == "" && b != "" && b != null && !Regex.IsMatch( b , @"\s" ) ) 
+else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b , @"\s" ) ) 
 {
     <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <div ahhhhaaaahaha>
@@ -862,12 +862,12 @@ else if( c == "" && b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         }
     </div>
 }
-else if( c == "" && b != "" && b != null ) 
+else if( ( c == "" || c == null ) && b != "" && b != null ) 
 {
     @foreach( var b in Regex.Split( b , @"\s" ) ) 
     {}
 }
-else if( c == "" ) 
+else if( ( c == "" || c == null ) ) 
 {
     <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <div ahhhhaaaahaha>
