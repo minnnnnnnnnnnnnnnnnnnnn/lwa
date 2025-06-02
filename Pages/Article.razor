@@ -65,9 +65,9 @@ else
     {
         <PageTitle>@( laws[0].Laws[aa].LawName + art.ArticleNo ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
         <div ahhhhaaaahaha>
-            @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
-            {
-                <div>
+            <div>
+                @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
+                {
                     <div id="title" class="title">
                         <span class="abandoned">@lc[aa].LawAbandonNote</span>
                         @if (lc[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
@@ -79,95 +79,151 @@ else
                             <span>臺中第一高級中學<br />@lc[aa].LawName.Split("臺中第一高級中學")[1]</span>
                         }
                     </div>
-                    <br />
-                    <h6>
-                        @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                }
+                else if( a.ToUpper().Split( '0' )[0] == "X" ) 
+                {
+                    <div id="title" class="title">
+                        <span class="abandoned">@lex[aa].LawAbandonNote</span>
+                        @if (lex[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
                         {
-                            <span>@art.ArticleNo.Split('【')[0]</span>
-                            <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                            <span>臺中市立臺中第一高級中等學校學生自治聯合會<br />@lex[aa].LawName.Split("臺中市立臺中第一高級中等學校學生自治聯合會")[1]</span>
+                        }
+                        else if (lex[aa].LawName.Contains("臺中第一高級中學"))
+                        {
+                            <span>臺中第一高級中學<br />@lex[aa].LawName.Split("臺中第一高級中學")[1]</span>
+                        }
+                    </div>
+                }
+                else if( a.ToUpper().Split( '0' )[0] == "L" ) 
+                {
+                    <div id="title" class="title">
+                        <span class="abandoned">@ll[aa].LawAbandonNote</span>
+                        @if (ll[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
+                        {
+                            <span>臺中市立臺中第一高級中等學校學生自治聯合會<br />@ll[aa].LawName.Split("臺中市立臺中第一高級中等學校學生自治聯合會")[1]</span>
+                        }
+                        else if (ll[aa].LawName.Contains("臺中第一高級中學"))
+                        {
+                            <span>臺中第一高級中學<br />@ll[aa].LawName.Split("臺中第一高級中學")[1]</span>
+                        }
+                    </div>
+                }
+                else if( a.ToUpper().Split( '0' )[0] == "J" ) 
+                {
+                    <div id="title" class="title">
+                        <span class="abandoned">@lj[aa].LawAbandonNote</span>
+                        @if (lj[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
+                        {
+                            <span>臺中市立臺中第一高級中等學校學生自治聯合會<br />@lj[aa].LawName.Split("臺中市立臺中第一高級中等學校學生自治聯合會")[1]</span>
+                        }
+                        else if (lj[aa].LawName.Contains("臺中第一高級中學"))
+                        {
+                            <span>臺中第一高級中學<br />@lj[aa].LawName.Split("臺中第一高級中學")[1]</span>
+                        }
+                    </div>
+                }
+                else if( a.ToUpper().Split( '0' )[0] == "E" ) 
+                {
+                    <div id="title" class="title">
+                        <span class="abandoned">@lel[aa].LawAbandonNote</span>
+                        @if (lel[aa].LawName.Contains("臺中市立臺中第一高級中等學校學生自治聯合會"))
+                        {
+                            <span>臺中市立臺中第一高級中等學校學生自治聯合會<br />@lel[aa].LawName.Split("臺中市立臺中第一高級中等學校學生自治聯合會")[1]</span>
+                        }
+                        else if (lel[aa].LawName.Contains("臺中第一高級中學"))
+                        {
+                            <span>臺中第一高級中學<br />@lel[aa].LawName.Split("臺中第一高級中學")[1]</span>
+                        }
+                    </div>
+                }
+                <br />
+                <h6>
+                    @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
+                    {
+                        <span>@art.ArticleNo.Split('【')[0]</span>
+                        <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                    }
+                    else 
+                    {
+                        <span>@art.ArticleNo</span>
+                    }
+                </h6>
+                <article class="@showNum[b]">
+                    @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
+                    {
+                        @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        {
+                            <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                        }
+                        else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
+                        {
+                            <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
+                        }
+                        else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
+                        {
+                            <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
                         }
                         else 
                         {
-                            <span>@art.ArticleNo</span>
+                            <li class="p">@p</li>
                         }
-                    </h6>
-                    <article class="@showNum[b]">
-                        @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
-                        {
-                            @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                    }
+                    @if( art.Cases.Length > 0 || art.Ref.Length > 0 || art.Rel.Length > 0 ) 
+                    {
+                        <small>
+                            @if( art.Cases.Length > 0 ) 
                             {
-                                <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
-                            }
-                            else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
-                            {
-                                <li><span>@( p.Split( '）' )[0] + "）" )</span><span>@Regex.Replace( p , @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)" , "" )</span></li>
-                            }
-                            else if (Regex.IsMatch(p, @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)"))
-                            {
-                                <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" , "")</span></li>
-                            }
-                            else 
-                            {
-                                <li class="p">@p</li>
-                            }
-                        }
-                        @if( art.Cases.Length > 0 || art.Ref.Length > 0 || art.Rel.Length > 0 ) 
-                        {
-                            <small>
-                                @if( art.Cases.Length > 0 ) 
-                                {
-                                    <div id="cases" class="cases">
-                                        <span>【判例/解釋】</span>
-                                        <span>
-                                            @for( int c = 0 ; c < art.Cases.Length ; c ++ ) 
+                                <div id="cases" class="cases">
+                                    <span>【判例/解釋】</span>
+                                    <span>
+                                        @for( int c = 0 ; c < art.Cases.Length ; c ++ ) 
+                                        {
+                                            <a href="@art.Cases[c].CaseUrl">@art.Cases[c].CaseNo</a>
+                                            @if( c < art.Cases.Length - 1 ) 
                                             {
-                                                <a href="@art.Cases[c].CaseUrl">@art.Cases[c].CaseNo</a>
-                                                @if( c < art.Cases.Length - 1 ) 
-                                                {
-                                                    <span>,</span>
-                                                }
+                                                <span>,</span>
                                             }
-                                        </span>
-                                    </div>
-                                }
-                                @if( art.Rel.Length > 0 ) 
-                                {
-                                    <div id="rel" class="rel">
-                                        <span>【相關法規/條文】</span>
-                                        <span>
-                                            @for( int r = 0 ; r < art.Rel.Length ; r ++ ) 
+                                        }
+                                    </span>
+                                </div>
+                            }
+                            @if( art.Rel.Length > 0 ) 
+                            {
+                                <div id="rel" class="rel">
+                                    <span>【相關法規/條文】</span>
+                                    <span>
+                                        @for( int r = 0 ; r < art.Rel.Length ; r ++ ) 
+                                        {
+                                            <a href="@art.Rel[r].Url">@art.Rel[r].Name</a>
+                                            @if( r < art.Rel.Length - 1 ) 
                                             {
-                                                <a href="@art.Rel[r].Url">@art.Rel[r].Name</a>
-                                                @if( r < art.Rel.Length - 1 ) 
-                                                {
-                                                    <span>,</span>
-                                                }
+                                                <span>,</span>
                                             }
-                                        </span>
-                                    </div>
-                                }
-                                @if( art.Ref.Length > 0 ) 
-                                {
-                                    <div id="ref" class="ref">
-                                        <span>【具參考價值】</span>
-                                        <span>
-                                            @for( int r = 0 ; r < art.Ref.Length ; r ++ ) 
+                                        }
+                                    </span>
+                                </div>
+                            }
+                            @if( art.Ref.Length > 0 ) 
+                            {
+                                <div id="ref" class="ref">
+                                    <span>【具參考價值】</span>
+                                    <span>
+                                        @for( int r = 0 ; r < art.Ref.Length ; r ++ ) 
+                                        {
+                                            <a href="@art.Ref[r].Url">@art.Ref[r].Name</a>
+                                            @if( r < art.Ref.Length - 1 ) 
                                             {
-                                                <a href="@art.Ref[r].Url">@art.Ref[r].Name</a>
-                                                @if( r < art.Ref.Length - 1 ) 
-                                                {
-                                                    <span>,</span>
-                                                }
+                                                <span>,</span>
                                             }
-                                        </span>
-                                    </div>
-                                }
-                            </small>
-                        }
-                    </article>
-                    <br/>
-                </div>
-            }
+                                        }
+                                    </span>
+                                </div>
+                            }
+                        </small>
+                    }
+                </article>
+                <br/>
+            </div>
         </div>
     }
     <a href="laws">回上一頁</a>

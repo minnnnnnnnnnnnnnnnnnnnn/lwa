@@ -8,37 +8,34 @@
     }
 </style>
 
-@if( a == "" || a == null ) 
-{
-    <div class="bread">
-        <span>現在位置：</span>
-        <ul>
-            <li><a href="">首頁</a></li>
-            <li><a href="laws">法規查詢</a></li>
-            @if (laws != null)
-                @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
-                {
-                    <li>@laws[0].Laws[aa].LawName</li>
-                }
-                else if ( a.ToUpper().Split( '0' )[0] == "X" ) 
-                {
-                    <li>@lex[aa].LawName</li>
-                }
-                else if ( a.ToUpper().Split( '0' )[0] == "L" ) 
-                {
-                    <li>@ll[aa].LawName</li>
-                }
-                else if ( a.ToUpper().Split( '0' )[0] == "J" ) 
-                {
-                    <li>@lj[aa].LawName</li>
-                }
-                else if ( a.ToUpper().Split( '0' )[0] == "E" ) 
-                {
-                    <li>@lel[aa].LawName</li>
-                }
-        </ul>
-    </div>
-}
+<div class="bread">
+    <span>現在位置：</span>
+    <ul>
+        <li><a href="">首頁</a></li>
+        <li><a href="laws">法規查詢</a></li>
+        @if (laws != null && a != "" && a != null)
+            @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
+            {
+                <li>@laws[0].Laws[aa].LawName</li>
+            }
+            else if ( a.ToUpper().Split( '0' )[0] == "X" ) 
+            {
+                <li>@lex[aa].LawName</li>
+            }
+            else if ( a.ToUpper().Split( '0' )[0] == "L" ) 
+            {
+                <li>@ll[aa].LawName</li>
+            }
+            else if ( a.ToUpper().Split( '0' )[0] == "J" ) 
+            {
+                <li>@lj[aa].LawName</li>
+            }
+            else if ( a.ToUpper().Split( '0' )[0] == "E" ) 
+            {
+                <li>@lel[aa].LawName</li>
+            }
+    </ul>
+</div>
 
 @if( a != null && a != "" ) 
 {
