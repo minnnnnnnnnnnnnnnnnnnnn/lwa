@@ -83,16 +83,16 @@ else if ( a == "" || a == null )
                                 <a href="@law.LawURL" target="_self">
                                     @if( law.LawName.Contains( b ) ) 
                                     {
-                                        <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
                                     }
                                     else if ((law.LawHasEngVersion == "Y" && law.EngLawName.Contains(b)))
                                     {
-                                        <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
                                         <small><span>@law.EngLawName.Split(b)[0]<span class="matched">@b</span>@law.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@law.LawName</span>
+                                        <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName</span>
                                     }
                                     @if (law.LawName.Contains(b)){}else 
                                     if (law.LawLevel.Contains(b))
@@ -155,7 +155,7 @@ else if ( a == "" || a == null )
                         <a href="@law.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@law.LawName</span>
+                                <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -232,16 +232,16 @@ else if ( a == "" || a == null )
                                     <a href="@law.LawURL" target="_self">
                                         @if( law.LawName.Contains( b ) ) 
                                         {
-                                            <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
                                         }
                                         else if ((law.LawHasEngVersion == "Y" && law.EngLawName.Contains(b)))
                                         {
-                                            <span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName.Split(b)[0]<span class="matched">@b</span>@law.LawName.Split(b)[1]</span>
                                             <small><span>@law.EngLawName.Split(b)[0]<span class="matched">@b</span>@law.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@law.LawName</span>
+                                            <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName</span>
                                         }
                                         @if (law.LawName.Contains(b)){}else 
                                         if (law.LawLevel.Contains(b))
@@ -307,7 +307,7 @@ else if ( a == "" || a == null )
                             <a href="@law.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@law.LawName</span>
+                                    <span><span class="abandoned">@law.LawAbandonNote</span>@law.LawName</span>
                                     <span>@AttcontainsB@ArtcontainsB</span>
                                 }
                                 @if( AttcontainsB ) 
@@ -390,7 +390,7 @@ else if (a.ToUpper() == "C" && ( b == "" || b == null ) )
             @foreach (var lawc in lc)
             {
                 <tr>
-                    <td><a href="@lawc.LawURL" target="_self">@lawc.LawName</a></td>
+                    <td><a href="@lawc.LawURL" target="_self"><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -409,7 +409,7 @@ else if (a.ToUpper() == "EX" && (b == "" || b == null))
             @foreach (var lawex in lex)
             {
                 <tr>
-                    <td><a href="@lawex.LawURL" target="_self">@lawex.LawName</a></td>
+                    <td><a href="@lawex.LawURL" target="_self"><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -428,7 +428,7 @@ else if (a.ToUpper() == "L" && (b == "" || b == null))
             @foreach (var lawl in ll)
             {
                 <tr>
-                    <td><a href="@lawl.LawURL" target="_self">@lawl.LawName</a></td>
+                    <td><a href="@lawl.LawURL" target="_self"><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -447,7 +447,7 @@ else if (a.ToUpper() == "J" && (b == "" || b == null))
             @foreach (var lawj in lj)
             {
                 <tr>
-                    <td><a href="@lawj.LawURL" target="_self">@lawj.LawName</a></td>
+                    <td><a href="@lawj.LawURL" target="_self"><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -466,7 +466,7 @@ else if (a.ToUpper() == "EL" && (b == "" || b == null))
             @foreach (var lawel in lel)
             {
                 <tr>
-                    <td><a href="@lawel.LawURL" target="_self">@lawel.LawName</a></td>
+                    <td><a href="@lawel.LawURL" target="_self"><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName</a></td>
                 </tr>
             }
         </tbody>
@@ -493,16 +493,16 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
                                 <a href="@lawc.LawURL" target="_self">
                                     @if( lawc.LawName.Contains( b ) ) 
                                     {
-                                        <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
                                     }
                                     else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)))
                                     {
-                                        <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
                                         <small><span>@lawc.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawc.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@lawc.LawName</span>
+                                        <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName</span>
                                     }
                                     @if (lawc.LawName.Contains(b)){}else 
                                     if (lawc.LawLevel.Contains(b))
@@ -565,7 +565,7 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
                         <a href="@lawc.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@lawc.LawName</span>
+                                <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -642,16 +642,16 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
                                     <a href="@lawc.LawURL" target="_self">
                                         @if( lawc.LawName.Contains( b ) ) 
                                         {
-                                            <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
                                         }
                                         else if ((lawc.LawHasEngVersion == "Y" && lawc.EngLawName.Contains(b)))
                                         {
-                                            <span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName.Split(b)[0]<span class="matched">@b</span>@lawc.LawName.Split(b)[1]</span>
                                             <small><span>@lawc.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawc.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@lawc.LawName</span>
+                                            <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName</span>
                                         }
                                         @if (lawc.LawName.Contains(b)){}else 
                                         if (lawc.LawLevel.Contains(b))
@@ -717,7 +717,7 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
                             <a href="@lawc.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@lawc.LawName</span>
+                                    <span><span class="abandoned">@lawc.LawAbandonNote</span>@lawc.LawName</span>
                                 }
                                 @if( AttcontainsB ) 
                                 {
@@ -806,16 +806,16 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
                                 <a href="@lawex.LawURL" target="_self">
                                     @if( lawex.LawName.Contains( b ) ) 
                                     {
-                                        <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
                                     }
                                     else if ((lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b)))
                                     {
-                                        <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
                                         <small><span>@lawex.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawex.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@lawex.LawName</span>
+                                        <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName</span>
                                     }
                                     @if (lawex.LawName.Contains(b)){}else 
                                     if (lawex.LawLevel.Contains(b))
@@ -878,7 +878,7 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
                         <a href="@lawex.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@lawex.LawName</span>
+                                <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -955,16 +955,16 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
                                     <a href="@lawex.LawURL" target="_self">
                                         @if( lawex.LawName.Contains( b ) ) 
                                         {
-                                            <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
                                         }
                                         else if ((lawex.LawHasEngVersion == "Y" && lawex.EngLawName.Contains(b)))
                                         {
-                                            <span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName.Split(b)[0]<span class="matched">@b</span>@lawex.LawName.Split(b)[1]</span>
                                             <small><span>@lawex.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawex.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@lawex.LawName</span>
+                                            <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName</span>
                                         }
                                         @if (lawex.LawName.Contains(b)){}else 
                                         if (lawex.LawLevel.Contains(b))
@@ -1030,7 +1030,7 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
                             <a href="@lawex.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@lawex.LawName</span>
+                                    <span><span class="abandoned">@lawex.LawAbandonNote</span>@lawex.LawName</span>
                                 }
                                 @if( AttcontainsB ) 
                                 {
@@ -1119,16 +1119,16 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
                                 <a href="@lawl.LawURL" target="_self">
                                     @if( lawl.LawName.Contains( b ) ) 
                                     {
-                                        <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
                                     }
                                     else if ((lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)))
                                     {
-                                        <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
                                         <small><span>@lawl.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawl.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@lawl.LawName</span>
+                                        <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName</span>
                                     }
                                     @if (lawl.LawName.Contains(b)){}else 
                                     if (lawl.LawLevel.Contains(b))
@@ -1191,7 +1191,7 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
                         <a href="@lawl.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@lawl.LawName</span>
+                                <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -1268,16 +1268,16 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
                                     <a href="@lawl.LawURL" target="_self">
                                         @if( lawl.LawName.Contains( b ) ) 
                                         {
-                                            <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
                                         }
                                         else if ((lawl.LawHasEngVersion == "Y" && lawl.EngLawName.Contains(b)))
                                         {
-                                            <span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName.Split(b)[0]<span class="matched">@b</span>@lawl.LawName.Split(b)[1]</span>
                                             <small><span>@lawl.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawl.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@lawl.LawName</span>
+                                            <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName</span>
                                         }
                                         @if (lawl.LawName.Contains(b)){}else 
                                         if (lawl.LawLevel.Contains(b))
@@ -1343,7 +1343,7 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
                             <a href="@lawl.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@lawl.LawName</span>
+                                    <span><span class="abandoned">@lawl.LawAbandonNote</span>@lawl.LawName</span>
                                 }
                                 @if( AttcontainsB ) 
                                 {
@@ -1432,16 +1432,16 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
                                 <a href="@lawj.LawURL" target="_self">
                                     @if( lawj.LawName.Contains( b ) ) 
                                     {
-                                        <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
                                     }
                                     else if ((lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)))
                                     {
-                                        <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
                                         <small><span>@lawj.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawj.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@lawj.LawName</span>
+                                        <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName</span>
                                     }
                                     @if (lawj.LawName.Contains(b)){}else 
                                     if (lawj.LawLevel.Contains(b))
@@ -1504,7 +1504,7 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
                         <a href="@lawj.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@lawj.LawName</span>
+                                <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -1581,16 +1581,16 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
                                     <a href="@lawj.LawURL" target="_self">
                                         @if( lawj.LawName.Contains( b ) ) 
                                         {
-                                            <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
                                         }
                                         else if ((lawj.LawHasEngVersion == "Y" && lawj.EngLawName.Contains(b)))
                                         {
-                                            <span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName.Split(b)[0]<span class="matched">@b</span>@lawj.LawName.Split(b)[1]</span>
                                             <small><span>@lawj.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawj.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@lawj.LawName</span>
+                                            <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName</span>
                                         }
                                         @if (lawj.LawName.Contains(b)){}else 
                                         if (lawj.LawLevel.Contains(b))
@@ -1656,7 +1656,7 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
                             <a href="@lawj.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@lawj.LawName</span>
+                                    <span><span class="abandoned">@lawj.LawAbandonNote</span>@lawj.LawName</span>
                                 }
                                 @if( AttcontainsB ) 
                                 {
@@ -1745,16 +1745,16 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
                                 <a href="@lawel.LawURL" target="_self">
                                     @if( lawel.LawName.Contains( b ) ) 
                                     {
-                                        <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
                                     }
                                     else if ((lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)))
                                     {
-                                        <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                        <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
                                         <small><span>@lawel.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawel.EngLawName.Split(b)[1]</span></small>
                                     }
                                     else 
                                     {
-                                        <span>@lawel.LawName</span>
+                                        <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName</span>
                                     }
                                     @if (lawel.LawName.Contains(b)){}else 
                                     if (lawel.LawLevel.Contains(b))
@@ -1817,7 +1817,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
                         <a href="@lawel.LawURL" target="_self">
                             @if( ArtcontainsB || AttcontainsB ) 
                             {
-                                <span>@lawel.LawName</span>
+                                <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName</span>
                             }
                             @if( AttcontainsB ) 
                             {
@@ -1894,16 +1894,16 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
                                     <a href="@lawel.LawURL" target="_self">
                                         @if( lawel.LawName.Contains( b ) ) 
                                         {
-                                            <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
                                         }
                                         else if ((lawel.LawHasEngVersion == "Y" && lawel.EngLawName.Contains(b)))
                                         {
-                                            <span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
+                                            <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName.Split(b)[0]<span class="matched">@b</span>@lawel.LawName.Split(b)[1]</span>
                                             <small><span>@lawel.EngLawName.Split(b)[0]<span class="matched">@b</span>@lawel.EngLawName.Split(b)[1]</span></small>
                                         }
                                         else 
                                         {
-                                            <span>@lawel.LawName</span>
+                                            <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName</span>
                                         }
                                         @if (lawel.LawName.Contains(b)){}else 
                                         if (lawel.LawLevel.Contains(b))
@@ -1969,7 +1969,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
                             <a href="@lawel.LawURL" target="_self">
                                 @if( ArtcontainsB || AttcontainsB ) 
                                 {
-                                    <span>@lawel.LawName</span>
+                                    <span><span class="abandoned">@lawel.LawAbandonNote</span>@lawel.LawName</span>
                                 }
                                 @if( AttcontainsB ) 
                                 {
@@ -2037,6 +2037,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         </tbody>
     </table>
 }
+<a href="">回首頁</a>
 
 @code {
     private LawRoot[]? laws;
