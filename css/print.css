@@ -40,6 +40,10 @@ div[ahhhhaaaahaha]
     font-size : 12pt ; 
     color : #000 ; 
 }
+div[ahhhhaaaahaha] pre 
+{
+    font-family : "Noto Sans Mono" , DFKai-SB , BiauKaiTC , "標楷體-繁" , "標楷體" , TW-Kai , TW-Kai-Plus , TW-Kai-Ext-B , TW-MOE-Std-Kai , TW-Sung , TW-Sung-Ext-B , TW-Sung-Plus , 標宋 , "Noto Sans TC" , sans-serif ; 
+}
 div[ahhhhaaaahaha] > div , div[ahhhhaaaahaha] > span , div[ahhhhaaaahaha] > span > .title 
 {
     width : 100% ; 
