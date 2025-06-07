@@ -245,6 +245,15 @@ header nav ul li
   {
     margin : 0 var(--header-padding-lr) ; 
   }
+  header nav ul li 
+  {
+    font-size : 16px ; 
+    width : 100% ; 
+    border-top : 0 ; 
+    padding : 0 ; 
+    text-align : center ; 
+    letter-spacing : 0 ; 
+  }
 }
 header a , header a:visited 
 {
