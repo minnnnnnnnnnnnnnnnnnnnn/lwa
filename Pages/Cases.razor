@@ -42,7 +42,7 @@ else if( a == "" || a == null )
         @foreach (var cas in @cases[0].Cases)
         {
             <tr>
-                <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                 <td>@cas.Category</td>
                 @* <td>@cas.DeliberationDate</td>
                 <td>@cas.Petitioner</td>
@@ -101,7 +101,7 @@ else
                             @if ( rul.RulingNo.Contains(a) )
                             {
                                 <tr>
-                                    <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                    <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                                     <td>@cas.Category</td>
                                     @if (cas.Title != "")
                                     {
@@ -126,7 +126,7 @@ else
                             @if ( o.Type.Contains(a) || o.Member.Contains(a) )
                             {
                                 <tr>
-                                    <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                                    <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                                     <td>@cas.Category</td>
                                     @if (cas.Title != "")
                                     {
@@ -147,7 +147,7 @@ else
                     @if ( cas.No.Contains(a) || cas.Category.Contains(a) )
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -162,7 +162,7 @@ else
                     else if (cas.DeliberationDate != null && cas.DeliberationDate.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -177,7 +177,7 @@ else
                     else if (cas.Petitioner != null && cas.Petitioner.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -192,7 +192,7 @@ else
                     else if (cas.Plaintiff != null && cas.Plaintiff.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -207,7 +207,7 @@ else
                     else if (cas.Defendant != null && cas.Defendant.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -222,7 +222,7 @@ else
                     else if (cas.Title != null && cas.Title.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             <td>@cas.Title</td>
                         </tr>
@@ -230,7 +230,7 @@ else
                     else if (cas.Cause != null && cas.Cause.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             <td>@cas.Cause</td>
                         </tr>
@@ -238,7 +238,7 @@ else
                     else if (cas.Syllabus != null && cas.Syllabus.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {
@@ -253,7 +253,7 @@ else
                     else if (cas.State != null && cas.State.Contains(a))
                     {
                         <tr>
-                            <td><a href="cases/detail?case=@cas.No" target="_self">@cas.No</a></td>
+                            <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
                             <td>@cas.Category</td>
                             @if (cas.Title != "")
                             {

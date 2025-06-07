@@ -24,83 +24,87 @@ else
 {
     <div class="cd">
         <dl>
-            <dt>判決字號</dt>
-            <dd>@cases[0].Cases[i].No</dd>
-            <dt>類別</dt>
-            <dd>@cases[0].Cases[i].Category</dd>
+            <dt><h4>判決字號</h4></dt>
+            <dd><h5>@cases[0].Cases[i].No</h5></dd>
+            <dt><h4>類別</h4></dt>
+            <dd><h5>@cases[0].Cases[i].Category</h5></dd>
             @if( @cases[0].Cases[i].DeliberationDate != "" ) 
             {
-                <dt>判決日期</dt>
-                <dd>@cases[0].Cases[i].DeliberationDate</dd>
+                <dt><h4>判決日期</h4></dt>
+                <dd><h5>@cases[0].Cases[i].DeliberationDate</h5></dd>
             }
             @if( @cases[0].Cases[i].Petitioner != "" ) 
             {
-                <dt>聲請人</dt>
-                <dd>@cases[0].Cases[i].Petitioner</dd>
+                <dt><h4>聲請人</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Petitioner</h5></dd>
             }
             @if( @cases[0].Cases[i].Plaintiff != "" ) 
             {
-                <dt>原告</dt>
-                <dd>@cases[0].Cases[i].Plaintiff</dd>
+                <dt><h4>原告</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Plaintiff</h5></dd>
             }
             @if( @cases[0].Cases[i].Defendant != "" ) 
             {
-                <dt>被告</dt>
-                <dd>@cases[0].Cases[i].Defendant</dd>
+                <dt><h4>被告</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Defendant</h5></dd>
             }
             @if( @cases[0].Cases[i].Title != "" ) 
             {
-                <dt>標題</dt>
-                <dd>@cases[0].Cases[i].Title</dd>
+                <dt><h4>標題</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Title</h5></dd>
             }
             @if( @cases[0].Cases[i].Cause != "" ) 
             {
-                <dt>案由</dt>
-                <dd>@cases[0].Cases[i].Cause</dd>
+                <dt><h4>案由</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Cause</h5></dd>
             }
             @if( @cases[0].Cases[i].Syllabus != "" ) 
             {
-                <dt>主文</dt>
-                <dd>@cases[0].Cases[i].Syllabus</dd>
+                <dt><h4>主文</h4></dt>
+                <dd><h5>@cases[0].Cases[i].Syllabus</h5></dd>
             }
             @if( @cases[0].Cases[i].State != "" ) 
             {
-                <dt>狀態</dt>
-                <dd>@cases[0].Cases[i].State</dd>
+                <dt><h4>狀態</h4></dt>
+                <dd><h5>@cases[0].Cases[i].State</h5></dd>
             }
             @if( @cases[0].Cases[i].FullJudgement != "" ) 
             {
-                <dt>判決全文（URL）</dt>
+                <dt><h4>判決全文（URL）</h4></dt>
                 <dd>
-                    <a href="@cases[0].Cases[i].FullJudgement" target="_blank">
-                        <span>@cases[0].Cases[i].FullJudgement</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                    </a>
+                    <h5>
+                        <a href="@cases[0].Cases[i].FullJudgement" target="_blank">
+                            <span>@cases[0].Cases[i].FullJudgement</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </a>
+                    </h5>
                 </dd>
             }
             @if (@cases[0].Cases[i].Rulings.Length != 0)
             {
-                <dt>裁定</dt>
+                <dt><h4>裁定</h4></dt>
                 <div class="cd r">
                     @foreach (var cassr in @cases[0].Cases[i].Rulings)
                     {
                         <dl>
-                            <dt>裁定字號</dt>
-                            <dd>@cassr.RulingNo</dd>
-                            <dt>裁定全文（URL）</dt>
+                            <dt><h5>裁定字號</h5></dt>
+                            <dd><h6>@cassr.RulingNo</h6></dd>
+                            <dt><h5>裁定全文（URL）</h5></dt>
                             <dd>
-                                <a href="@cassr.FullRulingURL" target="_blank">
-                                    <span>@cassr.FullRulingURL</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                </a>
+                                <h6>
+                                    <a href="@cassr.FullRulingURL" target="_blank">
+                                        <span>@cassr.FullRulingURL</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                </h6>
                             </dd>
                         </dl>
                     }
@@ -108,25 +112,27 @@ else
             }
             @if (@cases[0].Cases[i].Opinions.Length != 0)
             {
-                <dt>意見書</dt>
+                <dt><h4>意見書</h4></dt>
                 <div class="cd o">
                     @foreach (var casso in @cases[0].Cases[i].Opinions)
                     {
                         <dl>
-                            <dt>類型</dt>
-                            <dd>@casso.Type</dd> 
-                            <dt>委員</dt>
-                            <dd>@casso.Member</dd> 
-                            <dt>意見書全文（URL）</dt>
+                            <dt><h5>類型</h5></dt>
+                            <dd><h6>@casso.Type</h6></dd> 
+                            <dt><h5>委員</h5></dt>
+                            <dd><h6>@casso.Member</h6></dd> 
+                            <dt><h5>意見書全文（URL）</h5></dt>
                             <dd>
-                                <a href="@casso.URL" target="_blank">
-                                    <span>@casso.URL</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                </a>
+                                <h6>
+                                    <a href="@casso.URL" target="_blank">
+                                        <span>@casso.URL</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                </h6>
                             </dd>
                         </dl>
                     }
@@ -135,11 +141,13 @@ else
         </dl>
     </div>
 }
+<a href="cases?q=@b">回上一頁</a>
 
 @code {
     private Casess[]? cases;
     private string a;
     int i ; 
+    private string b ; 
     protected override void OnInitialized()
     {
         var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
@@ -147,6 +155,10 @@ else
         if(queryStrings.TryGetValue("case", out var aaa))
         {
             a = aaa;
+        }
+        if(queryStrings.TryGetValue("q", out var bbb))
+        {
+            b = bbb;
         }
     }
 

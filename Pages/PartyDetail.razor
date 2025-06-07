@@ -63,12 +63,13 @@ else
         </dl>
     </div>
 }
-<a href="parties">回上一頁</a>
+<a href="parties?q=@b">回上一頁</a>
 
 @code {
     private Py[]? p;
     private string a = "";
     int i;
+    private string b;
     protected override void OnInitialized()
     {
         var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
@@ -76,6 +77,10 @@ else
         if (queryStrings.TryGetValue("party", out var aaa))
         {
             a = aaa; 
+        }
+        if (queryStrings.TryGetValue("q", out var bbb))
+        {
+            b = bbb;
         }
     }
 

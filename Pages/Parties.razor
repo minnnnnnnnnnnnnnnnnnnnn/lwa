@@ -1,5 +1,6 @@
 @page "/parties"
 @inject HttpClient Http
+@inject NavigationManager N
 
 <PageTitle>政黨查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 
@@ -34,8 +35,8 @@ else
             @foreach (var partiess in p[0].Parties)
             {
                 <tr>
-                    <td><a href="parties/detail?party=@partiess.Party">@partiess.Party</a></td>
-                    <td><a href="parties/detail?party=@partiess.Party">@partiess.PartyName</a></td>
+                    <td><a href="parties/detail?party=@partiess.Party&q=@a">@partiess.Party</a></td>
+                    <td><a href="parties/detail?party=@partiess.Party&q=@a">@partiess.PartyName</a></td>
                     <td>@partiess.Chairman</td>
                 </tr>
             }
@@ -45,6 +46,16 @@ else
 
 @code {
     private Py[]? p;
+    private string a;
+    protected override void OnInitialized()
+    {
+        var uri = N.ToAbsoluteUri(N.Uri);
+        var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        if (queryStrings.TryGetValue("q", out var aaa))
+        {
+            a = aaa;
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
