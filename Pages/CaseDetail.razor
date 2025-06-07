@@ -22,128 +22,118 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>判決字號</th>
-                <th>類別</th>
-                @if( @cases[0].Cases[i].DeliberationDate != "" ) 
-                {
-                    <th>判決日期</th>
-                }
-                @if( @cases[0].Cases[i].Petitioner != "" ) 
-                {
-                <th>聲請人</th>
-                }
-                @if( @cases[0].Cases[i].Plaintiff != "" ) 
-                {
-                    <th>原告</th>
-                }
-                @if( @cases[0].Cases[i].Defendant != "" ) 
-                {
-                    <th>被告</th>
-                }
-                @if( @cases[0].Cases[i].Title != "" ) 
-                {
-                    <th>標題</th>
-                }
-                @if( @cases[0].Cases[i].Cause != "" ) 
-                {
-                    <th>案由</th>
-                }
-                @if( @cases[0].Cases[i].Syllabus != "" ) 
-                {
-                    <th>主文</th>
-                }
-                @if( @cases[0].Cases[i].State != "" ) 
-                {
-                    <th>狀態</th>
-                }
-                @if( @cases[0].Cases[i].FullJudgement != "" ) 
-                {
-                    <th>判決全文（URL）</th>
-                }
-                @if (@cases[0].Cases[i].Rulings.Length != 0)
-                {
-                    <th>裁定</th>
-                }
-                @if (@cases[0].Cases[i].Opinions.Length != 0)
-                {
-                    <th>意見書</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@cases[0].Cases[i].No</td>
-                <td>@cases[0].Cases[i].Category</td>
-                @if( @cases[0].Cases[i].DeliberationDate != "" ) 
-                {
-                    <td>@cases[0].Cases[i].DeliberationDate</td>
-                }
-                @if( @cases[0].Cases[i].Petitioner != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Petitioner</td>
-                }
-                @if( @cases[0].Cases[i].Plaintiff != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Plaintiff</td>
-                }
-                @if( @cases[0].Cases[i].Defendant != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Defendant</td>
-                }
-                @if( @cases[0].Cases[i].Title != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Title</td>
-                }
-                @if( @cases[0].Cases[i].Cause != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Cause</td>
-                }
-                @if( @cases[0].Cases[i].Syllabus != "" ) 
-                {
-                    <td>@cases[0].Cases[i].Syllabus</td>
-                }
-                @if( @cases[0].Cases[i].State != "" ) 
-                {
-                    <td>@cases[0].Cases[i].State</td>
-                }
-                @if( @cases[0].Cases[i].FullJudgement != "" ) 
-                {
-                    <td><a href="@cases[0].Cases[i].FullJudgement" target="_blank">@cases[0].Cases[i].FullJudgement</a></td>
-                }
-                @foreach (var cassr in @cases[0].Cases[i].Rulings)
-                {
-                    <table class="table">
-                        <thead>
-                            <th>裁定字號</th>
-                            <th>裁定全文（URL）</th>
-                        </thead>
-                        <tbody>
-                            <td>@cassr.RulingNo</td>
-                            <td><a href="@cassr.FullRulingURL" target="_blank">@cassr.FullRulingURL</a></td>
-                        </tbody>
-                    </table>
-                }
-                @foreach (var casso in @cases[0].Cases[i].Opinions)
-                {
-                    <table class="table">
-                        <thead>
-                            <th>類型</th>
-                            <th>委員</th>
-                            <th>意見書全文（URL）</th>
-                        </thead>
-                        <tbody>
-                            <td>@casso.Type</td> 
-                            <td>@casso.Member</td> 
-                            <td><a href="@casso.URL" target="_blank">@casso.URL</a></td>
-                        </tbody>
-                    </table>
-                }
-            </tr>
-        </tbody>
-    </table>
+    <div class="cd">
+        <dl>
+            <dt>判決字號</dt>
+            <dd>@cases[0].Cases[i].No</dd>
+            <dt>類別</dt>
+            <dd>@cases[0].Cases[i].Category</dd>
+            @if( @cases[0].Cases[i].DeliberationDate != "" ) 
+            {
+                <dt>判決日期</dt>
+                <dd>@cases[0].Cases[i].DeliberationDate</dd>
+            }
+            @if( @cases[0].Cases[i].Petitioner != "" ) 
+            {
+                <dt>聲請人</dt>
+                <dd>@cases[0].Cases[i].Petitioner</dd>
+            }
+            @if( @cases[0].Cases[i].Plaintiff != "" ) 
+            {
+                <dt>原告</dt>
+                <dd>@cases[0].Cases[i].Plaintiff</dd>
+            }
+            @if( @cases[0].Cases[i].Defendant != "" ) 
+            {
+                <dt>被告</dt>
+                <dd>@cases[0].Cases[i].Defendant</dd>
+            }
+            @if( @cases[0].Cases[i].Title != "" ) 
+            {
+                <dt>標題</dt>
+                <dd>@cases[0].Cases[i].Title</dd>
+            }
+            @if( @cases[0].Cases[i].Cause != "" ) 
+            {
+                <dt>案由</dt>
+                <dd>@cases[0].Cases[i].Cause</dd>
+            }
+            @if( @cases[0].Cases[i].Syllabus != "" ) 
+            {
+                <dt>主文</dt>
+                <dd>@cases[0].Cases[i].Syllabus</dd>
+            }
+            @if( @cases[0].Cases[i].State != "" ) 
+            {
+                <dt>狀態</dt>
+                <dd>@cases[0].Cases[i].State</dd>
+            }
+            @if( @cases[0].Cases[i].FullJudgement != "" ) 
+            {
+                <dt>判決全文（URL）</dt>
+                <dd>
+                    <a href="@cases[0].Cases[i].FullJudgement" target="_blank">
+                        <span>@cases[0].Cases[i].FullJudgement</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </dd>
+            }
+            @if (@cases[0].Cases[i].Rulings.Length != 0)
+            {
+                <dt>裁定</dt>
+                <div class="cd r">
+                    @foreach (var cassr in @cases[0].Cases[i].Rulings)
+                    {
+                        <dl>
+                            <dt>裁定字號</dt>
+                            <dd>@cassr.RulingNo</dd>
+                            <dt>裁定全文（URL）</dt>
+                            <dd>
+                                <a href="@cassr.FullRulingURL" target="_blank">
+                                    <span>@cassr.FullRulingURL</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                            </dd>
+                        </dl>
+                    }
+                </div>
+            }
+            @if (@cases[0].Cases[i].Opinions.Length != 0)
+            {
+                <dt>意見書</dt>
+                <div class="cd o">
+                    @foreach (var casso in @cases[0].Cases[i].Opinions)
+                    {
+                        <dl>
+                            <dt>類型</dt>
+                            <dd>@casso.Type</dd> 
+                            <dt>委員</dt>
+                            <dd>@casso.Member</dd> 
+                            <dt>意見書全文（URL）</dt>
+                            <dd>
+                                <a href="@casso.URL" target="_blank">
+                                    <span>@casso.URL</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                            </dd>
+                        </dl>
+                    }
+                </div>
+            }
+        </dl>
+    </div>
 }
 
 @code {

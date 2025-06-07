@@ -1,6 +1,7 @@
 table 
 {
     text-align : center ; 
+    width : 100% ; 
 }
 table a , table a:visited 
 {
@@ -17,7 +18,6 @@ td
 }
 .pq form 
 {
-  width : 20rem ; 
   height : 2rem ; 
   display : flex ; 
   justify-content : center ; 
@@ -25,7 +25,6 @@ td
 }
 .pq form input:first-child 
 {
-  width : 17rem ; 
   height : 2rem ; 
   border-radius : 1rem ; 
   border : 1px solid #000 ; 
@@ -38,6 +37,10 @@ td
   opacity : .65 ; 
   text-indent : .5rem ; 
 }
+.p thead th 
+{
+    padding-bottom : .25rem ; 
+}
 .p h1 
 {
     font-family : "Noto Sans Display" , "Noto Serif TC" ; 
@@ -49,6 +52,15 @@ td
 .p tr td:nth-child(2) 
 {
     text-align : left ; 
+    padding-left : .5rem ; 
+}
+@media ( min-width : 768px ) 
+{
+    .p tr td:nth-child( 2 ) 
+    {
+        text-align : center ; 
+        padding : 0 ; 
+    }
 }
 .p tr td:last-child 
 {
@@ -67,6 +79,7 @@ dt
 {
     width : 1em ; 
     height : 1em ; 
+    flex-shrink : 0 ; 
 }
 .c tr td:first-child 
 {
@@ -77,10 +90,6 @@ dt
 {
     width : 5em ; 
 }
-.c tr td:nth-child(3) 
-{
-    width : 4.5em ; 
-}
 .c tr td:last-child 
 {
     width : 4em ; 
@@ -90,18 +99,45 @@ form
 {
     height: 2rem;
 }
-form input:first-child 
+.pq , .cq 
 {
-    width: 70%;
+    margin : 1.5rem auto ; 
+}
+@media ( min-width : 768px ) 
+{
+    .pq , .cq 
+    {
+        margin-bottom : 2.5rem ; 
+    }
+}
+.pq input:first-child , .cq input:first-child 
+{
+    width: calc(100% - 28px);
     height: 2rem;
     border-radius: 1rem;
     border: 1px solid #000 ; 
     outline: 0;
 }
-form input:first-child::placeholder 
+.pq input:first-child::placeholder , .cq input:first-child::placeholder 
 {
     font-family: "Noto Sans TC";
     font-weight: 500;
     opacity: .65;
     text-indent: .5rem;
+}
+.pq p , .cq p 
+{
+    position : relative ; 
+}
+.pq input:last-child , .cq input:last-child 
+{
+    position : absolute ; 
+    top : calc(1rem - 12px) ; 
+    right : 5px ; 
+}
+a:has( .ex-link ) 
+{
+    display : flex ; 
+    flex-wrap : nowrap ; 
+    align-items : center ; 
 }
