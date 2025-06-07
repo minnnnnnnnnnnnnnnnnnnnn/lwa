@@ -38,3 +38,13 @@
 {
     text-indent : 1em ; 
 }
+@media ( min-width : 768px ) 
+{
+    .rel .tcfshsu 
+    {
+        display : flex ; 
+        justify-content : center ; 
+        align-items : flex-start ; 
+        flex-wrap : wrap ; 
+    }
+}
