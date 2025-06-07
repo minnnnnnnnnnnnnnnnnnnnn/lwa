@@ -16,12 +16,23 @@
 /* relatives */
 .rel a 
 {
-    color : #c7a001 ; 
+    color : #000a ; 
 }
-.rel div > ul > li:first-child 
+.rel a:hover 
+{
+    color : #c7a001 ; 
+    text-decoration : underline ; 
+}
+.rel div > ul > li:first-child:not( .lawall ul li ) 
 {
     font-size : 1.5rem ; 
     font-weight : 700 ; 
+}
+.lawall li:first-child 
+{
+    font-size : 1.15rem ; 
+    font-weight : 500 ; 
+    text-indent : .5em ; 
 }
 .rel div > ul > li:not(:first-child) , div > ul > ul li 
 {
