@@ -1,5 +1,6 @@
 @page "/print"
 @inject HttpClient Http
+@inject IJSRuntime JS
 <PageTitle>法規彙編 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 <div class="bread">
     <span>現在位置：</span>
@@ -15,18 +16,19 @@
 }
 else 
 { 
-    @* <script>
-        function print()
+    <script>
+        function Pprint () 
         { 
             var newWin = window.open( '' , '列印視窗' ) ; 
             newWin.document.open() ; 
-            newWin.document.write( '<html><head><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="css/print.css"></head><body>' ) ; 
+            newWin.document.write('\u{003C}html>\u{003C}head>\u{003C}link rel="preconnect" href="https://fonts.googleapis.com">\u{003C}link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\u{003C}link rel="stylesheet" href="css/print.css">\u{003C}script src="js/print.js">\u{003C}/script>\u{003C}/head>\u{003C}body>\u{003C}main>\u{003C}/main>\u{003C}/body>\u{003C}/html>' ) ;
             newWin.document.close() ; 
-        }
-    </script> *@
+        } 
+    </script>
     <div ahhhhaaaahaha>
         <span id="COVER">
             <button onclick="window.print()">列印</button>
+            <button onclick="Pprint()">列印（開新視窗）</button>
             <div>臺中市立臺中第一高級中等學校<br>學生自治聯合會</div>
             <h1>法規彙編</h1><br/>
             <span>113-2</span><br/>

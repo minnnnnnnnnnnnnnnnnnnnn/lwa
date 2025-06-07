@@ -1,4 +1,4 @@
-fetch(new Request('../json/laws.json')).then( (response) => {return response.json()} ).then( (j) => 
+fetch(new Request('json/lawsforprint.json')).then( (response) => {return response.json()} ).then( (j) => 
 {
     console.log( j ) ; 
     var lawCount = j.Laws.length ; 
@@ -309,6 +309,7 @@ fetch(new Request('../json/laws.json')).then( (response) => {return response.jso
     spn.setAttribute( "id" , "COVER-BACK" ) ; 
     spn.setAttribute( "style" , "line-height:1.3;" ) ; 
     spn.innerHTML = "<h1><span>臺中市立臺中第一高級中等學校學生自治聯合會&nbsp;法規彙編<span></h1><ul><li><span>出版者：</span><span>臺中市立臺中第一高級中等學校學生自治聯合會第三十屆學生會自治部</span></li><li><span>發行人：</span><span>卓祐宸</span></li><li><span>編輯：</span><span>卓祐宸" + contributes + "</span></li><li><span>網站：</span><a href=\"https://sites.google.com/view/tcfshsu\" style=\"color:#00f;font-family:\'Noto Sans\',sans-serif;\">https://sites.google.com/view/tcfshsu</a></li><li><span>定價：</span><span>免費供大眾下載使用</span></li><li><span>出版日期：</span><span>" + publishDate + "</span></li></ul>"
+    window.print() ; 
 }).catch( (err) => 
 { 
     let errorMessage = document.createElement( "div" ) ; 
