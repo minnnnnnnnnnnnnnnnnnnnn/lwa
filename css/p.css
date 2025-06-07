@@ -94,6 +94,30 @@ dt
 {
     width : 4em ; 
 }
+.cd h4 
+{
+    font-size : 20px ; 
+}
+.cd h5 
+{
+    font-size : 16px ; 
+    font-weight : 500 ; 
+}
+.cd h6 
+{
+    font-size : 14px ; 
+    font-weight : 300 ; 
+}
+.cd > dl > dd , .cd.r , .cd.o 
+{
+    display : flex ; 
+    align-items : center ; 
+}
+.cd > dl > dd::before , .cd.r::before , .cd.o::before 
+{
+    content : '　' ; 
+    flex-shrink : 0 ; 
+}
 
 form 
 {
@@ -140,4 +164,10 @@ a:has( .ex-link )
     display : flex ; 
     flex-wrap : nowrap ; 
     align-items : center ; 
+}
+
+.l tbody , .l tbody tr 
+{
+    display : inline-flex ; 
+    flex-direction : column ; 
 }
