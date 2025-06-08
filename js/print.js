@@ -1,6 +1,6 @@
-fetch(new Request('json/lawsforprint.json')).then( (response) => {return response.json()} ).then( (j) => 
+fetch(new Request('json/laws.json')).then( (response) => {return response.json()} ).then( (jj) => 
 {
-    console.log( j ) ; 
+    var j = jj[0] ; 
     var lawCount = j.Laws.length ; 
     document.querySelector( "main" ).appendChild( document.createElement( "div" ) ) ; 
     var main = document.querySelector( "main div" ) ; 
