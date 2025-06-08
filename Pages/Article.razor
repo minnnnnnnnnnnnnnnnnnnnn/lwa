@@ -7,8 +7,7 @@
         margin-left : -3.5rem ; 
     }
 </style>
-
-@if( aa == -1 ) 
+@if( aa == -1 || b < 0 ) 
 {
     <Laws></Laws>
 }
@@ -64,6 +63,7 @@ else
     else 
     {
         <PageTitle>@( laws[0].Laws[aa].LawName + art.ArticleNo ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+        <button onclick="window.print()" class="printBtn">列印</button>
         <div ahhhhaaaahaha>
             <div>
                 @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
@@ -151,9 +151,13 @@ else
                 <article class="@showNum[b]">
                     @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                         {
-                            <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                            <li><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                        }
+                        else if( Regex.IsMatch( p , "^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}\u002E|[１-９]{1}[０-９]+\u002E)" ) ) 
+                        {
+                            <li><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}\u002E|[１-９]{1}[０-９]+\u002E)" , "")</span></li>
                         }
                         else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
                         {
@@ -226,7 +230,14 @@ else
             </div>
         </div>
     }
-    <a href="laws/law?a=@a">回上一頁</a>
+    @if( c == "e" ) 
+    {
+        <a href="laws/lawe?a=@a">回上一頁</a>
+    }
+    else 
+    {
+        <a href="laws/law?a=@a">回上一頁</a>
+    }
 }
 
 @code {
@@ -279,6 +290,7 @@ else
     private List<A>? artarray = new List<A>(); 
     private A? art;
     public int aa = -1 ; 
+    private string? c ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -289,14 +301,18 @@ else
         }
         if (queryStrings.TryGetValue("p", out var bbb))
         {
-            b = bbb == default( String ) ? -1 : ( Int32.Parse( bbb ) - 1 ) ; 
+            b = ( bbb == "" || bbb == (string?)null ) ? -1 : ( Int32.Parse( bbb ) - 1 ) ; 
+        }
+        if (queryStrings.TryGetValue("from", out var ccc))
+        {
+            c = ccc ; 
         }
         aa = ( a == "" || a == null ) ? -1 : Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }
 
     protected override async Task OnInitializedAsync()
     {
-        if( aa != -1 ) 
+        if( aa != -1 && b >= 0 ) 
         {
             laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
             for (int i = 0; i < laws[0].Laws.Length; i++)

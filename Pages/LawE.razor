@@ -52,6 +52,7 @@ else if ( a == "" || a == null )
 else 
 {
     <PageTitle>@( laws[0].Laws[aa].LawName + "（簡讀版）" ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
@@ -132,9 +133,14 @@ else
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -236,9 +242,14 @@ else
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -340,9 +351,14 @@ else
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -444,9 +460,14 @@ else
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -548,9 +569,14 @@ else
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -579,7 +605,7 @@ else
         }
     </div>
 }
-<a href="laws/law?a=@a">回上一頁</a>
+<a href="laws/law?a=@a" class="printNoDisplay">回上一頁</a>
 
 @code {
     private LawRoot[]? laws;
@@ -756,7 +782,7 @@ else
                     h6c ++ ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             ofc ++ ; 
                         }
@@ -810,7 +836,7 @@ else
                     h6c ++ ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             ofc ++ ; 
                         }
@@ -864,7 +890,7 @@ else
                     h6c ++ ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             ofc ++ ; 
                         }
@@ -918,7 +944,7 @@ else
                     h6c ++ ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             ofc ++ ; 
                         }
@@ -972,7 +998,7 @@ else
                     h6c ++ ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             ofc ++ ; 
                         }
@@ -1075,7 +1101,7 @@ else
                     int iiiof = 0 ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             iiiof ++ ; 
                             liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -1163,7 +1189,7 @@ else
                     int iiiof = 0 ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             iiiof ++ ; 
                             liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -1251,7 +1277,7 @@ else
                     int iiiof = 0 ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             iiiof ++ ; 
                             liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -1339,7 +1365,7 @@ else
                     int iiiof = 0 ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             iiiof ++ ; 
                             liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -1427,7 +1453,7 @@ else
                     int iiiof = 0 ; 
                     foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                     {
-                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                        if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                         {
                             iiiof ++ ; 
                             liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 

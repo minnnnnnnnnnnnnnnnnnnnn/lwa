@@ -14,7 +14,7 @@
         margin : 0 ; 
         margin-bottom : .4in ; 
     }
-    #COVER button , header , footer 
+    #COVER button , header , footer , .printBtn 
     {
         display : none ; 
     }
@@ -112,7 +112,7 @@ div[ahhhhaaaahaha] .cases a , div[ahhhhaaaahaha] .rel a , div[ahhhhaaaahaha] .re
 {
     font-weight : 500 ; 
 }
-#COVER button 
+#COVER button , .printBtn 
 {
     font-family : 'Noto Sans TC' ; 
     color : #fff ; 
@@ -123,13 +123,13 @@ div[ahhhhaaaahaha] .cases a , div[ahhhhaaaahaha] .rel a , div[ahhhhaaaahaha] .re
     border-radius : 2.5px ; 
     cursor : pointer ; 
 }
-#COVER button:hover , #COVER button:focus 
+#COVER button:hover , #COVER button:focus , .printBtn:hover , .printBtn:focus 
 {
     color : #0ff ; 
     background : #f00 ; 
     text-decoration : underline ; 
 }
-#COVER button:focus 
+#COVER button:focus , .printBtn:focus 
 {
     outline : 5px #fc0 solid ; 
 }
@@ -260,4 +260,11 @@ div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ah
     font-size : 16pt ; 
     justify-content : center ; 
     align-items : center ; 
+}
+@media print 
+{
+    .printNoDisplay 
+    {
+        display : none !important ; 
+    }
 }

@@ -39,7 +39,7 @@
 
 @if( a != null && a != "" ) 
 {
-    <a href="laws/lawe?a=@a">簡讀版</a>
+    <a href="laws/lawe?a=@a" class="printNoDisplay">簡讀版</a>
 }
 @if( laws == null && a != "" && a != null ) 
 {
@@ -55,40 +55,38 @@ else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( R
     <PageTitle>錯誤 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <h1 style="color:red;font-weight:900;font-family:'Noto Sans Mono','Noto Sans TC';">!!!錯誤!!!<br />請重試！</h1>
 }
-else if( c == "histories" ) 
-{
-    <ol id="lHistory">
-        @if( a.ToUpper().Split( '0' )[0] == "C" ) 
-            @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-            {
-                <li>@his</li>
-            }
-        else if( a.ToUpper().Split( '0' )[0] == "X" ) 
-            @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-            {
-                <li>@his</li>
-            }
-        else if( a.ToUpper().Split( '0' )[0] == "L" ) 
-            @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-            {
-                <li>@his</li>
-            }
-        else if( a.ToUpper().Split( '0' )[0] == "J" ) 
-            @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-            {
-                <li>@his</li>
-            }
-        else if( a.ToUpper().Split( '0' )[0] == "E" ) 
-            @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-            {
-                <li>@his</li>
-            }
-    </ol>
-}
-else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b , @"\s" ) ) 
+else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) ) 
 {
     <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
+        <ol id="lHistory">
+            @if( a.ToUpper().Split( '0' )[0] == "C" ) 
+                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                {
+                    <li>@his</li>
+                }
+            else if( a.ToUpper().Split( '0' )[0] == "X" ) 
+                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                {
+                    <li>@his</li>
+                }
+            else if( a.ToUpper().Split( '0' )[0] == "L" ) 
+                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                {
+                    <li>@his</li>
+                }
+            else if( a.ToUpper().Split( '0' )[0] == "J" ) 
+                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                {
+                    <li>@his</li>
+                }
+            else if( a.ToUpper().Split( '0' )[0] == "E" ) 
+                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                {
+                    <li>@his</li>
+                }
+        </ol>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
             <div>
@@ -115,6 +113,12 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <span>臺中第一高級中學<br />@lc[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     @if( aa == 0 ) 
                     {
@@ -174,9 +178,14 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -270,6 +279,12 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <span>臺中第一高級中學<br />@lex[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lex[aa].LawForeword.Split( "\r\n" ) )
@@ -325,9 +340,14 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -421,6 +441,12 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <span>臺中第一高級中學<br />@ll[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in ll[aa].LawForeword.Split( "\r\n" ) )
@@ -476,9 +502,14 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -572,6 +603,12 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <span>臺中第一高級中學<br />@lj[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lj[aa].LawForeword.Split( "\r\n" ) )
@@ -627,9 +664,14 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -723,6 +765,12 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <span>臺中第一高級中學<br />@lel[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lel[aa].LawForeword.Split( "\r\n" ) )
@@ -778,9 +826,14 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -862,14 +915,15 @@ else if( ( c == "" || c == null ) && b != "" && b != null && !Regex.IsMatch( b ,
         }
     </div>
 }
-else if( ( c == "" || c == null ) && b != "" && b != null ) 
+else if( b != "" && b != null ) 
 {
     @foreach( var b in Regex.Split( b , @"\s" ) ) 
     {}
 }
-else if( ( c == "" || c == null ) ) 
+else 
 {
     <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
@@ -885,6 +939,12 @@ else if( ( c == "" || c == null ) )
                         <span>臺中第一高級中學<br />@lc[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     @if( aa == 0 ) 
                     {
@@ -944,9 +1004,14 @@ else if( ( c == "" || c == null ) )
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -1040,6 +1105,12 @@ else if( ( c == "" || c == null ) )
                         <span>臺中第一高級中學<br />@lex[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lex[aa].LawForeword.Split( "\r\n" ) )
@@ -1095,9 +1166,14 @@ else if( ( c == "" || c == null ) )
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -1191,6 +1267,12 @@ else if( ( c == "" || c == null ) )
                         <span>臺中第一高級中學<br />@ll[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in ll[aa].LawForeword.Split( "\r\n" ) )
@@ -1246,9 +1328,14 @@ else if( ( c == "" || c == null ) )
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -1342,6 +1429,12 @@ else if( ( c == "" || c == null ) )
                         <span>臺中第一高級中學<br />@lj[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lj[aa].LawForeword.Split( "\r\n" ) )
@@ -1397,9 +1490,14 @@ else if( ( c == "" || c == null ) )
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -1493,6 +1591,12 @@ else if( ( c == "" || c == null ) )
                         <span>臺中第一高級中學<br />@lel[aa].LawName.Split("臺中第一高級中學")[1]</span>
                     }
                 </div>
+                <ol id="lHistory" class="legislativeHistory">
+                    @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
+                    {
+                        <li>@his</li>
+                    }
+                </ol>
                 <div id="foreword" class="Foreword">
                     <p>
                         @foreach (var fw in lel[aa].LawForeword.Split( "\r\n" ) )
@@ -1548,9 +1652,14 @@ else if( ( c == "" || c == null ) )
                         <article class="@showNum[iSN]">
                             @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                             {
-                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                                @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
                                 {
-                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" , "")</span></li>
+                                    <li id="@liof[iof]"><span>@( p.Split( '、' )[0] + "、" )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" , "")</span></li>
+                                    iof ++ ; 
+                                }
+                                else if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
+                                {
+                                    <li id="@liof[iof]"><span>@( p.Split( '.' )[0] + "." )</span><span>@Regex.Replace( p , @"^([1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" , "")</span></li>
                                     iof ++ ; 
                                 }
                                 else if (Regex.IsMatch(p, @"^(（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）)"))
@@ -1633,14 +1742,7 @@ else if( ( c == "" || c == null ) )
     </div>
 }
 
-@if( c == "histories" || c == "TofC" ) 
-{
-    <a href="laws/law?a=@a">回上一頁</a>
-}
-else 
-{
-    <a href="laws?q=@b">回上一頁</a>
-}
+<a href="laws?q=@b" class="printNoDisplay">回上一頁</a>
 
 @code 
 {
@@ -1830,7 +1932,7 @@ else
                         h6c ++ ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 ofc ++ ; 
                             }
@@ -1884,7 +1986,7 @@ else
                         h6c ++ ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 ofc ++ ; 
                             }
@@ -1938,7 +2040,7 @@ else
                         h6c ++ ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 ofc ++ ; 
                             }
@@ -1992,7 +2094,7 @@ else
                         h6c ++ ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 ofc ++ ; 
                             }
@@ -2046,7 +2148,7 @@ else
                         h6c ++ ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 ofc ++ ; 
                             }
@@ -2149,7 +2251,7 @@ else
                         int iiiof = 0 ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 iiiof ++ ; 
                                 liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -2237,7 +2339,7 @@ else
                         int iiiof = 0 ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 iiiof ++ ; 
                                 liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -2325,7 +2427,7 @@ else
                         int iiiof = 0 ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 iiiof ++ ; 
                                 liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -2413,7 +2515,7 @@ else
                         int iiiof = 0 ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 iiiof ++ ; 
                                 liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 
@@ -2501,7 +2603,7 @@ else
                         int iiiof = 0 ; 
                         foreach( var p in l.ArticleContent.Split( "\r\n" ) ) 
                         {
-                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E)" ) ) 
+                            if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E)" ) ) 
                             {
                                 iiiof ++ ; 
                                 liof[idof] = l.ArticleNo + "_" + iiip.ToString() + "__" + iiisubp.ToString() + "___" + iiiitem.ToString() + "____" + iiiof.ToString() ; 

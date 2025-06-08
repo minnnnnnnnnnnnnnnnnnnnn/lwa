@@ -171,3 +171,10 @@ a:has( .ex-link )
     display : inline-flex ; 
     flex-direction : column ; 
 }
+.l tbody > a 
+{
+    display : flex ; 
+    flex-direction : column ; 
+    justify-content : center ; 
+    align-content : center ; 
+}
