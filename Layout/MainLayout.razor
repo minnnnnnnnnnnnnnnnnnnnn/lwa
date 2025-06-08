@@ -11,16 +11,16 @@
     <header>
         <div class="top-guide">
             <ul>
-                <li><a href="guide">網站導覽</a></li>
+                <li><a href="guide" tabindex="1">網站導覽</a></li>
                 <li id="zoom">
-                    <span class="@sIsYellow" style="font-size:13.6px;" @onclick="@(() => Zoom('s'))" @onclick:preventDefault>A</span><span class="@mIsYellow" style="font-size:16px;" @onclick="@(() => Zoom('m'))" @onclick:preventDefault>A</span><span class="@lIsYellow" style="font-size:18.4px;" @onclick="@(() => Zoom('l'))" @onclick:preventDefault>A</span>
+                    <span class="@sIsYellow" style="font-size:13.6px;" @onclick="@(() => Zoom('s'))" @onclick:preventDefault tabindex="1">A</span><span tabindex="2" class="@mIsYellow" style="font-size:16px;" @onclick="@(() => Zoom('m'))" @onclick:preventDefault>A</span><span tabindex="3" class="@lIsYellow" style="font-size:18.4px;" @onclick="@(() => Zoom('l'))" @onclick:preventDefault>A</span>
                 </li>
             </ul>
         </div>
         <div class="top">
-            <a class=""href=""><img src="i/icon/logo.png" alt="首頁" /></a>
+            <a tabindex="4" class=""href=""><img src="i/icon/logo.png" alt="首頁" /></a>
             <form action="laws" method="get">
-                <select name="c" id="">
+                <select tabindex="5" name="c" id="">
                     <option value="">不限</option>
                     <option value="c">中央法規</option>
                     <option value="ex">行政法規</option>
@@ -35,43 +35,45 @@
                     <option value="命令">命令</option>
                 </select> *@
                 <p>
-                    <input type="search" placeholder="輸入關鍵字以搜尋" name="q">
-                    <input type="submit" style="background-image:url(i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
+                    <input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q">
+                    <input tabindex="7" type="submit" style="background-image:url(i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
                 </p>
             </form>
-            <div @onclick="ToggleNavMenu">
+            <div tabindex="8" @onclick="ToggleNavMenu">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
             </div>
         </div>
         <nav @onclick="ToggleNavMenu" class="@NavMenuCssClass">
             <ul>
-                <li><a @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
-                <li><a @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
-                <li><a @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
-                <li><a @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
-                <li><a @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
-                <li><a @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
-                <li><a @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
-                <li><a @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
+                <li><a tabindex="9" @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
+                <li><a tabindex="9" @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
+                <li><a tabindex="9" @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
+                <li><a tabindex="9" @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
+                <li><a tabindex="9" @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
+                <li><a tabindex="9" @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
+                <li><a tabindex="9" @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
+                <li><a tabindex="9" @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
             </ul>
         </nav>
     </header>
     <div>
+        <div @ref="@top"></div>
         <main class="main">
             @Body
         </main>
+        <div class="toTop" tabindex="0"><span>回最</span><span>上方</span></div>
     </div>
     <footer>
         <div class="footer-upper">
             <ul>
-                <li><a @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
-                <li><a @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
-                <li><a @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
-                <li><a @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
-                <li><a @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
-                <li><a @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
-                <li><a @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
-                <li><a @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
+                <li><a tabindex="0" @onclick="ToLC" @onclick:preventDefault>中央法規</a></li>
+                <li><a tabindex="0" @onclick="ToLEx" @onclick:preventDefault>行政法規</a></li>
+                <li><a tabindex="0" @onclick="ToLL" @onclick:preventDefault>立法法規</a></li>
+                <li><a tabindex="0" @onclick="ToLJ" @onclick:preventDefault>司法法規</a></li>
+                <li><a tabindex="0" @onclick="ToLEl" @onclick:preventDefault>選舉法規</a></li>
+                <li><a tabindex="0" @onclick="ToC" @onclick:preventDefault>判例查詢</a></li>
+                <li><a tabindex="0" @onclick="ToP" @onclick:preventDefault>政黨查詢</a></li>
+                <li><a tabindex="0" @onclick="ToRel" @onclick:preventDefault>相關連結</a></li>
             </ul>
         </div>
         <div class="footer-note">
@@ -79,7 +81,7 @@
                 <li>本網站係提供法規之最新動態資訊及資料檢索，並不提供法規及法律諮詢之服務。</li>
                 <li>若有任何法律上的疑義，建議您可逕向發布法規之主管機關洽詢。</li>
                 <li>本網站法規資料係由政府各機關提供之電子檔或書面文字登打製作，若與各法規主管機關之公布文字有所不同，仍以各法規主管機關之公布資料為準。</li>
-                <li>部分資料內容，使用特殊文字或符號，如欲詳閱內容，請連結至<a href="https://www.cns11643.gov.tw/downloadList.jsp?ID=1" target="_blank">全字庫</a>下載造字檔或<a href="https://data.gov.tw/dataset/5961" target="_blank">政府資料開放平臺</a>下載全字庫字形檔。</li>
+                <li>部分資料內容，使用特殊文字或符號，如欲詳閱內容，請連結至<a tabindex="0" href="https://www.cns11643.gov.tw/downloadList.jsp?ID=1" target="_blank">全字庫</a>下載造字檔或<a tabindex="0" href="https://data.gov.tw/dataset/5961" target="_blank">政府資料開放平臺</a>下載全字庫字形檔。</li>
                 <li>法規整編資料截止日：民國 @lty 年 @ltm 月 @ltd 日</li>
                 <li>政黨整編資料截止日：民國 @pty 年 @ptm 月 @ptd 日</li>
                 <li>判例整編資料截止日：民國 @cty 年 @ctm 月 @ctd 日</li>
@@ -87,17 +89,17 @@
         </div>
         <div class="footer-bottom">
             <ul>
-                <li><a href="open">資料開放宣告</a></li>
+                <li><a tabindex="0" href="open">資料開放宣告</a></li>
                 @* <li><a href="privacy">隱私保護宣告</a></li> *@
-                <li><a href="print">法規彙編列印</a></li>
+                <li><a tabindex="0" href="print">法規彙編列印</a></li>
             </ul>
             <span>本網站由臺中市立臺中第一高級中等學校學生自治聯合會學生會自治部及評議委員會共同維運管理</span><br/>
             <span><span>臺中市立臺中第一高級中等學校學生自治聯合會辦公室地址：</span><span>404臺中市北區育才街2號 敬業樓3樓</span></span><br/>
             <span>信箱：
                 <ul>
-                    <li><span>學生會：</span><a href="mailto:tcfshsa290801@gmail.com">tcfshsa290801@gmail.com</a></li>
-                    <li><span>學生議會：</span><a href="mailto:tcfshsc101@gmail.com">tcfshsc101@gmail.com</a></li>
-                    <li><span>評議委員會：</span><a href="mailto:tcfshstudentcourt@std.tcfsh.tc.edu.tw">tcfshstudentcourt@std.tcfsh.tc.edu.tw</a></li>
+                    <li><span>學生會：</span><a tabindex="0" href="mailto:tcfshsa290801@gmail.com">tcfshsa290801@gmail.com</a></li>
+                    <li><span>學生議會：</span><a tabindex="0" href="mailto:tcfshsc101@gmail.com">tcfshsc101@gmail.com</a></li>
+                    <li><span>評議委員會：</span><a tabindex="0" href="mailto:tcfshstudentcourt@std.tcfsh.tc.edu.tw">tcfshstudentcourt@std.tcfsh.tc.edu.tw</a></li>
                 </ul>
             </span>
         </div>
@@ -117,6 +119,7 @@
     public string cty ;
     public string ctm ;
     public string ctd ;
+    private ElementReference? top ; 
     protected override async Task OnInitializedAsync()
     {
         l = await Http.GetFromJsonAsync<L[]>("json/laws.json");
