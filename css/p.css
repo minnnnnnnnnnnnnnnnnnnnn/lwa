@@ -113,7 +113,15 @@ dt
     display : flex ; 
     align-items : center ; 
 }
-.cd > dl > dd::before , .cd.r::before , .cd.o::before 
+.cd.r , .cd.o 
+{
+    flex-wrap : wrap ; 
+}
+.cd.r > :nth-child(n) , .cd.o > :nth-child(n) 
+{
+    padding-left : 1em ; 
+}
+.cd > dl > dd::before 
 {
     content : '　' ; 
     flex-shrink : 0 ; 
@@ -164,6 +172,10 @@ a:has( .ex-link )
     display : flex ; 
     flex-wrap : nowrap ; 
     align-items : center ; 
+}
+a:has( .ex-link ) :first-child 
+{
+    flex-shrink : 0 ; 
 }
 
 .l tbody , .l tbody tr 
