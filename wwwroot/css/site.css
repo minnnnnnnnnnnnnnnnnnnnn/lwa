@@ -314,6 +314,13 @@ header a:focus
   zoom : 105% ; 
   background : #0009 ; 
 }
+@media print 
+{
+  .toTop , #top 
+  {
+    display : none ; 
+  }
+}
 
 /* index */
 .latest h1 

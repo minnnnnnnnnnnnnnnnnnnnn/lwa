@@ -57,11 +57,11 @@
         </nav>
     </header>
     <div>
-        <div @ref="@top"></div>
+        <div id="top"></div>
         <main class="main">
             @Body
         </main>
-        <div class="toTop" tabindex="0"><span>回最</span><span>上方</span></div>
+        <div class="toTop" tabindex="0" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})"><span>回最</span><span>上方</span></div>
     </div>
     <footer>
         <div class="footer-upper">
@@ -119,7 +119,6 @@
     public string cty ;
     public string ctm ;
     public string ctd ;
-    private ElementReference? top ; 
     protected override async Task OnInitializedAsync()
     {
         l = await Http.GetFromJsonAsync<L[]>("json/laws.json");
