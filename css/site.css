@@ -19,6 +19,7 @@ html
   position : relative ; 
   min-height : 100% ; 
   font-family : "Noto Sans" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+  word-break : break-all ; 
 }
 @media ( min-width : 768px ) 
 {
