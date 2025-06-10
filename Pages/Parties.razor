@@ -12,6 +12,11 @@
     </ul>
 </div>
 <form action="parties" method="get" class="pq">
+    <label for="s">狀態：</label>
+    <select name="s" id="s">
+        <option value="">不限</option>
+        <option value="一般">一般</option>
+    </select>
     <p>
         <input type="search" placeholder="輸入關鍵字以搜尋政黨" name="q" />
         <input type="submit" style="background-image:url(i/icon/search.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
@@ -21,7 +26,7 @@
 {
     <p><em>Loading...</em></p>
 }
-else
+else 
 {
     <table class="p">
         <thead>
@@ -32,7 +37,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var partiess in p[0].Parties)
+            @foreach (var partiess in pq)
             {
                 <tr>
                     <td><a href="parties/detail?party=@partiess.Party&q=@a">@partiess.Party</a></td>
@@ -47,6 +52,9 @@ else
 @code {
     private Py[]? p;
     private string a;
+    private string? b;
+    private bool ifbvalid = false ; 
+    public List<P> pq = new List<P>() ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -55,11 +63,32 @@ else
         {
             a = aaa;
         }
+        if (queryStrings.TryGetValue("s", out var bbb))
+        {
+            b = bbb;
+            ifbvalid = ( b == "一般" ) ; 
+        }
     }
 
     protected override async Task OnInitializedAsync()
     {
         p = await Http.GetFromJsonAsync<Py[]>("json/parties.json");
+        if( p != null && !string.IsNullOrEmpty( a ) && ifbvalid ) 
+        {
+            pq = p[0].Parties.Where( p => p.PartyState == b ).Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ; 
+        }
+        else if( p != null && !string.IsNullOrEmpty( a ) ) 
+        {
+            pq = p[0].Parties.Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ; 
+        }
+        else if( p!= null && ifbvalid ) 
+        {
+            pq = p[0].Parties.Where( p => p.PartyState == b ).ToList() ; 
+        }
+        else if( p != null ) 
+        {
+            pq = p[0].Parties.ToList() ; 
+        }
     }
 
     public class Py
