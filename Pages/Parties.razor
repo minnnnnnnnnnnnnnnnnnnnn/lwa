@@ -75,11 +75,17 @@ else
         p = await Http.GetFromJsonAsync<Py[]>("json/parties.json");
         if( p != null && !string.IsNullOrEmpty( a ) && ifbvalid ) 
         {
-            pq = p[0].Parties.Where( p => p.PartyState == b ).Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ; 
+            foreach( var a in Regex.Split( a , @"\s" ) ) 
+            {
+                pq.AddRange( p[0].Parties.Where( p => p.PartyState == b ).Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ) ; 
+            }
         }
         else if( p != null && !string.IsNullOrEmpty( a ) ) 
         {
-            pq = p[0].Parties.Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ; 
+            foreach( var a in Regex.Split( a , @"\s" ) ) 
+            {
+                pq.AddRange( p[0].Parties.Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ) ; 
+            }
         }
         else if( p!= null && ifbvalid ) 
         {
