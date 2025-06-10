@@ -121,6 +121,10 @@ dt
 {
     padding-left : 1em ; 
 }
+.cd.r > dl , .cd.o > dl 
+{
+    padding-bottom : 1rem ; 
+}
 .cd > dl > dd::before 
 {
     content : '　' ; 
