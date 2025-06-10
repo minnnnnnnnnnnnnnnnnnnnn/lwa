@@ -273,7 +273,6 @@ else
 
 @code {
     private Casess[]? cases;
-    private List<Case> cq = new List<Case>();
     public string a; 
     protected override void OnInitialized()
     {
@@ -287,28 +286,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         cases = await Http.GetFromJsonAsync<Casess[]>("json/cases.json");
-        if( cases != null ) 
-        {
-            if( string.IsNullOrEmpty( a ) ) 
-            {
-                cq = cases[0].Cases.ToList() ; 
-            }
-            else 
-            {
-                cq = cases[0].Cases.Where( 
-                    c => 
-                    c.No.Contains( a ) || 
-                    c.Category.Contains( a ) || 
-                    ( string.IsNullOrEmpty( c.DeliberationDate ) ? false : c.DeliberationDate.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Petitioner ) ? false : c.Petitioner.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Plaintiff ) ? false : c.Plaintiff.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Defendant ) ? false : c.Defendant.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Title ) ? false : c.Title.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Cause ) ? false : c.Cause.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.Syllabus ) ? false : c.Syllabus.Contains( a ) ) || 
-                    ( string.IsNullOrEmpty( c.State ) ? false : c.State.Contains( a ) ) ).ToList() ; 
-            }
-        }
     }
 
     public class Casess
