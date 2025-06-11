@@ -96,7 +96,7 @@ else
                 {
                     @foreach (var rul in cas.Rulings)
                     {
-                        @foreach( var a in a.Split(' ') ) 
+                        @foreach( var a in Regex.Replace( a , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                         {
                             @if ( rul.RulingNo.Contains(a) )
                             {
@@ -121,7 +121,7 @@ else
                 {
                     @foreach (var o in cas.Opinions)
                     { 
-                        @foreach( var a in a.Split( ' ' ) ) 
+                        @foreach( var a in Regex.Replace( a , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                         {
                             @if ( o.Type.Contains(a) || o.Member.Contains(a) )
                             {
@@ -142,7 +142,7 @@ else
                         }
                     }
                 }
-                @foreach( var a in a.Split( ' ' ) ) 
+                @foreach( var a in Regex.Replace( a , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @if ( cas.No.Contains(a) || cas.Category.Contains(a) )
                     {

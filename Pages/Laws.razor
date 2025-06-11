@@ -68,7 +68,7 @@ else if ( a == "" || a == null )
                 <h1>法規列表</h1>
             </thead>
             <tbody>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var law in laws[0].Laws)
                 {
@@ -221,7 +221,7 @@ else if ( a == "" || a == null )
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var law in laws[0].Laws ) 
                     {
@@ -470,7 +470,7 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>中央法規</h3>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var lawc in lc)
                 {
@@ -619,7 +619,7 @@ else if (a.ToUpper() == "C" && (b != "" && b != null))
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var lawc in lc ) 
                     {
@@ -781,7 +781,7 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>行政法規</h3>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var lawex in lex)
                 {
@@ -930,7 +930,7 @@ else if (a.ToUpper() == "EX" && (b != "" && b != null))
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var lawex in lex ) 
                     {
@@ -1092,7 +1092,7 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>立法法規</h3>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var lawl in ll)
                 {
@@ -1241,7 +1241,7 @@ else if (a.ToUpper() == "L" && (b != "" && b != null))
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var lawl in ll ) 
                     {
@@ -1403,7 +1403,7 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>司法法規</h3>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var lawj in lj)
                 {
@@ -1552,7 +1552,7 @@ else if (a.ToUpper() == "J" && (b != "" && b != null))
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var lawj in lj ) 
                     {
@@ -1714,7 +1714,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         </thead>
         <tbody>
             <h3>選舉法規</h3>
-            @if( !b.Contains( ' ' ) ) 
+            @if( !Regex.IsMatch( b , @"\s" ) ) 
             {
                 @foreach (var lawel in lel)
                 {
@@ -1863,7 +1863,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
             }
             else 
             {
-                @foreach( var b in b.Split( ' ' ) ) 
+                @foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     @foreach( var lawel in lel ) 
                     {
