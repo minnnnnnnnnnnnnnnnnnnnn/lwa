@@ -40,8 +40,8 @@ else
             @foreach (var partiess in pq)
             {
                 <tr>
-                    <td><a href="parties/detail?party=@partiess.Party&q=@a">@partiess.Party</a></td>
-                    <td><a href="parties/detail?party=@partiess.Party&q=@a">@partiess.PartyName</a></td>
+                    <td><a href="parties/detail?party=@partiess.Party&q=@a&s=@b">@partiess.Party</a></td>
+                    <td><a href="parties/detail?party=@partiess.Party&q=@a&s=@b">@partiess.PartyName</a></td>
                     <td>@partiess.Chairman</td>
                 </tr>
             }
