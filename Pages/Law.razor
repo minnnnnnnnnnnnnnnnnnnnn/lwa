@@ -89,6 +89,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         </ol>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lc[aa].LawAbandonNote</span>
@@ -133,7 +134,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                 </div>
                 <br />
                 @foreach( var art in lc[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -167,12 +168,16 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -267,6 +272,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         }
         @if ( a.ToUpper().Split( '0' )[0] == "X" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lex[aa].LawAbandonNote</span>
@@ -295,7 +301,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                 </div>
                 <br />
                 @foreach( var art in lex[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -329,12 +335,16 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -429,6 +439,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         }
         @if ( a.ToUpper().Split( '0' )[0] == "L" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@ll[aa].LawAbandonNote</span>
@@ -457,7 +468,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                 </div>
                 <br />
                 @foreach( var art in ll[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -491,12 +502,16 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -591,6 +606,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         }
         @if ( a.ToUpper().Split( '0' )[0] == "J" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lj[aa].LawAbandonNote</span>
@@ -619,7 +635,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                 </div>
                 <br />
                 @foreach( var art in lj[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -653,12 +669,16 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -753,6 +773,7 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
         }
         @if ( a.ToUpper().Split( '0' )[0] == "E" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lel[aa].LawAbandonNote</span>
@@ -815,12 +836,16 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -927,6 +952,7 @@ else
     <div ahhhhaaaahaha>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lc[aa].LawAbandonNote</span>
@@ -993,12 +1019,16 @@ else
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -1093,6 +1123,7 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "X" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lex[aa].LawAbandonNote</span>
@@ -1121,7 +1152,7 @@ else
                 </div>
                 <br />
                 @foreach( var art in lex[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -1155,12 +1186,16 @@ else
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -1255,6 +1290,7 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "L" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@ll[aa].LawAbandonNote</span>
@@ -1283,7 +1319,7 @@ else
                 </div>
                 <br />
                 @foreach( var art in ll[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -1317,12 +1353,16 @@ else
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -1417,6 +1457,7 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "J" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lj[aa].LawAbandonNote</span>
@@ -1445,7 +1486,7 @@ else
                 </div>
                 <br />
                 @foreach( var art in lj[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -1479,12 +1520,16 @@ else
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -1579,6 +1624,7 @@ else
         }
         @if ( a.ToUpper().Split( '0' )[0] == "E" ) 
         {
+            int ia = 1 ; 
             <div>
                 <div id="title" class="title">
                     <span class="abandoned">@lel[aa].LawAbandonNote</span>
@@ -1607,7 +1653,7 @@ else
                 </div>
                 <br />
                 @foreach( var art in lel[aa].LawArticles ) 
-                {
+                {                    
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -1641,12 +1687,16 @@ else
                         <h6 id="@h6[ih6]">
                             @if (art.ArticleNo.Contains('【') && art.ArticleNo != "" && art.ArticleNo != null )
                             {
-                                <span>@art.ArticleNo.Split('【')[0]</span>
-                                <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">
+                                    <span>@art.ArticleNo.Split('【')[0]</span>
+                                    <span>@Regex.Split(art.ArticleNo, @"條(?=【)")[1]</span>
+                                </a>
+                                ia ++ ; 
                             }
                             else 
                             {
-                                <span>@art.ArticleNo</span>
+                                <a href="laws/a?a=@a&p=@ia&q=@b">@art.ArticleNo</a>
+                                ia ++ ; 
                             }
                         </h6>
                         <article class="@showNum[iSN]">
@@ -1903,7 +1953,7 @@ else
             if( a.ToUpper()[0] == 'C' ) 
             {
                 foreach( var l in lc[aa].LawArticles ) 
-                {
+                {                    
                     if (l.ArticleType == "C")
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -1957,7 +2007,7 @@ else
             else if( a.ToUpper()[0] == 'X' ) 
             {
                 foreach( var l in lex[aa].LawArticles ) 
-                {
+                {                    
                     if (l.ArticleType == "C")
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2011,7 +2061,7 @@ else
             else if( a.ToUpper()[0] == 'L' ) 
             {
                 foreach( var l in ll[aa].LawArticles ) 
-                {
+                {                    
                     if (l.ArticleType == "C")
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2065,7 +2115,7 @@ else
             else if( a.ToUpper()[0] == 'J' ) 
             {
                 foreach( var l in lj[aa].LawArticles ) 
-                {
+                {                    
                     if (l.ArticleType == "C")
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2119,7 +2169,7 @@ else
             else if( a.ToUpper()[0] == 'E' ) 
             {
                 foreach( var l in lel[aa].LawArticles ) 
-                {
+                {                    
                     if (l.ArticleType == "C")
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2198,7 +2248,7 @@ else
             if( a.ToUpper()[0] == 'C' ) 
             {
                 foreach( var l in lc[aa].LawArticles ) 
-                {
+                {                    
                     if( l.ArticleType == "C" ) 
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2286,7 +2336,7 @@ else
             else if( a.ToUpper()[0] == 'X' ) 
             {
                 foreach( var l in lex[aa].LawArticles ) 
-                {
+                {                    
                     if( l.ArticleType == "C" ) 
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2374,7 +2424,7 @@ else
             else if( a.ToUpper()[0] == 'L' ) 
             {
                 foreach( var l in ll[aa].LawArticles ) 
-                {
+                {                    
                     if( l.ArticleType == "C" ) 
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2462,7 +2512,7 @@ else
             else if( a.ToUpper()[0] == 'J' ) 
             {
                 foreach( var l in lj[aa].LawArticles ) 
-                {
+                {                    
                     if( l.ArticleType == "C" ) 
                     {
                         if (l.ArticleContent[0] == '第') @*編*@
@@ -2550,7 +2600,7 @@ else
             else if( a.ToUpper()[0] == 'E' ) 
             {
                 foreach( var l in lel[aa].LawArticles ) 
-                {
+                {                    
                     if( l.ArticleType == "C" ) 
                     {
                         if (l.ArticleContent[0] == '第') @*編*@

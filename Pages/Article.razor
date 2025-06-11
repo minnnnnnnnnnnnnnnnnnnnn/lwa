@@ -232,11 +232,11 @@ else
     }
     @if( c == "e" ) 
     {
-        <a href="laws/lawe?a=@a">回上一頁</a>
+        <a href="laws/lawe?a=@a&q=@d">回上一頁</a>
     }
     else 
     {
-        <a href="laws/law?a=@a">回上一頁</a>
+        <a href="laws/law?a=@a&q=@d">回上一頁</a>
     }
 }
 
@@ -291,6 +291,7 @@ else
     private A? art;
     public int aa = -1 ; 
     private string? c ; 
+    private string? d;
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -306,6 +307,10 @@ else
         if (queryStrings.TryGetValue("from", out var ccc))
         {
             c = ccc ; 
+        }
+        if (queryStrings.TryGetValue("q", out var ddd))
+        {
+            d = ddd ; 
         }
         aa = ( a == "" || a == null ) ? -1 : Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }
