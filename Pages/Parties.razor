@@ -78,14 +78,14 @@ else
         {
             foreach( var a in Regex.Replace( a , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
             {
-                pq.AddRange( p[0].Parties.Where( p => p.PartyState == b ).Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ) ; 
+                pq.AddRange( p[0].Parties.Where( p => p.PartyState == b ).Where( p => ( p.PartyName.ToUpper().Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.ToUpper().Contains( a ) ) || p.Chairman.ToUpper().Contains( a ) ) ).ToList() ) ; 
             }
         }
         else if( p != null && !string.IsNullOrEmpty( a ) ) 
         {
             foreach( var a in Regex.Replace( a , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
             {
-                pq.AddRange( p[0].Parties.Where( p => ( p.PartyName.Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.Contains( a ) ) || p.Chairman.Contains( a ) ) ).ToList() ) ; 
+                pq.AddRange( p[0].Parties.Where( p => ( p.PartyName.ToUpper().Contains( a ) || ( string.IsNullOrEmpty( p.PartyAbbreviation ) ? false : p.PartyAbbreviation.ToUpper().Contains( a ) ) || p.Chairman.ToUpper().Contains( a ) ) ).ToList() ) ; 
             }
         }
         else if( p!= null && ifbvalid ) 
