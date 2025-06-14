@@ -194,3 +194,52 @@ a:has( .ex-link ) :first-child
     justify-content : center ; 
     align-content : center ; 
 }
+
+/* latest */
+.la dd:not( .la dd dd ) , .la dd dl 
+{
+    margin-bottom : 1rem ; 
+}
+.la dd dt 
+{
+    font-size : 1rem ; 
+    font-weight : 600 ; 
+}
+.la dd dd 
+{
+    font-size : .95rem ; 
+    font-weight : 550 ; 
+}
+.la table 
+{
+    border-collapse : collapse ; 
+    border : 1px solid #000 ; 
+}
+.la table thead 
+{
+    border-bottom : #000 2px solid ; 
+}
+.la table tbody 
+{
+    text-align: left;
+}
+.la table tbody tr td:first-child , .la table thead tr th:first-child 
+{
+    width : calc(3em + 2px); 
+}
+.la table tbody tr td:nth-child( 2 ) , .la table thead tr th:nth-child( 2 ) , .la table tbody tr td:nth-child( 3 ) , .la table thead tr th:nth-child( 3 ) 
+{
+    border : 1px solid #000 ; 
+}
+.la table tbody tr td:last-child , .la table thead tr th:last-child 
+{
+    width : calc(5em + 2px) ; 
+}
+.la table ul li 
+{
+    display : flex ; 
+}
+.la table ul li :first-child 
+{
+    flex-shrink : 0 ; 
+}

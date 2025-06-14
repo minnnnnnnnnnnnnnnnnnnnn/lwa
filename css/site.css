@@ -323,38 +323,6 @@ header a:focus
   }
 }
 
-/* index */
-.latest h1 
-{
-    font-family : "Noto Sans TC" , sans-serif ; 
-    font-weight : 600 ; 
-    font-size : 2rem ; 
-}
-@media (min-width : 768px)
-{
-  .latest h1 
-  {
-    font-size : 3rem ; 
-    font-weight : 700 ; 
-  }
-}
-.latest ul 
-{
-    font-weight : 500 ; 
-}
-.latest ul li 
-{
-  text-indent : -1em ; 
-  margin-left : 1em ; 
-}
-.latest ul li::before 
-{
-  content : ">" ; 
-  font-family : 'Noto Sans Mono' ; 
-  width : .5em ; 
-  margin-right : .5em ; 
-}
-
 
 /* footer */
 footer 
