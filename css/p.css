@@ -231,6 +231,10 @@ a:has( .ex-link ) :first-child
 {
     border : 1px solid #000 ; 
 }
+.la td:nth-child( 2 ) , .la td:nth-child( 3 ) , .la th:nth-child( 2 ) , .la th:nth-child( 3 ) 
+{
+    min-width : 3.5em ; 
+}
 .la table tbody tr td:last-child , .la table thead tr th:last-child 
 {
     width : calc(5em + 2px) ; 
