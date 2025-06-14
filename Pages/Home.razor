@@ -25,7 +25,7 @@
             <PageTitle>首頁 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
             @for( int i = l.Length - 1 ; i >= 0 ; i -- ) 
             {
-                <li>@l[i].Title</li>
+                <li><a href="latest?no=@( i + 1 )">@l[i].Title</a></li>
             }
         }
     </ul>
