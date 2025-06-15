@@ -219,7 +219,6 @@ else
     private bool lIsNull = true;
 
     private int a = 0;
-    int i;
     protected override async Task OnInitializedAsync()
     {
         l = await Http.GetFromJsonAsync<Latests[]>("json/latest.json");
