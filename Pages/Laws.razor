@@ -2033,7 +2033,6 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     public List<L> ll = new List<L>();
     public List<L> lj = new List<L>();
     public List<L> lel = new List<L>();
-    private string jgpnsgan = "" ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -2045,10 +2044,6 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         if (queryStrings.TryGetValue("q", out var bbb))
         {
             b = bbb;
-        }
-        if (queryStrings.TryGetValue("jg", out var ccc))
-        {
-            jgpnsgan = ccc;
         }
     }
 
