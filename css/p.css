@@ -239,6 +239,13 @@ a:has( .ex-link ) :first-child
 {
     width : calc(5em + 2px) ; 
 }
+@media ( min-width : 768px ) 
+{
+    .la table tbody tr td:last-child , .la table thead tr th:last-child 
+    {
+        width : calc(10em + 2px) ; 
+    }
+}
 .la table ul li 
 {
     display : flex ; 
