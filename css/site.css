@@ -86,7 +86,7 @@ header .top-guide ul
   align-items : center ; 
   margin : 0 var(--header-padding-lr) ; 
 }
-header .top-guide ul li:last-child 
+header .top-guide ul li:nth-child( 2 ) 
 {
   box-sizing : content-box ; 
   width : 5em ; 
@@ -107,13 +107,21 @@ header .top-guide ul li span , header .top-guide ul li span:hover , header .top-
   -ms-user-select : none ; 
   user-select : none; 
 }
-header .top-guide ul li 
+header .top-guide ul li:not( :last-child ) 
 {
   padding : .15rem 1rem ; 
 }
 header .top-guide ul li:not( :last-child ) 
 {
   border-right : 1px solid #fff ; 
+}
+header .top-guide ul li .toggleD 
+{
+  width : 4rem ; 
+}
+header .top-guide ul li .toggleD svg 
+{
+  width : calc(2rem - 2px) ; 
 }
 header .top 
 {
