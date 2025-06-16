@@ -11,12 +11,11 @@
     <span>現在位置：</span>
     <ul>
         <li><a href="">首頁</a></li>
-        <li><a href="laws">法規查詢</a></li>
-        @if (laws != null)
-        {
+        <li><a href="laws?c=@c&q=@b">法規查詢</a></li>
+        @if( laws != null && ifavalid )
             @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
             {
-                <li>@( laws[0].Laws[aa].LawName + "（簡讀版）" )</li>
+                <li>@( lc[aa].LawName + "（簡讀版）" )</li>
             }
             else if ( a.ToUpper().Split( '0' )[0] == "X" ) 
             {
@@ -34,7 +33,6 @@
             {
                 <li>@( lel[aa].LawName + "（簡讀版）" )</li>
             }
-        }
     </ul>
 </div>
 @if (laws == null)
@@ -42,7 +40,7 @@
     <PageTitle>Loading - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <p><em>Loading...</em></p>
 }
-else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) < 0 || Int32.Parse( a.ToUpper().Contains( 'C' ) ? a.ToUpper().Replace( "C"  , "" ) : "-1" ) >= ic || Int32.Parse( a.ToUpper().Contains( 'X' ) ? a.ToUpper().Replace( "X"  , "" ) : "-1" ) >= iex || Int32.Parse( a.ToUpper().Contains( 'L' ) ? a.ToUpper().Replace( "L"  , "" ) : "-1" ) >= il || Int32.Parse( a.ToUpper().Contains( 'J' ) ? a.ToUpper().Replace( "J"  , "" ) : "-1" ) >= ij || Int32.Parse( a.ToUpper().Contains( 'E' ) ? a.ToUpper().Replace( "E"  , "" ) : "-1" ) >= iel ) 
+else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) <= 0 || Int32.Parse( a.ToUpper().Contains( 'C' ) ? a.ToUpper().Replace( "C"  , "" ) : "-1" ) > ic || Int32.Parse( a.ToUpper().Contains( 'X' ) ? a.ToUpper().Replace( "X"  , "" ) : "-1" ) > iex || Int32.Parse( a.ToUpper().Contains( 'L' ) ? a.ToUpper().Replace( "L"  , "" ) : "-1" ) > il || Int32.Parse( a.ToUpper().Contains( 'J' ) ? a.ToUpper().Replace( "J"  , "" ) : "-1" ) > ij || Int32.Parse( a.ToUpper().Contains( 'E' ) ? a.ToUpper().Replace( "E"  , "" ) : "-1" ) > iel ) 
 {
     <PageTitle>錯誤 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <h1 style="color:red;font-weight:900;font-family:'Noto Sans Mono','Noto Sans TC';">!!!錯誤!!!<br />請重試！</h1>
@@ -605,7 +603,7 @@ else
         }
     </div>
 }
-<a href="laws/law?a=@a" class="printNoDisplay">回上一頁</a>
+<a href="laws/law?a=@a&c=@c&q=@b" class="printNoDisplay">回上一頁</a>
 
 @code {
     private LawRoot[]? laws;
@@ -655,6 +653,8 @@ else
     public List<L> lel = new List<L>();
     public string a;
     public int aa = -1 ; 
+    public string? b , c ; 
+    private bool ifavalid = false ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -662,6 +662,14 @@ else
         if (queryStrings.TryGetValue("a", out var aaa))
         {
             a = aaa;
+        }
+        if (queryStrings.TryGetValue("q", out var bbb))
+        {
+            b = bbb;
+        }
+        if (queryStrings.TryGetValue("c", out var ccc))
+        {
+            c = ccc;
         }
         aa = Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }
@@ -671,15 +679,15 @@ else
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
         for (int i = 0; i < laws[0].Laws.Length; i++)
         {
-            if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
-            {
-                lc.Add(laws[0].Laws[i]);
-                ic++;
-            }
-            else if (laws[0].Laws[i].LawCategory.Contains("選舉法規"))
+            if (laws[0].Laws[i].LawCategory.Contains("選舉法規"))
             {
                 lel.Add(laws[0].Laws[i]);
                 iel++;
+            }
+            else if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
+            {
+                lc.Add(laws[0].Laws[i]);
+                ic++;
             }
             else if (laws[0].Laws[i].LawCategory.Contains("行政法規"))
             {
@@ -697,6 +705,7 @@ else
                 ij++;
             }
         }
+        ifavalid = !( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) <= 0 || Int32.Parse( a.ToUpper().Contains( 'C' ) ? a.ToUpper().Replace( "C"  , "" ) : "-1" ) > ic || Int32.Parse( a.ToUpper().Contains( 'X' ) ? a.ToUpper().Replace( "X"  , "" ) : "-1" ) > iex || Int32.Parse( a.ToUpper().Contains( 'L' ) ? a.ToUpper().Replace( "L"  , "" ) : "-1" ) > il || Int32.Parse( a.ToUpper().Contains( 'J' ) ? a.ToUpper().Replace( "J"  , "" ) : "-1" ) > ij || Int32.Parse( a.ToUpper().Contains( 'E' ) ? a.ToUpper().Replace( "E"  , "" ) : "-1" ) > iel ) ; 
         if( a.ToUpper()[0] == 'C' ) 
         {
             foreach( var a in lc[aa].LawArticles) 

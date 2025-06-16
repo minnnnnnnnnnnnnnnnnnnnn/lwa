@@ -649,15 +649,15 @@ else
         showNum = new string[aCount] ; 
         for (int i = 0; i < laws[0].Laws.Length; i++)
         {
-            if (laws[0].Laws[i].LawCategory.Contains("中央法規"))
-            {
-                lc.Add(laws[0].Laws[i]);
-                ic++;
-            }
-            else if (laws[0].Laws[i].LawCategory.Contains("選舉法規"))
+            if (laws[0].Laws[i].LawCategory.Contains("選舉法規"))
             {
                 lel.Add(laws[0].Laws[i]);
                 iel++;
+            }
+            else if( laws[0].Laws[i].LawCategory.Contains( "中央法規" ) )
+            {
+                lc.Add(laws[0].Laws[i]);
+                ic++;
             }
             else if (laws[0].Laws[i].LawCategory.Contains("行政法規"))
             {
