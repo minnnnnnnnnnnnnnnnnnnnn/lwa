@@ -7,14 +7,7 @@
     <span>現在位置：</span>
     <ul>
         <li><a href="">首頁</a></li>
-        @if( a != -1 ) 
-        {
-            <li>最新消息</li>
-        }
-        else 
-        {
-            <li>最新消息 - @l[a].Title</li>
-        }
+        <li>最新消息</li>
     </ul>
 </div>
 
@@ -39,7 +32,7 @@ else
                 {
                     <dl>
                         <dt>修正法規</dt>
-                        <dd><a href="@c.LawURL">@c.LawName</a></dd>
+                        <dd><a href="@c.LawURL&f=@( "ln" + a.ToString() )">@c.LawName</a></dd>
                         <dt></dt>
                         <dd>
                                 <dl>
@@ -236,7 +229,7 @@ else
         var queryStrings = QueryHelpers.ParseQuery(uri.Query);
         if (queryStrings.TryGetValue("no", out var aaa))
         {
-            a = aaa == "" ? -1 : Int32.Parse( aaa ) ; 
+            a = string.IsNullOrEmpty( aaa ) ? -1 : ( !Regex.IsMatch( aaa , @"([1-9]{1})|([1-9]{1}[0-9]+)" ) ? -1 : Int32.Parse( aaa ) ) ; 
         }
     }
 

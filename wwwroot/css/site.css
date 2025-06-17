@@ -84,7 +84,7 @@ header .top-guide ul
   display : flex ; 
   justify-content : flex-end ; 
   align-items : center ; 
-  margin : 0 var(--header-padding-lr) ; 
+  margin : 0 1rem ; 
 }
 header .top-guide ul li:nth-child( 2 ) 
 {
@@ -125,7 +125,7 @@ header .top-guide ul li .toggleD svg
 }
 header .top 
 {
-  margin : .5rem var(--header-padding-lr) ; 
+  margin : .5rem 1rem ; 
   display : flex ; 
   align-items : center ; 
   justify-content : space-evenly ; 
@@ -218,7 +218,7 @@ header .top > :last-child svg
 }
 header nav 
 {
-  margin : .5rem var(--header-padding-lr) ; 
+  margin : .5rem 1rem ; 
 }
 header nav ul 
 {
@@ -241,7 +241,7 @@ header nav ul li
   header nav 
   {
     padding : .5rem 0 ; 
-    margin : 0 var(--header-padding-lr) ; 
+    margin : 0 1rem ; 
     border-top : 1px var(--header-hr) solid ; 
   }
   header nav ul 
@@ -252,7 +252,7 @@ header nav ul li
   }
   header nav ul li , li:not( div[ahhhhaaaahaha] li ):not( .footer-bottom li ):not( .bread li ) 
   {
-    margin : 0 var(--header-padding-lr) ; 
+    margin : 0 1rem ; 
   }
   header nav ul li 
   {
@@ -335,7 +335,7 @@ header a:focus
 /* footer */
 footer 
 {
-  margin : var(--footer-padding-lr) ; 
+  margin : 1rem ; 
   margin-bottom : 0 ; 
   font-family : "Noto Serif" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
 }
@@ -347,7 +347,7 @@ footer ::selection
 .footer-upper 
 {
   padding : .5rem 0 ; 
-  margin : 0 var(--footer-padding-lr) ; 
+  margin : 0 1rem ; 
   margin-bottom : 1rem ; 
   border-bottom : 1px solid #000 ; 
 }
@@ -376,7 +376,7 @@ footer ::selection
 }
 footer > .footer-note 
 {
-  margin-left : var(--footer-padding-lr) ; 
+  margin-left : 1rem ; 
   color : #057b7b ; 
 }
 footer > .footer-note ul li 
