@@ -59,7 +59,7 @@
                 </p>
             </form>
             <div tabindex="8" @onclick="ToggleNavMenu">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L21 12M3 6L21 6M3 18L21 18" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="@menuBar" /></svg>
             </div>
         </div>
         <nav @onclick="ToggleNavMenu" class="@NavMenuCssClass">
@@ -139,6 +139,8 @@
     public string ctm ;
     public string ctd ;
     private string? dark ; 
+    private string menuBar = "M3 12L21 12M3 6L21 6M3 18L21 18" ; 
+    private bool barOrX = true ; 
     protected override async Task OnInitializedAsync()
     {
         l = await Http.GetFromJsonAsync<L[]>("json/laws.json");
@@ -265,5 +267,14 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+        if( barOrX ) 
+        {
+            menuBar = "M3 3L21 21M3 21L21 3" ; 
+        }
+        else 
+        {
+            menuBar = "M3 12L21 12M3 6L21 6M3 18L21 18" ; 
+        }
+        barOrX = !barOrX ; 
     }
 }
