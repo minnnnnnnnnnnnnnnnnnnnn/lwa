@@ -53,7 +53,7 @@ else
         <PageTitle>Loading - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
         <p><em>Loading...</em></p>
     }
-    else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) < 0 || Int32.Parse( a.ToUpper().Contains( 'C' ) ? a.ToUpper().Replace( "C"  , "" ) : "-1" ) >= ic || Int32.Parse( a.ToUpper().Contains( 'X' ) ? a.ToUpper().Replace( "X"  , "" ) : "-1" ) >= iex || Int32.Parse( a.ToUpper().Contains( 'L' ) ? a.ToUpper().Replace( "L"  , "" ) : "-1" ) >= il || Int32.Parse( a.ToUpper().Contains( 'J' ) ? a.ToUpper().Replace( "J"  , "" ) : "-1" ) >= ij || Int32.Parse( a.ToUpper().Contains( 'E' ) ? a.ToUpper().Replace( "E"  , "" ) : "-1" ) >= iel ) 
+    else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) <= 0 || Int32.Parse( a.ToUpper().Contains( 'C' ) ? a.ToUpper().Replace( "C"  , "" ) : "-1" ) > ic || Int32.Parse( a.ToUpper().Contains( 'X' ) ? a.ToUpper().Replace( "X"  , "" ) : "-1" ) > iex || Int32.Parse( a.ToUpper().Contains( 'L' ) ? a.ToUpper().Replace( "L"  , "" ) : "-1" ) > il || Int32.Parse( a.ToUpper().Contains( 'J' ) ? a.ToUpper().Replace( "J"  , "" ) : "-1" ) > ij || Int32.Parse( a.ToUpper().Contains( 'E' ) ? a.ToUpper().Replace( "E"  , "" ) : "-1" ) > iel ) 
     {
         <PageTitle>錯誤 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
         <h1 style="color:red;font-weight:900;font-family:'Noto Sans Mono','Noto Sans TC';">!!!錯誤!!!<br />請重試！</h1>
@@ -232,11 +232,11 @@ else
     }
     @if( c == "e" ) 
     {
-        <a href="laws/lawe?a=@a&q=@d">回上一頁</a>
+        <a href="laws/lawe?a=@a&q=@d&c=@e">回上一頁</a>
     }
     else 
     {
-        <a href="laws/law?a=@a&q=@d">回上一頁</a>
+        <a href="laws/law?a=@a&q=@d&c=@e">回上一頁</a>
     }
 }
 
@@ -282,6 +282,7 @@ else
     public int aa = -1 ; 
     private string? c ; 
     private string? d;
+    private string? e ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -301,6 +302,10 @@ else
         if (queryStrings.TryGetValue("q", out var ddd))
         {
             d = ddd ; 
+        }
+        if (queryStrings.TryGetValue("c", out var eee))
+        {
+            e = eee ; 
         }
         aa = ( a == "" || a == null ) ? -1 : Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }
