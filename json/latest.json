@@ -846,13 +846,6 @@
                     },
                     {
                         "ArticleType": "A",
-                        "ArticleNo": "第九條【選舉】",
-                        "ArticleContent": "正、副會長之選舉、罷免及補選應以普通、平等、直接及無記名方式為之，詳細辦法以法規另訂之。", 
-                        "Amendment": "正、副會長之選舉、罷免及補選應以普通、平等、直接方式為之，詳細辦法以法規另訂之。", 
-                        "Reason": ""
-                    },
-                    {
-                        "ArticleType": "A",
                         "ArticleNo": "第十一條【會長之提案權】",
                         "ArticleContent": "會長應於每屆學生議會開議後一個月內，向學生議會報告會務情形，並送交立法計畫，以備審議。\r\n會長於非常之時得咨請學生議會召開臨時會。", 
                         "Amendment": "會長得向學生議會提出法律案。\r\n會長應依法定程序向學生議會提出預、決算案。\r\n會長應於每屆學生議會開議後兩個月內，向學生議會送交立法計畫，以備審議。\r\n會長於非常之時得咨請學生議會召開臨時會。", 
@@ -884,6 +877,13 @@
                         "ArticleNo": "第十六條【覆議】",
                         "ArticleContent": "（新增條文）", 
                         "Amendment": "學生會對於學生議會決議之法律案、預算案認有窒礙難行時，得於該決議送達學生會五日內，移請學生議會覆議。學生議會為第十五條決議時，亦同。\r\n覆議時，會長應赴學生議會報告覆議理由，如經全體議員二分之一出席，出席議員三分之二決議維持原案，學生會應即接受該決議。", 
+                        "Reason": ""
+                    },
+                    {
+                        "ArticleType": "C",
+                        "ArticleNo": "",
+                        "ArticleContent": "（新增條文）", 
+                        "Amendment": "      第 一 節 學生議會", 
                         "Reason": ""
                     },
                     {
@@ -1026,7 +1026,7 @@
                 "LawName": "臺中市立臺中第一高級中等學校學生自治聯合會議會職權行使法",
                 "LawURL": "laws/law?a=l000000001",
                 "LawCategory": "立法法規",
-                "LawModifiedDate": "20250520",
+                "LawModifiedDate": "20250611",
                 "LawEffectiveDate": "",
                 "LawEffectiveNote": "",
                 "LawAbandonNote": "",
@@ -1064,7 +1064,7 @@
                 "LawName": "臺中市立臺中第一高級中等學校學生自治聯合會一般訴訟法",
                 "LawURL": "laws/law?a=j000000003",
                 "LawCategory": "司法法規",
-                "LawModifiedDate": "20250106",
+                "LawModifiedDate": "20250611",
                 "LawEffectiveDate": "",
                 "LawEffectiveNote": "",
                 "LawAbandonNote": "",
