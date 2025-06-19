@@ -70,19 +70,18 @@ else
             }
             @if( @cases[0].Cases[i].FullJudgement != "" ) 
             {
-                <dt><h4>判決全文（URL）</h4></dt>
-                <dd>
-                    <h5>
+                <dt>
+                    <h4>
                         <a href="@cases[0].Cases[i].FullJudgement" target="_blank">
-                            <span>@cases[0].Cases[i].FullJudgement</span>
+                            <span>判決全文</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </a>
-                    </h5>
-                </dd>
+                    </h4>
+                </dt>
             }
             @if (@cases[0].Cases[i].Rulings.Length != 0)
             {
@@ -93,19 +92,18 @@ else
                         <dl>
                             <dt><h5>裁定字號</h5></dt>
                             <dd><h6>@cassr.RulingNo</h6></dd>
-                            <dt><h5>裁定全文（URL）</h5></dt>
-                            <dd>
-                                <h6>
+                            <dt>
+                                <h5>
                                     <a href="@cassr.FullRulingURL" target="_blank">
-                                        <span>@cassr.FullRulingURL</span>
+                                        <span>裁定全文</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
                                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                             <polyline points="15 3 21 3 21 9"></polyline>
                                             <line x1="10" y1="14" x2="21" y2="3"></line>
                                         </svg>
                                     </a>
-                                </h6>
-                            </dd>
+                                </h5>
+                            </dt>
                         </dl>
                     }
                 </div>
@@ -121,11 +119,10 @@ else
                             <dd><h6>@casso.Type</h6></dd> 
                             <dt><h5>委員</h5></dt>
                             <dd><h6>@casso.Member</h6></dd> 
-                            <dt><h5>意見書全文（URL）</h5></dt>
-                            <dd>
+                            <dt>
                                 <h6>
                                     <a href="@casso.URL" target="_blank">
-                                        <span>@casso.URL</span>
+                                        <span>意見書全文</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ex-link">
                                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                             <polyline points="15 3 21 3 21 9"></polyline>
@@ -133,7 +130,7 @@ else
                                         </svg>
                                     </a>
                                 </h6>
-                            </dd>
+                            </dt>
                         </dl>
                     }
                 </div>
