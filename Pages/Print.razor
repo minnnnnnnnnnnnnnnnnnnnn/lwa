@@ -590,11 +590,23 @@ else
                 </li>
                 <li>
                     <span>發行人：</span>
-                    <span>卓祐宸</span>
+                    <span>@發行人</span>
                 </li>
                 <li>
                     <span>編輯：</span>
-                    <span>卓祐宸</span>
+                    <span>
+                        @foreach( var x in 編輯 ) 
+                        {
+                            @if( x != 編輯.Last() ) 
+                            {
+                                @( x + "、" ) 
+                            }
+                            else 
+                            {
+                                @x
+                            }
+                        }
+                    </span>
                 </li>
                 <li>
                     <span>網站：</span>
@@ -613,7 +625,7 @@ else
     </div>
 }
 
-<br /><a class="printNoDisplay" href="">回首頁</a>
+<br class="printNoDisplay" /><a class="printNoDisplay" href="">回首頁</a>
 
 @code {
 
@@ -632,6 +644,8 @@ else
     public List<L> ll = new List<L>();
     public List<L> lj = new List<L>();
     public List<L> lel = new List<L>();
+    private string 發行人 = "卓祐宸" ; 
+    private string[] 編輯 = { "卓祐宸" } ; 
     protected override async Task OnInitializedAsync()
     {
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
