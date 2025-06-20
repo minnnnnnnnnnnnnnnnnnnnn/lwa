@@ -107,7 +107,7 @@ header .top-guide ul li span , header .top-guide ul li span:hover , header .top-
   -ms-user-select : none ; 
   user-select : none; 
 }
-header .top-guide ul li:not( :last-child ) 
+header .top-guide ul li:not( header .top-guide ul li:has( .toggleD ) ) 
 {
   padding : .15rem 1rem ; 
 }

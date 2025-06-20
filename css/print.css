@@ -203,7 +203,7 @@ div[ahhhhaaaahaha] h6
     font-weight : bold ; 
     font-size : 12pt ; 
 }
-div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] h6 :first-child , div[ahhhhaaaahaha] article > li :first-child 
+div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ahhhhaaaahaha] h3 :first-child , div[ahhhhaaaahaha] h4 :first-child , div[ahhhhaaaahaha] h5 :first-child , div[ahhhhaaaahaha] h6 :first-child , div[ahhhhaaaahaha] article > li :first-child , div[ahhhhaaaahaha] #COVER-BACK li > span:first-child 
 {
     flex-shrink : 0 ; 
 }
