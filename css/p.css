@@ -210,6 +210,19 @@ a:has( .ex-link ) :first-child
     justify-content : center ; 
     align-content : center ; 
 }
+@media ( min-width : 768px ) 
+{
+    .table 
+    {
+        width : 700px ; 
+        margin : 0 auto ; 
+        text-align : left ; 
+    }
+}
+.table h1 
+{
+    text-align : center ; 
+}
 
 /* latest */
 .la dd:not( .la dd dd ) , .la dd dl 
