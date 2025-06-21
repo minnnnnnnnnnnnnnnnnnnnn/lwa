@@ -35,7 +35,7 @@
 }
 else if ( string.IsNullOrEmpty( a ) )
 {
-    @if ( !string.IsNullOrEmpty( b ) ) 
+    @if ( string.IsNullOrEmpty( b ) ) 
     {
         <table class="l">
             <thead>
@@ -2098,7 +2098,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
             if( !string.IsNullOrEmpty( b ) ) 
             {
                 var lqq = new List<L>() ; 
-                foreach( var b in Regex.Split( b , @"\s" ) ) 
+                foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
                 {
                     lqq.AddRange( lq.Where( l => l.LawName.ToUpper().Contains( b.ToUpper() ) || l.LawLevel.ToUpper().Contains( b.ToUpper() ) || l.LawHistories.ToUpper().Contains( b.ToUpper() ) || ( l.LawHasEngVersion == "Y" && l.EngLawName.ToUpper().Contains( b.ToUpper() ) ) || ( l.LawForeword != "" && l.LawForeword != null && l.LawForeword.ToUpper().Contains( b.ToUpper() ) ) ).ToList() ) ; 
                 }
