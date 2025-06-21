@@ -2,6 +2,7 @@ table
 {
     text-align : center ; 
     width : 100% ; 
+    border-collapse : collapse ; 
 }
 table a , table a:visited 
 {
@@ -9,7 +10,6 @@ table a , table a:visited
 }
 tr 
 {
-    border-bottom : 1px solid #000 ; 
     margin : .2rem ; 
 }
 td 
@@ -45,6 +45,10 @@ td
 {
     font-family : "Noto Sans Display" , "Noto Serif TC" ; 
 }
+.p tr:has( td ) 
+{
+    border-top : 1px solid #000 ; 
+}
 .p tr td:first-child 
 {
     width : 2em ; 
@@ -56,6 +60,18 @@ td
 }
 @media ( min-width : 768px ) 
 {
+    .p , .pq  
+    {
+        width : 700px ; 
+        margin : 0 auto ; 
+    }
+    .p ~ a.printNoDisplay 
+    {
+        display : block ; 
+        width : 100% ; 
+        text-align : center ; 
+        margin-top : 1rem ; 
+    }
     .p tr td:nth-child( 2 ) 
     {
         text-align : center ; 
@@ -222,6 +238,10 @@ a:has( .ex-link ) :first-child
 .la table tbody 
 {
     text-align: left;
+}
+.la table td 
+{
+    border-bottom : 1px solid #000 ; 
 }
 .la table tbody tr td:first-child , .la table thead tr th:first-child 
 {
