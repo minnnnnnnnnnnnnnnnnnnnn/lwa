@@ -10,6 +10,25 @@
     </ul>
 </div>
 <PageTitle>法規查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+<form action="laws" method="get" class="lq">
+    <label for="ab">狀態：</label>
+    <select name="ab" id="ab">
+        <option value="">不限</option>
+        <option value="false">一般</option>
+        <option value="true">廢止</option>
+    </select>
+    <label for="lv">位階：</label>
+    <select name="l" id="lv">
+        <option value="">不限</option>
+        <option value="章程">章程</option>
+        <option value="法律">法律</option>
+        <option value="命令">命令</option>
+    </select>
+    <p>
+        <input type="search" placeholder="輸入關鍵字以搜尋" name="q" />
+        <input type="submit" style="background-image:url(i/icon/search.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
+    </p>
+</form>
 @if (laws == null)
 {
     <p><em>Loading...</em></p>
@@ -2023,6 +2042,8 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     private LawRoot[]? laws;
     public string? a;
     public string b;
+    public string? c ; 
+    public string? d ; 
     private int ic = 0;
     private int iex = 0;
     private int il = 0;
@@ -2046,6 +2067,14 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         {
             b = bbb;
         }
+        if (queryStrings.TryGetValue("l", out var ccc))
+        {
+            c = ccc;
+        }
+        if (queryStrings.TryGetValue("ab", out var ddd))
+        {
+            d = ddd;
+        }
     }
 
     protected override async Task OnInitializedAsync()
@@ -2054,9 +2083,26 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         if( laws!= null && !string.IsNullOrEmpty( a ) ) 
         {
             lq = laws[0].Laws.Where( l => ( a.ToUpper() == "EL" ? l.LawCategory.Contains( "選舉法規" ) : ( a.ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( a.ToUpper() == "EX" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( a.ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( a.ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : false ) ) ) ) ) ).ToList() ; 
+            if( !string.IsNullOrEmpty( d ) && d == "true" ) 
+            {
+                lq = lq.Where( l => l.LawAbandonNote == "廢" ).ToList() ; 
+            }
+            else if( !string.IsNullOrEmpty( d ) && d == "false" ) 
+            {
+                lq = lq.Where( l => l.LawAbandonNote == "" ).ToList() ; 
+            }
+            if( !string.IsNullOrEmpty( c ) && ( c == "章程" || c == "法律" || c == "命令" ) ) 
+            {
+                lq = lq.Where( l => l.LawLevel == c ).ToList() ; 
+            }
             if( !string.IsNullOrEmpty( b ) ) 
             {
-                lq = lq.Where( l => true ).ToList() ; 
+                var lqq = new List<L>() ; 
+                foreach( var b in Regex.Split( b , @"\s" ) ) 
+                {
+                    lqq.AddRange( lq.Where( l => l.LawName.ToUpper().Contains( b.ToUpper() ) || l.LawLevel.ToUpper().Contains( b.ToUpper() ) || l.LawHistories.ToUpper().Contains( b.ToUpper() ) || ( l.LawHasEngVersion == "Y" && l.EngLawName.ToUpper().Contains( b.ToUpper() ) ) || ( l.LawForeword != "" && l.LawForeword != null && l.LawForeword.ToUpper().Contains( b.ToUpper() ) ) ).ToList() ) ; 
+                }
+                lq = lqq ; 
             }
         }
         for( int i = 0 ; i < laws[0].Laws.Length ; i++ )

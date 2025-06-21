@@ -24,8 +24,8 @@ else
     <h1>@p[0].Parties[Int32.Parse(a)].PartyName</h1>
     <div class="pd">
         <dl>
-            <dt>政黨名稱</dt>
-            <dd>@p[0].Parties[i].PartyName</dd>
+            <dt class="printNoDisplay">政黨名稱</dt>
+            <dd class="printNoDisplay">@p[0].Parties[i].PartyName</dd>
             @if (@p[0].Parties[i].PartyAbbreviation != "")
             {
                 <dt>政黨簡稱</dt>
@@ -63,7 +63,8 @@ else
         </dl>
     </div>
 }
-<a href="parties?q=@b&s=@c">回上一頁</a>
+<br class="printNoDisplay" />
+<a class="printNoDisplay" href="parties?q=@b&s=@c">回上一頁</a>
 
 @code {
     private Py[]? p;
