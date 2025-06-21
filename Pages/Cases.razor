@@ -11,7 +11,13 @@
         <li>判例查詢</li>
     </ul>
 </div>
-<form action="cases" method="get" class="cq">
+<form action="cases" method="get" class="cq printNoDisplay">
+    <label for="c">狀態：</label>
+    <select name="c" id="c">
+        <option value="">不限</option>
+        <option value="章程訴訟">章程訴訟</option>
+        <option value="一般訴訟">一般訴訟</option>
+    </select>
     <p>
         <input type="search" placeholder="輸入關鍵字以搜尋判例" name="q" />
         <input type="submit" style="background-image:url(i/icon/search.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />
@@ -39,7 +45,7 @@ else if( a == "" || a == null )
             </tr>
         </thead>
         <tbody>
-        @foreach (var cas in cases[0].Cases)
+        @foreach (var cas in cq)
         {
             <tr>
                 <td><a href="cases/detail?case=@cas.No&q=@a" target="_self">@cas.No</a></td>
@@ -90,7 +96,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach( var cas in cases[0].Cases )
+            @foreach( var cas in cq )
             {
                 @if( cas.Rulings.Length != 0 ) 
                 {
@@ -276,6 +282,8 @@ else
 @code {
     private Casess[]? cases;
     public string a; 
+    public string? b ; 
+    private List<Case> cq = new List<Case>(); 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -284,10 +292,26 @@ else
         {
             a = aaa;
         }
+        if (queryStrings.TryGetValue("c", out var bbb))
+        {
+            b = bbb;
+        }
     }
     protected override async Task OnInitializedAsync()
     {
         cases = await Http.GetFromJsonAsync<Casess[]>("json/cases.json");
+        if( cases != null && !string.IsNullOrEmpty( b ) ) 
+        {
+            cq = cases[0].Cases.Where( c => c.Category == b ).ToList() ; 
+            if( cq.FirstOrDefault() == null ) 
+            {
+                cq = cases[0].Cases.ToList() ; 
+            }
+        }
+        else if( cases != null ) 
+        {
+            cq = cases[0].Cases.ToList() ; 
+        }
     }
 
     public class Casess

@@ -33,6 +33,13 @@
 {
     <p><em>Loading...</em></p>
 }
+else if( linq == "true" ) 
+{
+    @foreach( var l in lq ) 
+    {
+        <div>@l.LawName</div>
+    }
+}
 else if ( string.IsNullOrEmpty( a ) )
 {
     @if ( string.IsNullOrEmpty( b ) ) 
@@ -2044,6 +2051,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     public string b;
     public string? c ; 
     public string? d ; 
+    public string? linq ; 
     private int ic = 0;
     private int iex = 0;
     private int il = 0;
@@ -2075,14 +2083,18 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
         {
             d = ddd;
         }
+        if (queryStrings.TryGetValue("linq", out var eee))
+        {
+            linq = eee;
+        }
     }
 
     protected override async Task OnInitializedAsync()
     {
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
-        if( laws!= null && !string.IsNullOrEmpty( a ) ) 
+        if( laws!= null ) 
         {
-            lq = laws[0].Laws.Where( l => ( a.ToUpper() == "EL" ? l.LawCategory.Contains( "選舉法規" ) : ( a.ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( a.ToUpper() == "EX" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( a.ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( a.ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : false ) ) ) ) ) ).ToList() ; 
+            lq = laws[0].Laws.Where( l => ( a.ToUpper() == "EL" ? l.LawCategory.Contains( "選舉法規" ) : ( a.ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( a.ToUpper() == "EX" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( a.ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( a.ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : true  ) ) ) ) ) ).ToList() ; 
             if( !string.IsNullOrEmpty( d ) && d == "true" ) 
             {
                 lq = lq.Where( l => l.LawAbandonNote == "廢" ).ToList() ; 
@@ -2098,10 +2110,15 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
             if( !string.IsNullOrEmpty( b ) ) 
             {
                 var lqq = new List<L>() ; 
-                foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
+                if( !Regex.IsMatch( b , @"([(].+[)])|[+\-&]" ) ) 
                 {
-                    lqq.AddRange( lq.Where( l => l.LawName.ToUpper().Contains( b.ToUpper() ) || l.LawLevel.ToUpper().Contains( b.ToUpper() ) || l.LawHistories.ToUpper().Contains( b.ToUpper() ) || ( l.LawHasEngVersion == "Y" && l.EngLawName.ToUpper().Contains( b.ToUpper() ) ) || ( l.LawForeword != "" && l.LawForeword != null && l.LawForeword.ToUpper().Contains( b.ToUpper() ) ) ).ToList() ) ; 
+                    foreach( var b in Regex.Replace( b , @"\s" , "\r\n" ).Split( "\r\n" ) ) 
+                    {
+                        lqq.AddRange( lq.Where( l => l.LawName.ToUpper().Contains( b.ToUpper() ) @*|| l.LawLevel.ToUpper().Contains( b.ToUpper() ) *@|| l.LawHistories.ToUpper().Contains( b.ToUpper() ) || ( l.LawHasEngVersion == "Y" && l.EngLawName.ToUpper().Contains( b.ToUpper() ) ) || ( l.LawForeword != "" && l.LawForeword != null && l.LawForeword.ToUpper().Contains( b.ToUpper() ) ) ).ToList() ) ; 
+                    }
                 }
+                else 
+                {}
                 lq = lqq ; 
             }
         }
