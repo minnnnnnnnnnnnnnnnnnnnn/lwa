@@ -37,48 +37,48 @@ td
   opacity : .65 ; 
   text-indent : .5rem ; 
 }
-.p thead th 
+.p:not( div[ahhhhaaaahaha] .p ) thead th 
 {
     padding-bottom : .25rem ; 
 }
-.p h1 
+.p:not( div[ahhhhaaaahaha] .p ) h1 
 {
     font-family : "Noto Sans Display" , "Noto Serif TC" ; 
 }
-.p tr:has( td ) 
+.p:not( div[ahhhhaaaahaha] .p ) tr:has( td ) 
 {
     border-top : 1px solid #000 ; 
 }
-.p tr td:first-child 
+.p:not( div[ahhhhaaaahaha] .p ) tr td:first-child 
 {
     width : 2em ; 
 }
-.p tr td:nth-child(2) 
+.p:not( div[ahhhhaaaahaha] .p ) tr td:nth-child(2) 
 {
     text-align : left ; 
     padding-left : .5rem ; 
 }
 @media ( min-width : 768px ) 
 {
-    .p , .pq  
+    .p:not( div[ahhhhaaaahaha] .p ) , .pq  
     {
         width : 700px ; 
         margin : 0 auto ; 
     }
-    .p ~ a.printNoDisplay 
+    .p:not( div[ahhhhaaaahaha] .p ) ~ a.printNoDisplay 
     {
         display : block ; 
         width : 100% ; 
         text-align : center ; 
         margin-top : 1rem ; 
     }
-    .p tr td:nth-child( 2 ) 
+    .p:not( div[ahhhhaaaahaha] .p ) tr td:nth-child( 2 ) 
     {
         text-align : center ; 
         padding : 0 ; 
     }
 }
-.p tr td:last-child 
+.p:not( div[ahhhhaaaahaha] .p ) tr td:last-child 
 {
     width : 4em ; 
 }
@@ -198,6 +198,10 @@ a:has( .ex-link ) :first-child
     flex-shrink : 0 ; 
 }
 
+.lawresult 
+{
+    display : block ; 
+}
 .l tbody , .l tbody tr 
 {
     display : inline-flex ; 
