@@ -14,9 +14,9 @@
 {
     <p><em>Loading...</em></p>
 }
-else if ( a == "" || a == null )
+else if ( string.IsNullOrEmpty( a ) )
 {
-    @if (b == "" || b == null ) 
+    @if ( !string.IsNullOrEmpty( b ) ) 
     {
         <table class="l">
             <thead>
@@ -2033,6 +2033,7 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     public List<L> ll = new List<L>();
     public List<L> lj = new List<L>();
     public List<L> lel = new List<L>();
+    public List<L> lq = new List<L>(); 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -2050,6 +2051,14 @@ else if (a.ToUpper() == "EL" && (b != "" && b != null))
     protected override async Task OnInitializedAsync()
     {
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
+        if( laws!= null && !string.IsNullOrEmpty( a ) ) 
+        {
+            lq = laws[0].Laws.Where( l => ( a.ToUpper() == "EL" ? l.LawCategory.Contains( "選舉法規" ) : ( a.ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( a.ToUpper() == "EX" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( a.ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( a.ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : false ) ) ) ) ) ).ToList() ; 
+            if( !string.IsNullOrEmpty( b ) ) 
+            {
+                lq = lq.Where( l => true ).ToList() ; 
+            }
+        }
         for( int i = 0 ; i < laws[0].Laws.Length ; i++ )
         {
             if (laws[0].Laws[i].LawCategory.ToUpper().Contains("選舉法規"))

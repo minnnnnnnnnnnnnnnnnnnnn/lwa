@@ -2,9 +2,23 @@
 @inject HttpClient Http 
 @inject NavigationManager N
 <style>
-    #title , #lHistory , #foreword 
+    #title , #lHistory 
     {
         margin-left : -3.5rem ; 
+    }
+    div[ahhhhaaaahaha] a:hover , div[ahhhhaaaahaha] a:focus 
+    {
+        color : #c03 ; 
+        text-decoration : none ; 
+    }
+    div[ahhhhaaaahaha] a , div[ahhhhaaaahaha] a:focus 
+    {
+        text-decoration : underline ; 
+    }
+    div[ahhhhaaaahaha] a:focus 
+    {
+        outline : .5px #fc0 solid ; 
+        border-radius : 1px ; 
     }
 </style>
 
@@ -13,7 +27,7 @@
     <ul>
         <li><a href="">首頁</a></li>
         <li><a href="laws?c=@c&q=@b">法規查詢</a></li>
-        @if (laws != null && a != "" && a != null)
+        @if (laws != null && !string.IsNullOrEmpty( a ))
             @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
             {
                 <li>@lc[aa].LawName</li>
@@ -37,16 +51,16 @@
     </ul>
 </div>
 
-@if( a != null && a != "" ) 
+@if( !string.IsNullOrEmpty( a ) ) 
 {
     <a href="laws/lawe?a=@a&c=@c&q=@b" class="printNoDisplay">簡讀版</a>
 }
-@if( laws == null && a != "" && a != null ) 
+@if( laws == null && !string.IsNullOrEmpty( a ) ) 
 {
     <PageTitle>Loading - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <p><em>Loading...</em></p>
 }
-else if ( a == "" || a == null ) 
+else if ( string.IsNullOrEmpty( a ) ) 
 {
     <Laws></Laws>
 }
@@ -55,38 +69,11 @@ else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( R
     <PageTitle>錯誤 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <h1 style="color:red;font-weight:900;font-family:'Noto Sans Mono','Noto Sans TC';">!!!錯誤!!!<br />請重試！</h1>
 }
-else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) ) 
+else if( !string.IsNullOrEmpty( b ) ) 
 {
     <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
-        <ol id="lHistory">
-            @if( a.ToUpper().Split( '0' )[0] == "C" ) 
-                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                {
-                    <li>@his</li>
-                }
-            else if( a.ToUpper().Split( '0' )[0] == "X" ) 
-                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                {
-                    <li>@his</li>
-                }
-            else if( a.ToUpper().Split( '0' )[0] == "L" ) 
-                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                {
-                    <li>@his</li>
-                }
-            else if( a.ToUpper().Split( '0' )[0] == "J" ) 
-                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                {
-                    <li>@his</li>
-                }
-            else if( a.ToUpper().Split( '0' )[0] == "E" ) 
-                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                {
-                    <li>@his</li>
-                }
-        </ol>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
         {
             int ia = 1 ; 
@@ -939,11 +926,6 @@ else if( b != "" && b != null && !Regex.IsMatch( b , @"\s" ) )
             </div>
         }
     </div>
-}
-else if( b != "" && b != null ) 
-{
-    @foreach( var b in Regex.Split( b , @"\s" ) ) 
-    {}
 }
 else 
 {
