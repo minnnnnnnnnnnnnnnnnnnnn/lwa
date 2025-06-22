@@ -364,6 +364,7 @@ header a:focus
   bottom : 20px ; 
   right : 10px ; 
   cursor : pointer ; 
+  user-select : none ; 
 }
 .toTop:hover  
 {
