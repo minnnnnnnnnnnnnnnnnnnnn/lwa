@@ -62,7 +62,7 @@ td
 {
     .p:not( div[ahhhhaaaahaha] .p ) , .pq  
     {
-        width : 700px ; 
+        width : calc(21cm - .8in) ; 
         margin : 0 auto ; 
     }
     .p:not( div[ahhhhaaaahaha] .p ) ~ a.printNoDisplay 
