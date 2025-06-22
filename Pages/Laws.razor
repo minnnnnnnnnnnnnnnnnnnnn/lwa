@@ -43,7 +43,7 @@ else
     {
         @foreach( var l in lq ) 
         {
-            <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d">@l.LawName</a>
+            <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d"><span class="abandoned">@l.LawAbandonNote</span>@l.LawName</a>
         }
     }
     else 

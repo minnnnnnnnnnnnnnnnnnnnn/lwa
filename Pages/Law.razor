@@ -34,7 +34,7 @@
     <span>現在位置：</span>
     <ul>
         <li><a href="">首頁</a></li>
-        <li><a href="laws?c=@c&q=@b">法規查詢</a></li>
+        <li><a href="@( $"laws?q={b}&c={c}&l={e}&ab={f}" )">法規查詢</a></li>
         @if (laws != null && !string.IsNullOrEmpty( a ))
             @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
             {
