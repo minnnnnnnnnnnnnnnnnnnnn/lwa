@@ -1,13 +1,13 @@
 {
   "mainAssemblyName": "lwa",
   "resources": {
-    "hash": "sha256-zYn46o/G9t/Wx369y36UQmBj494u2b8AvA+5SgtLJ1Y=",
+    "hash": "sha256-WT63VUszftpMcbkcVMjNAaNfAMWE4N8QBdi2ebE4e84=",
     "fingerprinting": {
       "Azure.Core.92q6rqqhly.wasm": "Azure.Core.wasm",
       "Azure.Identity.b6ekoqlu3w.wasm": "Azure.Identity.wasm",
       "EntityFramework.uzzyt4r27v.wasm": "EntityFramework.wasm",
       "Humanizer.oqup3v7t3k.wasm": "Humanizer.wasm",
-      "Microsoft.AspNetCore.Components.jxwlhy8fwx.wasm": "Microsoft.AspNetCore.Components.wasm",
+      "Microsoft.AspNetCore.Components.rggbf1tffg.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.z9ousaivew.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.f1guaawl3i.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
       "Microsoft.AspNetCore.Razor.Language.xtef4vafxt.wasm": "Microsoft.AspNetCore.Razor.Language.wasm",
@@ -203,7 +203,7 @@
       "mscorlib.ucx6g0qqud.wasm": "mscorlib.wasm",
       "netstandard.xl04otckob.wasm": "netstandard.wasm",
       "System.Private.CoreLib.qa52lmei0e.wasm": "System.Private.CoreLib.wasm",
-      "lwa.at98ox11mj.wasm": "lwa.wasm",
+      "lwa.mloipk364t.wasm": "lwa.wasm",
       "Humanizer.resources.ywrwvesg23.wasm": "Humanizer.resources.wasm",
       "Humanizer.resources.08lwhm08x4.wasm": "Humanizer.resources.wasm",
       "Humanizer.resources.5zb07tir5k.wasm": "Humanizer.resources.wasm",
@@ -374,7 +374,7 @@
       "Azure.Identity.b6ekoqlu3w.wasm": "sha256-wxR1E0zJLWYxnckYUOXZsbZoUjCYCwgg3aYbYbCLaGo=",
       "EntityFramework.uzzyt4r27v.wasm": "sha256-uueQ0GZwJn0GayyzX8NkWQ7aKlhFBFJSQsPS/xLQj44=",
       "Humanizer.oqup3v7t3k.wasm": "sha256-4NbSboZzzP9nikRtXapUZNzOyITt7ht9TNqCIQHr5OE=",
-      "Microsoft.AspNetCore.Components.jxwlhy8fwx.wasm": "sha256-Ca3giM6xhgGh9aG6WQK3eDPlXKrlRXJbN6u2lL77MSQ=",
+      "Microsoft.AspNetCore.Components.rggbf1tffg.wasm": "sha256-5TTDvo2++GfYfAlehqljzYir8YlzNPcgZFh4D4C8eWA=",
       "Microsoft.AspNetCore.Components.Web.z9ousaivew.wasm": "sha256-mUV7IUmBcrfECYcyFP8MoMOY61Rs53GfAnw2tBLa1Qg=",
       "Microsoft.AspNetCore.Components.WebAssembly.f1guaawl3i.wasm": "sha256-TWFXspaFqKDxIL4ce5AMcPGB6JxQhprZSHAPeZFcTf4=",
       "Microsoft.AspNetCore.Razor.Language.xtef4vafxt.wasm": "sha256-1bhsc6uUIsElEgbuoDI8OLXAZQbnsNjO4N4rEr6iekk=",
@@ -568,7 +568,7 @@
       "System.qym59vuz4s.wasm": "sha256-gij/jdEMf1xzVOb2Lusq3HYuCxA3h50Raoupe/7Q4P4=",
       "mscorlib.ucx6g0qqud.wasm": "sha256-Xh5r/QOiGaA2dMLdbJAnGVLya/hUFo6Nk2ol789ig9Q=",
       "netstandard.xl04otckob.wasm": "sha256-67fb9/lGnp6lLYXdTuu74tLwpb5HBw89Oc/ZuHLrfP0=",
-      "lwa.at98ox11mj.wasm": "sha256-UpD0PxqDG2joXi1HnJUDi5JsUQ8OnYWQRsGqSwVdN/Q="
+      "lwa.mloipk364t.wasm": "sha256-9nlygHiWwxCM9pOem5kNCZIKzgHszdcK1o5FbeNGUU8="
     },
     "satelliteResources": {
       "af": {
