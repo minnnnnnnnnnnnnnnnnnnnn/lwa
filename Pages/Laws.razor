@@ -43,7 +43,7 @@ else
     {
         @foreach( var l in lq ) 
         {
-            <a class="lawresult" href="@l.LawURL">@l.LawName</a>
+            <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d">@l.LawName</a>
         }
     }
     else 
@@ -218,6 +218,12 @@ else
                 }
             }
             return false ; 
+        }
+        public string SearchResult( string a ) 
+        {
+            if( Contains( a , "&" ) ) 
+            {}
+            return "" ; 
         }
     }
     public class A 

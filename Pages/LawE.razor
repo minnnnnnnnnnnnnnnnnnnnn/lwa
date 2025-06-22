@@ -613,7 +613,7 @@ else
         }
     </div>
 }
-<a href="laws/law?a=@a&c=@c&q=@b" class="printNoDisplay">回上一頁</a>
+<a href="laws/law?a=@a&c=@c&q=@b&l=@d&ab=@e" class="printNoDisplay">回上一頁</a>
 
 @code {
     private LawRoot[]? laws;
@@ -663,7 +663,7 @@ else
     public List<L> lel = new List<L>();
     public string a;
     public int aa = -1 ; 
-    public string? b , c ; 
+    public string? b , c , d , e ; 
     private bool ifavalid = false ; 
     protected override void OnInitialized()
     {
@@ -680,6 +680,14 @@ else
         if (queryStrings.TryGetValue("c", out var ccc))
         {
             c = ccc;
+        }
+        if (queryStrings.TryGetValue("l", out var ddd))
+        {
+            d = ddd;
+        }
+        if (queryStrings.TryGetValue("ab", out var eee))
+        {
+            e = eee;
         }
         aa = Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }

@@ -61,7 +61,7 @@
 
 @if( !string.IsNullOrEmpty( a ) ) 
 {
-    <a href="laws/lawe?a=@a&c=@c&q=@b" class="printNoDisplay">簡讀版</a>
+    <a href="laws/lawe?a=@a&c=@c&q=@b&l=@e&ab=@f" class="printNoDisplay">簡讀版</a>
 }
 @if( laws == null && !string.IsNullOrEmpty( a ) ) 
 {
@@ -1782,7 +1782,7 @@ else
     </div>
 }
 
-<a href="@( string.IsNullOrEmpty( d ) ? $"laws?q={b}&c={c}" : ( Regex.IsMatch( d.ToUpper() , @"^([L]{1}[N]{1})" ) ? $"latest?no={d.ToUpper().Replace( "LN" , "" )}" : $"laws?q={b}&c={c}" ) )" class="printNoDisplay">回上一頁</a>
+<a href="@( string.IsNullOrEmpty( d ) ? $"laws?q={b}&c={c}&l={e}&ab={f}" : ( Regex.IsMatch( d.ToUpper() , @"^([L]{1}[N]{1})" ) ? $"latest?no={d.ToUpper().Replace( "LN" , "" )}" : $"laws?q={b}&c={c}" ) )" class="printNoDisplay">回上一頁</a>
 
 @code 
 {
@@ -1836,6 +1836,8 @@ else
     public string? c;
     public int aa = -1 ; 
     public string? d;
+    public string? e ; 
+    public string? f ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -1855,6 +1857,14 @@ else
         if (queryStrings.TryGetValue("f", out var ddd))
         {
             d = ddd;
+        }
+        if (queryStrings.TryGetValue("l", out var eee))
+        {
+            e = eee;
+        }
+        if (queryStrings.TryGetValue("ab", out var fff))
+        {
+            f = fff;
         }
         aa = ( a == "" || a == null ) ? -1 : Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }
