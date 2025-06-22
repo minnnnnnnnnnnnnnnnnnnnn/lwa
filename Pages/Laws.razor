@@ -30,20 +30,64 @@
     </p>
 </form>
 <select @onchange="Sort">
-    <option value=""></option>
-    <option value=""></option>
+    <option value="latest">最後異動日期（新 > 舊）</option>
+    <option value="oldest">最後異動日期（舊 > 新）</option>
+    <option value="AtoZ">筆劃（少 > 多）</option>
+    <option value="ZtoA">筆劃（多 > 少）</option>
 </select>
 @if (laws == null)
 {
-    <p><em>Loading...</em></p>
+    <p style="display:block;width:fit-content;margin:1rem auto;"><em>Loading...</em></p>
 }
 else 
 {
     @if( lq.Count != 0 ) 
     {
-        @foreach( var l in lq ) 
+        @foreach( var l in lq.OrderBy( l => l.LawAbandonNote ).ThenBy( l => l.LawURL ) ) 
         {
-            <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d"><span class="abandoned">@l.LawAbandonNote</span>@l.LawName</a>
+            <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d">
+                <div>
+                    <span class="abandoned">@l.LawAbandonNote</span>
+                    @if( l.SearchResult( b , true ).Contains( "\\" ) )
+                    {
+                        @foreach( var r in l.SearchResult( b , true ).Split( "\\" ) ) 
+                        {
+                            @if( b.Contains( r ) ) 
+                            {
+                                <span class="matched">@r</span>
+                            }
+                            else 
+                            {
+                                @r
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        @( l.SearchResult( b , true ) ) 
+                    }
+                </div>
+                <div class="preview">
+                    @if( l.SearchResult( b , false ).Contains( "\\" ) )
+                    {
+                        @foreach( var r in l.SearchResult( b , false ).Split( "\\" ) ) 
+                        {
+                            @if( b.Contains( r ) ) 
+                            {
+                                <span class="matched">@r</span>
+                            }
+                            else 
+                            {
+                                @r
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        @( l.SearchResult( b , false ) ) 
+                    }
+                </div>
+            </a>
         }
     }
     else 
@@ -117,7 +161,7 @@ else
         }
     }
     
-    public void Sort() 
+    public void Sort( ChangeEventArgs a ) 
     {}
 
     public class LawRoot
@@ -180,7 +224,7 @@ else
         }
         public bool Contains( string a , string b ) 
         {
-            if( b == "a" ) 
+            if( b == "art" ) 
             {
                 foreach( var art in LawArticles ) 
                 {
@@ -200,7 +244,7 @@ else
                     }
                 }
             }
-            else if( b == "&" ) 
+            else if( b == "aa" ) 
             {
                 foreach( var art in LawArticles ) 
                 {
@@ -217,13 +261,111 @@ else
                     }
                 }
             }
+            else if( a == "nme" ) 
+            {
+                if( LawName.ToUpper().Contains( a ) ) 
+                {
+                    return true ; 
+                }
+            }
+            else if( a == "his" ) 
+            {
+                if( LawHistories.ToUpper().Contains( a ) ) 
+                {
+                    return true ; 
+                }
+            }
+            else if( a == "fwd" ) 
+            {
+                if( string.IsNullOrEmpty( LawForeword ) ? false : LawForeword.ToUpper().Contains( a ) ) 
+                {
+                    return true ; 
+                }
+            }
+            else if( a == "eng" ) 
+            {
+                if( LawHasEngVersion == "Y" ) 
+                {
+                    if( EngLawName.ToUpper().Contains( a ) ) 
+                    {
+                        return true ; 
+                    }
+                }
+            }
             return false ; 
         }
-        public string SearchResult( string a ) 
+        public string SearchResult( string aa , bool b ) 
         {
-            if( Contains( a , "&" ) ) 
-            {}
-            return "" ; 
+            string aaa = "" ; 
+            if( b ) 
+            {
+                if( string.IsNullOrEmpty( aaa ) ) 
+                {
+                    aaa = LawName ; 
+                }
+                else 
+                {
+                    foreach( var a in Regex.Split( aa , @"\s" ) ) 
+                    {
+                        if( Contains( a , "nme" ) ) 
+                        {
+                            for( int i = 0 ; i < LawName.Split( a ).Length ; i ++ ) 
+                            {
+                                if( i != ( LawName.Split( a ).Length - 1 ) ) 
+                                {
+                                    aaa += LawName.Split( a )[i] + "\\" ; 
+                                }
+                                else 
+                                {
+                                    aaa += LawName.Split( a )[i] ; 
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else 
+            {
+                if( string.IsNullOrEmpty( aaa ) ) 
+                {
+                    if( !string.IsNullOrEmpty( LawForeword ) ) 
+                    {
+                        aaa = Regex.Replace( LawForeword , @"\s" , "" ) ; 
+                    }
+                    else 
+                    {
+                        foreach( var art in LawArticles ) 
+                        {
+                            if( art.ArticleType == "C" ) 
+                            {
+                                aaa += art.ArticleContent ; 
+                            }
+                            else 
+                            {
+                                aaa = art.ArticleContent ; 
+                                break ; 
+                            }
+                        }
+                    }        
+                }
+                else 
+                {
+                    foreach( var a in Regex.Split( aa , @"\s" ) ) 
+                    {
+                        if( Contains( a , "his" ) ) 
+                        {
+                            
+                        }
+                        else if( Contains( a , "fwd" ) ) 
+                        {}
+                        else if( Contains( a , "att" ) ) 
+                        {}
+                        else if( Contains( a , "art" ) ) 
+                        {}
+                    }
+                }
+            }
+            return aaa ; 
         }
     }
     public class A 

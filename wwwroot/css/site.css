@@ -33,6 +33,10 @@ html
   color : var( --selection-color ) ; 
   background : var( --selection-bg ) ; 
 }
+::placeholder 
+{
+  font-family : "Noto Sans" , "Noto Sans TC" , "Noto Sans JP" , "Noto Sans SC" , sans-serif ; 
+}
 * 
 {
   margin : 0 ; 
@@ -285,6 +289,48 @@ header a:focus
 .main 
 {
   margin : 1rem 3rem ; 
+}
+@media ( min-width : 768px ) 
+{
+  .lawresult 
+  {
+    width : calc(21cm - .8in) ; 
+    margin : 0 auto ; 
+  }
+}
+.lawresult > div:not( .preview ) 
+{
+  color : #000 ; 
+  background : #0002 ; 
+  border-top-right-radius : .5rem ; 
+  border-top-left-radius : .5rem ; 
+  padding-left : .25rem ; 
+}
+.preview 
+{
+  font-family : "Noto Sans" , "Noto Sans TC" , "Noto Sans JP" , "Noto Sans SC" , sans-serif ; 
+  font-size : small ; 
+  background : #0001 ; 
+  color : #333a ; 
+  text-decoration : none ; 
+  border-bottom-right-radius : .5rem ; 
+  border-bottom-left-radius : .5rem ; 
+  margin-bottom : .5rem ; 
+  padding : .5rem .8rem ; 
+}
+.lawresult:hover > div 
+{
+  color : #c03 ; 
+}
+.lq 
+{
+  height : fit-content ; 
+  width : fit-content ; 
+}
+.lq , .lq ~ select 
+{
+  display : block ; 
+  margin : 1rem auto ; 
 }
 .matched 
 {
