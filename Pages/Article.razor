@@ -226,11 +226,11 @@ else
     }
     @if( c == "e" ) 
     {
-        <a class="printNoDisplay" href="laws/lawe?a=@a&q=@d&c=@e">回上一頁</a>
+        <a class="printNoDisplay" href="laws/lawe?a=@a&q=@d&c=@e&f=@f&l=@g&ab=@h">回上一頁</a>
     }
     else 
     {
-        <a class="printNoDisplay" href="laws/law?a=@a&q=@d&c=@e">回上一頁</a>
+        <a class="printNoDisplay" href="laws/law?a=@a&q=@d&c=@e&f=@f&l=@g&ab=@h">回上一頁</a>
     }
 }
 
@@ -277,6 +277,9 @@ else
     private string? c ; 
     private string? d;
     private string? e ; 
+    private string? f ; 
+    private string? g ; 
+    private string? h ; 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -300,6 +303,18 @@ else
         if (queryStrings.TryGetValue("c", out var eee))
         {
             e = eee ; 
+        }
+        if (queryStrings.TryGetValue("f", out var fff))
+        {
+            f = fff ; 
+        }
+        if (queryStrings.TryGetValue("l", out var ggg))
+        {
+            g = ggg ; 
+        }
+        if (queryStrings.TryGetValue("ab", out var hhh))
+        {
+            h = hhh ; 
         }
         aa = ( a == "" || a == null ) ? -1 : Int32.Parse( Regex.Replace( a.ToUpper() , @"[CXLJE]"  , "" ) ) - 1 ; 
     }

@@ -6,6 +6,41 @@
     {
         zoom: @z ; 
     }
+    #lqc 
+    {
+        color : #346247 ; 
+        background : #ff9ede ; 
+        border : 0 ; 
+        border-radius : 8.5px ; 
+    }
+    label[for="lqc"] 
+    {
+        display : none ; 
+        color : #fffad0 ; 
+    }
+    #lql , label[for="lql"] 
+    {
+        color : #ffc8d2 ; 
+        display : none ; 
+    }
+    #lql 
+    {
+        background : #613b9a ; 
+        border : 0 ; 
+        border-radius : 8.5px ; 
+    }
+    label[for="lql"] , label[for="lqc"] 
+    {
+        font-size : .8rem ; 
+        flex-shrink : 0 ; 
+    }
+    @@media ( min-width : 768px ) 
+    {
+        #lql , label[for="lql"] , label[for="lqc"] 
+        {
+            display : inline-block ; 
+        }
+    }
 </style>
 <div class="@dark">
     <header>
@@ -31,7 +66,8 @@
         <div class="top">
             <a tabindex="4" class=""href=""><img src="i/icon/logo.png" alt="首頁" /></a>
             <form action="laws" method="get">
-                <select tabindex="5" name="c" id="">
+                <label for="lqc">類別：</label>
+                <select tabindex="5" name="c" id="lqc">
                     <option value="">不限</option>
                     <option value="c">中央法規</option>
                     <option value="ex">行政法規</option>
@@ -39,12 +75,13 @@
                     <option value="j">司法法規</option>
                     <option value="el">選舉法規</option>
                 </select>
-                @* <select name="level" id="">
+                <label for="lql">位階：</label>
+                <select name="l" id="lql">
                     <option value="">不限</option>
                     <option value="章程">章程</option>
                     <option value="法律">法律</option>
                     <option value="命令">命令</option>
-                </select> *@
+                </select>
                 <p>
                     <input tabindex="6" type="search" placeholder="輸入關鍵字以搜尋" name="q">
                     <input tabindex="7" type="submit" style="background-image:url(i/icon/search_w.svg);width:24px;height:24px;background-color:#0000;border:0;cursor:pointer;" value="" alt="搜尋！" />

@@ -3719,7 +3719,7 @@
                 "EngLawName": "",
                 "LawAttachements": [
                     {
-                        "FileName": "會議紀錄格式",
+                        "FileName": "附件一",
                         "FileURL": ""
                     }
                 ],
@@ -14649,7 +14649,11 @@
                 "EngLawName": "",
                 "LawAttachements": [
                     {
-                        "FileName": "選舉報告書",
+                        "FileName": "選舉報告書.pdf",
+                        "FileURL": "https://drive.google.com/file/d/1OsWHzHFAI8WZyFQA8nE36cv219tddl_S/view?usp=sharing"
+                    }, 
+                    {
+                        "FileName": "選舉報告書.docx",
                         "FileURL": "https://docs.google.com/document/d/1Y7coI_NKYJRRZIrIdiqxjAR4hloNfFFJ/edit?usp=sharing&ouid=100682093598870809161&rtpof=true&sd=true"
                     }
                 ],
