@@ -190,7 +190,7 @@ else
         public string? LawAbandonNote { get; set; }
         public string LawHasEngVersion { get; set; }
         public string? EngLawName { get; set; }
-        public Attachements[]? LawAttachements { get; set; }
+        public Attachments[]? LawAttachments { get; set; }
         public string LawHistories { get; set; }
         public string? LawForeword { get; set; }
         public A[] LawArticles { get; set; }
@@ -222,7 +222,7 @@ else
                     return true ; 
                 }
             }
-            foreach( var att in LawAttachements ) 
+            foreach( var att in LawAttachments ) 
             {
                 if( att.FileName.ToUpper().Contains( a ) ) 
                 {
@@ -245,7 +245,7 @@ else
             }
             else if( b == "att" ) 
             {
-                foreach( var att in LawAttachements ) 
+                foreach( var att in LawAttachments ) 
                 {
                     if( att.FileName.ToUpper().Contains( a ) ) 
                     {
@@ -262,7 +262,7 @@ else
                         return true ; 
                     }
                 }
-                foreach( var att in LawAttachements ) 
+                foreach( var att in LawAttachments ) 
                 {
                     if( att.FileName.ToUpper().Contains( a ) ) 
                     {
@@ -381,7 +381,7 @@ else
                         }
                         if( Contains( a , "att" ) ) 
                         {
-                            foreach( var att in LawAttachements.Where( l => l.Contains( a )).ToArray() ) 
+                            foreach( var att in LawAttachments.Where( l => l.Contains( a )).ToArray() ) 
                             {
                                 for( int i = 0 ; ( i + 1 ) < att.FileURL.Split( a ).Length ; i ++ ) 
                                 {
@@ -467,7 +467,7 @@ else
             return false ; 
         }
     }
-    public class Attachements 
+    public class Attachments 
     {
         public string FileName { get; set; }
         public string FileURL { get; set; }

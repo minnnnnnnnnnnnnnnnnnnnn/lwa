@@ -264,3 +264,19 @@ div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ah
         display : none !important ; 
     }
 }
+
+
+.printFooter 
+{
+    display : none ; 
+}
+@media print 
+{
+    .printFooter 
+    {
+        display : block ; 
+        position : fixed ; 
+        left : -.2in ; 
+        bottom : -.3in ; 
+    }
+}
