@@ -1,9 +1,12 @@
 #lawHeader 
 {
     background : #0001 ; 
+    margin-top : 1rem ; 
     padding-top : 1rem ; 
     padding-left : .15rem ; 
     font-size : 1.15rem ; 
+    border-top-right-radius : 8px ; 
+    border-top-left-radius : 8px ; 
 }
 #lawHeader li 
 {
@@ -28,4 +31,10 @@
 {
     display : list-item ; 
     list-style : disc ; 
+}
+#mainC 
+{
+    background : #00000005 ; 
+    border-bottom-right-radius : 8px ; 
+    border-bottom-left-radius : 8px ; 
 }
