@@ -1,8 +1,8 @@
 :root 
 {
-    --header-bg : #057b7b ; 
-    --header-top-bg : #135858 ; 
-    --header-hr : #5ca9a9 ; 
+    --header-bg : #033c3ce8 ; 
+    --header-top-bg : #000 ; 
+    --header-hr : #418c8c ; 
     --header-a : #fff ; 
     --header-a-hover : #fc0 ; 
     --header-a-focus : #fc0 ; 
