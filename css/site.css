@@ -18,7 +18,7 @@ html
   font-size : 14px ; 
   position : relative ; 
   min-height : 100% ; 
-  font-family : "Noto Sans" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+  font-family : "Noto Sans" , "Sonti TC" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
   word-break : break-all ; 
 }
 @media ( min-width : 768px ) 
@@ -71,7 +71,7 @@ a:focus
 header 
 {
   background : var(--header-bg) ; 
-  font-family : "Noto Serif" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+  font-family : "Noto Sans" , "Songti TC" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
 }
 header ::selection 
 {
@@ -397,7 +397,7 @@ footer
 {
   margin : 1rem ; 
   margin-bottom : 0 ; 
-  font-family : "Noto Serif" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+  font-family : "Noto Sans" , "Songti TC" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
 }
 footer ::selection 
 {
