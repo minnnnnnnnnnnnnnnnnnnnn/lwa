@@ -305,11 +305,13 @@ header a:focus
   border-top-right-radius : .5rem ; 
   border-top-left-radius : .5rem ; 
   padding-left : .25rem ; 
+  font-weight : 600 ; 
+  font-size : 1.15rem ; 
 }
 .preview 
 {
   font-family : "Noto Sans" , "Noto Sans TC" , "Noto Sans JP" , "Noto Sans SC" , sans-serif ; 
-  font-size : small ; 
+  font-size : .8rem ; 
   background : #0001 ; 
   color : #333a ; 
   text-decoration : none ; 
@@ -343,6 +345,10 @@ header a:focus
 {
   color : #fc0 ; 
   background : #0009 ; 
+}
+.matched::selection 
+{
+  background : #f00 ; 
 }
 
 /* toTop */

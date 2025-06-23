@@ -113,13 +113,21 @@ else if( !string.IsNullOrEmpty( b ) )
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -309,13 +317,21 @@ else if( !string.IsNullOrEmpty( b ) )
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -501,13 +517,21 @@ else if( !string.IsNullOrEmpty( b ) )
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -693,13 +717,21 @@ else if( !string.IsNullOrEmpty( b ) )
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -885,13 +917,21 @@ else if( !string.IsNullOrEmpty( b ) )
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -1084,13 +1124,21 @@ else
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lc[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -1280,13 +1328,21 @@ else
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lex[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -1472,13 +1528,21 @@ else
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in ll[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -1664,13 +1728,21 @@ else
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lj[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>
@@ -1856,13 +1928,21 @@ else
                             </span>
                         </li>
                     }
+                    <li>
+                        <span>立法沿革：</span>
+                        <span>
+                            <ol id="lHistory" class="legislativeHistory">
+                                @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
+                                {
+                                    <li>
+                                        <span>@( his.Split( "." )[0] + "." )</span>
+                                        <span>@( his.Split( "." )[1] )</span>
+                                    </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
-                <ol id="lHistory" class="legislativeHistory">
-                    @foreach (var his in lel[aa].LawHistories.Split("\r\n"))
-                    {
-                        <li>@his</li>
-                    }
-                </ol>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
                     <p>

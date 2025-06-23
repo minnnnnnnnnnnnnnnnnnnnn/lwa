@@ -57,9 +57,9 @@ else
             <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d">
                 <div>
                     <span class="abandoned">@l.LawAbandonNote</span>
-                    @if( l.SearchResult( b , true ).Contains( "\\" ) )
+                    @if( l.SearchResult( b , true ).Contains( "<\\>" ) )
                     {
-                        @foreach( var r in l.SearchResult( b , true ).Split( "\\" ) ) 
+                        @foreach( var r in l.SearchResult( b , true ).Split( "<\\>" ) ) 
                         {
                             @if( b.Contains( r ) ) 
                             {
@@ -77,9 +77,9 @@ else
                     }
                 </div>
                 <div class="preview">
-                    @if( l.SearchResult( b , false ).Contains( "\\" ) )
+                    @if( l.SearchResult( b , false ).Contains( "<\\>" ) )
                     {
-                        @foreach( var r in l.SearchResult( b , false ).Split( "\\" ) ) 
+                        @foreach( var r in l.SearchResult( b , false ).Split( "<\\>" ) ) 
                         {
                             @if( b.Contains( r ) ) 
                             {
@@ -308,7 +308,7 @@ else
             string aaa = "" ; 
             if( b ) 
             {
-                if( string.IsNullOrEmpty( aaa ) ) 
+                if( string.IsNullOrEmpty( aa ) ) 
                 {
                     aaa = LawName ; 
                 }
@@ -322,7 +322,7 @@ else
                             {
                                 if( i != ( LawName.Split( a ).Length - 1 ) ) 
                                 {
-                                    aaa += LawName.Split( a )[i] + "\\" ; 
+                                    aaa += LawName.Split( a )[i] + "<\\>" + a + "<\\>" ; 
                                 }
                                 else 
                                 {
@@ -331,11 +331,15 @@ else
                             }
                         }
                     }
+                    if( string.IsNullOrEmpty( aaa ) ) 
+                    {
+                        aaa = LawName ; 
+                    }
                 }
             }
             else 
             {
-                if( string.IsNullOrEmpty( aaa ) ) 
+                if( string.IsNullOrEmpty( aa ) ) 
                 {
                     if( !string.IsNullOrEmpty( LawForeword ) ) 
                     {
@@ -363,14 +367,99 @@ else
                     {
                         if( Contains( a , "his" ) ) 
                         {
-                            
+                            for( int i = 0 ; i < LawHistories.Split( a ).Length ; i ++ ) 
+                            {
+                                if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
+                                {
+                                    aaa += LawHistories.Split( a )[i] + "<\\>" + a + "<\\>" ; 
+                                }
+                                else 
+                                {
+                                    aaa += LawHistories.Split( a )[i] ; 
+                                }
+                            }
                         }
                         else if( Contains( a , "fwd" ) ) 
-                        {}
+                        {
+                            for( int i = 0 ; i < LawForeword.Split( a ).Length ; i ++ ) 
+                            {
+                                if( i != ( LawForeword.Split( a ).Length - 1 ) ) 
+                                {
+                                    aaa += LawForeword.Split( a )[i] + "<\\>" + a + "<\\>" ; 
+                                }
+                                else 
+                                {
+                                    aaa += LawForeword.Split( a )[i] ; 
+                                }
+                            }
+                        }
                         else if( Contains( a , "att" ) ) 
-                        {}
+                        {
+                            foreach( var att in LawAttachements.Where( l => l.Contains( a )).ToArray() ) 
+                            {
+                                for( int i = 0 ; i < att.FileURL.Split( a ).Length ; i ++ ) 
+                                {
+                                    if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
+                                    {
+                                        aaa += att.FileURL.Split( a )[i] + "<\\>" + a + "<\\>" ; 
+                                    }
+                                    else 
+                                    {
+                                        aaa += att.FileURL.Split( a )[i] ; 
+                                    }
+                                }
+                            }
+                        }
                         else if( Contains( a , "art" ) ) 
-                        {}
+                        {
+                            foreach( var art in LawArticles.Where( l => l.Contains( a )).ToArray() ) 
+                            {
+                                for( int i = 0 ; i < art.ArticleNo.Split( a ).Length ; i ++ ) 
+                                {
+                                    if( i != ( ( ( Regex.IsMatch( art.ArticleNo , @"【(?!=條)" ) ) ? Regex.Split( art.ArticleNo , @"【(?!=條)" )[1].Replace( "】" , "" ).Split( a ).Length : art.ArticleNo.Split( a ).Length ) - 1 ) ) 
+                                    {
+                                        aaa += art.ArticleNo.Split( a )[i] + "<\\>" + a + "<\\>" ; 
+                                    }
+                                    else 
+                                    {
+                                        aaa += art.ArticleNo.Split( a )[i] ; 
+                                    }
+                                }
+                                for( int i = 0 ; i < art.ArticleContent.Split( a ).Length ; i ++ ) 
+                                {
+                                    if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
+                                    {
+                                        aaa += art.ArticleContent.Split( a )[i] + "<\\>" + a + "<\\>" ; 
+                                    }
+                                    else 
+                                    {
+                                        aaa += art.ArticleContent.Split( a )[i] ; 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if( string.IsNullOrEmpty( aaa ) ) 
+                    {
+                        if( !string.IsNullOrEmpty( LawForeword ) ) 
+                        {
+                            aaa = Regex.Replace( LawForeword , @"\s" , "" ) ; 
+                        }
+                        else 
+                        {
+                            foreach( var art in LawArticles ) 
+                            {
+                                if( art.ArticleType == "C" ) 
+                                {
+                                    aaa += art.ArticleContent ; 
+                                }
+                                else 
+                                {
+                                    aaa = art.ArticleContent ; 
+                                    break ; 
+                                }
+                            }
+                        }        
                     }
                 }
             }
@@ -382,10 +471,54 @@ else
         public string ArticleType { get; set; }
         public string? ArticleNo { get; set; }
         public string ArticleContent { get; set; }
+        public bool Contains( string a ) 
+        {
+            if( Regex.IsMatch( a , @"([(].+[)])|[+\-&]" ) ) 
+            {}
+            else if( Regex.IsMatch( a , @"\s" ) ) 
+            {
+                foreach( var aa in Regex.Split( a , @"\s" ) ) 
+                {
+                    if( ( !string.IsNullOrEmpty( ArticleNo ) && ArticleNo.Contains( "【" ) ) ? ArticleNo.Split( "【" )[1].Replace( "】" , "" ).ToUpper().Contains( a ) : false ) 
+                    {
+                        return true ; 
+                    }
+                    else if( ArticleContent.ToUpper().Contains( a ) ) 
+                    {
+                        return true ; 
+                    }
+                }
+            }
+            else 
+            {
+                return ( ArticleContent.ToUpper().Contains( a ) || ( ( !string.IsNullOrEmpty( ArticleNo ) && ArticleNo.Contains( "【" ) ) ? ArticleNo.Split( "【" )[1].Replace( "】" , "" ).ToUpper().Contains( a ) : false ) ) ; 
+            }
+            return false ; 
+        }
     }
     public class Attachements 
     {
         public string FileName { get; set; }
         public string FileURL { get; set; }
+        public bool Contains( string a ) 
+        {
+            if( Regex.IsMatch( a , @"([(].+[)])|[+\-&]" ) ) 
+            {}
+            else if( Regex.IsMatch( a , @"\s" ) ) 
+            {
+                foreach( var aa in Regex.Split( a , @"\s" ) ) 
+                {
+                    if( FileName.ToUpper().Contains( a ) ) 
+                    {
+                        return true ; 
+                    }
+                }
+            }
+            else 
+            {
+                return FileName.Contains( a ) ; 
+            }
+            return false ; 
+        }
     }
 }

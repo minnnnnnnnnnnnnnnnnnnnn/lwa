@@ -38,3 +38,21 @@
     border-bottom-right-radius : 8px ; 
     border-bottom-left-radius : 8px ; 
 }
+#lawHeader .legislativeHistory 
+{
+    text-align : left ; 
+    font-size : 1.15rem ; 
+}
+#lawHeader .legislativeHistory::before 
+{
+    content : '' ; 
+}
+#lawHeader .legislativeHistory li 
+{
+    display : flex !important ; 
+}
+#lawHeader .legislativeHistory li span:first-child 
+{
+    flex-shrink : 0 ; 
+    width : fit-content ; 
+}
