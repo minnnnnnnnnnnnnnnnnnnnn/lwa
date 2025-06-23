@@ -11,6 +11,15 @@
 </div>
 <PageTitle>法規查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 <form action="laws" method="get" class="lq">
+    <label for="lqc">類別：</label>
+    <select name="c" id="c">
+        <option value="">不限</option>
+        <option value="c">中央法規</option>
+        <option value="ex">行政法規</option>
+        <option value="l">立法法規</option>
+        <option value="j">司法法規</option>
+        <option value="el">選舉法規</option>
+    </select>
     <label for="ab">狀態：</label>
     <select name="ab" id="ab">
         <option value="">不限</option>
@@ -261,28 +270,28 @@ else
                     }
                 }
             }
-            else if( a == "nme" ) 
+            else if( b == "nme" ) 
             {
                 if( LawName.ToUpper().Contains( a ) ) 
                 {
                     return true ; 
                 }
             }
-            else if( a == "his" ) 
+            else if( b == "his" ) 
             {
                 if( LawHistories.ToUpper().Contains( a ) ) 
                 {
                     return true ; 
                 }
             }
-            else if( a == "fwd" ) 
+            else if( b == "fwd" ) 
             {
                 if( string.IsNullOrEmpty( LawForeword ) ? false : LawForeword.ToUpper().Contains( a ) ) 
                 {
                     return true ; 
                 }
             }
-            else if( a == "eng" ) 
+            else if( b == "eng" ) 
             {
                 if( LawHasEngVersion == "Y" ) 
                 {
