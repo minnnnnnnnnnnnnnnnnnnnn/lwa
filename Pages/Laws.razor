@@ -11,7 +11,7 @@
 </div>
 <PageTitle>法規查詢 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
 <form action="laws" method="get" class="lq">
-    <label for="lqc">類別：</label>
+    <label for="c">類別：</label>
     <select name="c" id="c">
         <option value="">不限</option>
         <option value="c">中央法規</option>
@@ -343,7 +343,7 @@ else
                 {
                     if( !string.IsNullOrEmpty( LawForeword ) ) 
                     {
-                        aaa = Regex.Replace( LawForeword , @"\s" , "" ) ; 
+                        aaa = "前言：" + Regex.Replace( LawForeword , @"\s" , "" ) ; 
                     }
                     else 
                     {
@@ -351,11 +351,11 @@ else
                         {
                             if( art.ArticleType == "C" ) 
                             {
-                                aaa += art.ArticleContent ; 
+                                aaa += Regex.Replace( art.ArticleContent , @"\s" , "" ) ; 
                             }
                             else 
                             {
-                                aaa = art.ArticleContent ; 
+                                aaa += art.ArticleNo + Regex.Replace( art.ArticleContent , @"\s" , "" ) + "…" ; 
                                 break ; 
                             }
                         }
@@ -367,73 +367,44 @@ else
                     {
                         if( Contains( a , "his" ) ) 
                         {
-                            for( int i = 0 ; i < LawHistories.Split( a ).Length ; i ++ ) 
+                            for( int i = 0 ; ( i + 1 ) < LawHistories.Split( a ).Length ; i ++ ) 
                             {
-                                if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
-                                {
-                                    aaa += LawHistories.Split( a )[i] + "<\\>" + a + "<\\>" ; 
-                                }
-                                else 
-                                {
-                                    aaa += LawHistories.Split( a )[i] ; 
-                                }
+                                aaa += LawHistories.Split( a )[i] + "<\\>" + a + "<\\>" + LawHistories.Split( a )[ i + 1 ] + "…" ; 
                             }
                         }
-                        else if( Contains( a , "fwd" ) ) 
+                        if( Contains( a , "fwd" ) ) 
                         {
-                            for( int i = 0 ; i < LawForeword.Split( a ).Length ; i ++ ) 
+                            for( int i = 0 ; ( i + 1 ) < LawForeword.Split( a ).Length ; i ++ ) 
                             {
-                                if( i != ( LawForeword.Split( a ).Length - 1 ) ) 
-                                {
-                                    aaa += LawForeword.Split( a )[i] + "<\\>" + a + "<\\>" ; 
-                                }
-                                else 
-                                {
-                                    aaa += LawForeword.Split( a )[i] ; 
-                                }
+                                aaa += LawForeword.Split( a )[i] + "<\\>" + a + "<\\>" + LawForeword.Split( a )[ i + 1 ] + "…" ; 
                             }
                         }
-                        else if( Contains( a , "att" ) ) 
+                        if( Contains( a , "att" ) ) 
                         {
                             foreach( var att in LawAttachements.Where( l => l.Contains( a )).ToArray() ) 
                             {
-                                for( int i = 0 ; i < att.FileURL.Split( a ).Length ; i ++ ) 
+                                for( int i = 0 ; ( i + 1 ) < att.FileURL.Split( a ).Length ; i ++ ) 
                                 {
-                                    if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
-                                    {
-                                        aaa += att.FileURL.Split( a )[i] + "<\\>" + a + "<\\>" ; 
-                                    }
-                                    else 
-                                    {
-                                        aaa += att.FileURL.Split( a )[i] ; 
-                                    }
+                                    aaa += att.FileURL.Split( a )[i] + "<\\>" + a + "<\\>" + att.FileURL.Split( a )[ i + 1 ] + "…" ; 
                                 }
                             }
                         }
-                        else if( Contains( a , "art" ) ) 
+                        if( Contains( a , "art" ) ) 
                         {
-                            foreach( var art in LawArticles.Where( l => l.Contains( a )).ToArray() ) 
+                            foreach( var art in LawArticles.Where( l => l.Contains( a ) ).ToArray() ) 
                             {
-                                for( int i = 0 ; i < art.ArticleNo.Split( a ).Length ; i ++ ) 
+                                if( art.ArticleNo.Contains( a ) ) 
                                 {
-                                    if( i != ( ( ( Regex.IsMatch( art.ArticleNo , @"【(?!=條)" ) ) ? Regex.Split( art.ArticleNo , @"【(?!=條)" )[1].Replace( "】" , "" ).Split( a ).Length : art.ArticleNo.Split( a ).Length ) - 1 ) ) 
+                                    for( int i = 0 ; ( i + 1 ) < art.ArticleNo.Split( a ).Length ; i ++ ) 
                                     {
-                                        aaa += art.ArticleNo.Split( a )[i] + "<\\>" + a + "<\\>" ; 
-                                    }
-                                    else 
-                                    {
-                                        aaa += art.ArticleNo.Split( a )[i] ; 
+                                        aaa += art.ArticleNo.Split( a )[i] + "<\\>" + a + "<\\>" + art.ArticleNo.Split( a )[ i + 1 ] + "…" ; 
                                     }
                                 }
-                                for( int i = 0 ; i < art.ArticleContent.Split( a ).Length ; i ++ ) 
+                                if( art.ArticleNo.Contains( a ) ) 
                                 {
-                                    if( i != ( LawHistories.Split( a ).Length - 1 ) ) 
+                                    for( int i = 0 ; ( i + 1 ) < art.ArticleContent.Split( a ).Length ; i ++ ) 
                                     {
-                                        aaa += art.ArticleContent.Split( a )[i] + "<\\>" + a + "<\\>" ; 
-                                    }
-                                    else 
-                                    {
-                                        aaa += art.ArticleContent.Split( a )[i] ; 
+                                        aaa += art.ArticleContent.Split( a )[i] + "<\\>" + a + "<\\>" + art.ArticleContent.Split( a )[ i + 1 ] + "…" ; 
                                     }
                                 }
                             }
@@ -443,7 +414,7 @@ else
                     {
                         if( !string.IsNullOrEmpty( LawForeword ) ) 
                         {
-                            aaa = Regex.Replace( LawForeword , @"\s" , "" ) ; 
+                            aaa = "前言：" + Regex.Replace( LawForeword , @"\s" , "" ) ; 
                         }
                         else 
                         {
@@ -451,11 +422,11 @@ else
                             {
                                 if( art.ArticleType == "C" ) 
                                 {
-                                    aaa += art.ArticleContent ; 
+                                    aaa += Regex.Replace( art.ArticleContent , @"\s" , "" ) ; 
                                 }
                                 else 
                                 {
-                                    aaa = art.ArticleContent ; 
+                                    aaa += Regex.Replace( art.ArticleContent , @"\s" , "" ) + "…" ; 
                                     break ; 
                                 }
                             }
