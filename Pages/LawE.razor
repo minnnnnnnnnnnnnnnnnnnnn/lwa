@@ -1547,6 +1547,18 @@ else
         public string ArticleType { get; set; }
         public string? ArticleNo { get; set; }
         public string ArticleContent { get; set; }
+        public string ShowNum() 
+        {
+            int i = 0 ; 
+            foreach( var a in ArticleContent.Split( "\r\n" ) ) 
+            {
+                if( !Regex.IsMatch( a , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E|（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）|（[1-9]{1}[0-9]+）|（[1-9]{1}）|（[１-９]{1}[０-９]+）|（[１-９]{1}）|[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" ) ) 
+                {
+                    i ++ ; 
+                }
+            }
+            return i > 1 ? "showNum" : "" ; 
+        }
     }
     public class Attachements
     {

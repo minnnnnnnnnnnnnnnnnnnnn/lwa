@@ -61,7 +61,7 @@
         laws = await Http.GetFromJsonAsync<LawRoot[]>("json/laws.json");
         if( laws != null ) 
         {
-            l = laws[0].Laws.Where( l => string.IsNullOrEmpty( a ) ? false : ( a.ToUpper() == "EL" ? l.LawCategory.Contains( "選舉法規" ) : ( a.ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( a.ToUpper() == "EX" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( a.ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( a.ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : false  ) ) ) ) ) ).ToArray()[aa] ; 
+            l = laws[0].Laws.Where( l => string.IsNullOrEmpty( a ) ? false : ( Regex.Replace( a.ToUpper() , @"[^CXLJE]"  , "" ).ToUpper() == "E" ? l.LawCategory.Contains( "選舉法規" ) : ( Regex.Replace( a.ToUpper() , @"[^CXLJE]"  , "" ).ToUpper() == "C" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "中央法規" ) ) : ( Regex.Replace( a.ToUpper() , @"[^CXLJE]"  , "" ).ToUpper() == "X" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "行政法規" ) ) : ( Regex.Replace( a.ToUpper() , @"[^CXLJE]"  , "" ).ToUpper() == "L" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "立法法規" ) ) : ( Regex.Replace( a.ToUpper() , @"[^CXLJE]"  , "" ).ToUpper() == "J" ? ( !l.LawCategory.Contains( "選舉法規" ) && l.LawCategory.Contains( "司法法規" ) ) : false  ) ) ) ) ) ).ToArray()[aa] ; 
         }
     }
 

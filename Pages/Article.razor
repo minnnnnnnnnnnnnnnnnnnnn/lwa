@@ -142,7 +142,7 @@ else
                         <span>@art.ArticleNo</span>
                     }
                 </h6>
-                <article class="@showNum[b]">
+                <article class="@art.ShowNum()">
                     @foreach( var p in art.ArticleContent.Split( "\r\n" ) ) 
                     {
                         @if( Regex.IsMatch( p , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、)" ) ) 
@@ -258,7 +258,6 @@ else
     private string[]? liof ;
     private int aCount;
     private int[] pCount;
-    private string[]? showNum;
     private int ic = 0;
     private int iex = 0;
     private int il = 0;
@@ -413,7 +412,6 @@ else
                 art = artarray[b] ; 
             }
             pCount = new int[aCount] ; 
-            showNum = new string[aCount] ; 
             int ii = 0 ; 
             if( a.ToUpper()[0] == 'C' ) 
             {
@@ -1150,10 +1148,6 @@ else
                     }
                 }
             }
-            for( int pc = 0 ; pc < aCount ; pc ++ ) 
-            {
-                showNum[pc] = pCount[pc] > 1 ? "showNum" : null ; 
-            }
         }
     }
     
@@ -1205,6 +1199,18 @@ else
         public Cases[]? Cases { get; set; } 
         public Rel[]? Rel { get; set; } 
         public Ref[]? Ref { get; set; } 
+        public string ShowNum() 
+        {
+            int i = 0 ; 
+            foreach( var a in ArticleContent.Split( "\r\n" ) ) 
+            {
+                if( !Regex.IsMatch( a , @"^([1-9]{1}[0-9]+、|[1-9]{1}、|[１-９]{1}[０-９]+、|[１-９]{1}、|[1-9]{1}[0-9]+\u002E|[1-9]{1}\u002E|[１-９]{1}[０-９]+\u002E|[１-９]{1}\u002E|（[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+）|（[一二三四五六七八九十]{1}）|（[1-9]{1}[0-9]+）|（[1-9]{1}）|（[１-９]{1}[０-９]+）|（[１-９]{1}）|[一二三四五六七八九十]{1}[一二三四五六七八九○零十百]+、|[一二三四五六七八九十]{1}、)" ) ) 
+                {
+                    i ++ ; 
+                }
+            }
+            return i > 1 ? "showNum" : "" ; 
+        }
     }
     public class Attachements
     {
