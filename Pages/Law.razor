@@ -79,7 +79,7 @@ else if( !Regex.IsMatch( a.ToUpper() , @"[CXLJE]{1}[0-9]{9}" ) || Int32.Parse( R
 }
 else if( !string.IsNullOrEmpty( b ) ) 
 {
-    <PageTitle>@laws[0].Laws[aa].LawName - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <PageTitle>@laws[0].Laws[aa].LawName.Replace( "臺中市立臺中第一高級中等學校學生自治聯合會" , "" ).Replace( "臺中第一高級中學" , "" ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 

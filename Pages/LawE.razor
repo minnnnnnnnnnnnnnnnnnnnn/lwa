@@ -59,7 +59,7 @@ else if ( a == "" || a == null )
 {}
 else 
 {
-    <PageTitle>@( laws[0].Laws[aa].LawName + "（簡讀版）" ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
+    <PageTitle>@( laws[0].Laws[aa].LawName.Replace( "臺中市立臺中第一高級中等學校學生自治聯合會" , "" ).Replace( "臺中第一高級中學" , "" ) + "（簡讀版）" ) - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
     <button onclick="window.print()" class="printBtn">列印</button>
     <div ahhhhaaaahaha>
         @if ( a.ToUpper().Split( '0' )[0] == "C" ) 
