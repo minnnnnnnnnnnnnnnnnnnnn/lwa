@@ -266,17 +266,49 @@ div[ahhhhaaaahaha] h1 :first-child , div[ahhhhaaaahaha] h2 :first-child , div[ah
 }
 
 
-.printFooter 
+#printFooter 
 {
     display : none ; 
 }
 @media print 
 {
-    .printFooter 
+    #printFooter 
     {
         display : block ; 
-        position : fixed ; 
+        /* position : fixed ; 
         left : -.2in ; 
-        bottom : -.3in ; 
+        bottom : -.3in ;  */
+        border-top : #ccc solid 2px ; 
+        width : 100% ; 
+        break-after : auto ; 
+        break-before : auto ; 
+    }
+    div[ahhhhaaaahaha] #printFooter span 
+    {
+        display : inline-block ; 
+        padding : 0 ; 
+        padding-left : .5rem ; 
+        padding-top : .15rem ; 
+        font-family : "Noto Sans" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+        color : #0005 ; 
+    }
+    div[ahhhhaaaahaha] #printFooter a 
+    {
+        display : inline-block ; 
+        color : #057b7b99 ; 
+        text-decoration : none ; 
+        font-family : "Noto Sans" , "Noto Sans TC" , "Noto Sans JP" , "Noto Sans SC" , sans-serif ; 
+    }
+    #lawHeader , #mainC 
+    {
+        break-after : auto ; 
+    }
+    #mainC , #mainC > :nth-child( n ) 
+    {
+        padding-left : 3.5rem ; 
+    }
+    #lawHeader form 
+    {
+        display : none ; 
     }
 }
