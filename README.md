@@ -1,21 +1,3 @@
-@page "/open"
-<PageTitle>資料開放宣告 - 臺中市立臺中第一高級中等學校學生自治聯合會法規資料庫</PageTitle>
-<style>
-    p 
-    {
-        margin-left : 2em ; 
-        text-indent : -2em ; 
-        margin-bottom : .5rem ; 
-    }
-</style>
-<div class="bread">
-    <span>現在位置：</span>
-    <ul>
-        <li><a href="">首頁</a></li>
-        <li>資料開放宣告</li>
-    </ul>
-</div>
-<h1>資料開放宣告</h1>
 <div class="open">
 <p>一、授權方式及範圍<br/>
 
