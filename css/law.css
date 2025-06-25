@@ -57,3 +57,34 @@
     flex-shrink : 0 ; 
     width : fit-content ; 
 }
+div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h2 , div[ahhhhaaaahaha] #TableofC h3 , div[ahhhhaaaahaha] #TableofC h4 , div[ahhhhaaaahaha] #TableofC h5 
+{
+    font-family : "Noto Sans Mono" , "Songti TC" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
+    margin-left : 0 ; 
+    text-indent : -5em ; 
+    margin-left : 5em ; 
+}
+#TableofC span:has( ol ) 
+{
+    zoom : 85% ; 
+}
+#TableofC span ol , #TableofC span ol li 
+{
+    list-style-type : none ; 
+}
+#TableofC li:has( h1 ) ~ li:has( h2 ) , #TableofC li:has( h2 ):not( li:has( h1 ) ~ li:has( h2 ) ) ~ li:has( h3 ) , #TableofC li:has( h3 ):not( li:has( h2 ) ~ li:has( h3 ) ) ~ li:has( h4 ) , #TableofC li:has( h4 ):not( li:has( h3 ) ~ li:has( h4 ) ) ~ li:has( h5 ) 
+{
+    padding-left : 1rem ; 
+}
+#TableofC li:has( h1 ) ~ li:has( h2 ) ~ li:has( h3 ) , #TableofC li:has( h2 ):not( li:has( h1 ) ~ li:has( h2 ) ) ~ li:has( h3 ) ~ li:has( h4 ) , #TableofC li:has( h3 ):not( li:has( h2 ) ~ li:has( h3 ) ) ~ li:has( h4 ) ~ li:has( h5 ) 
+{
+    padding-left : 2rem ; 
+}
+#TableofC li:has( h1 ) ~ li:has( h2 ) ~ li:has( h3 ) ~ li:has( h4 ) , #TableofC li:has( h2 ):not( li:has( h1 ) ~ li:has( h2 ) ) ~ li:has( h3 ) ~ li:has( h4 ) ~ li:has( h5 ) 
+{
+    padding-left : 3rem ; 
+}
+#TableofC li:has( h1 ) ~ li:has( h2 ) ~ li:has( h3 ) ~ li:has( h4 ) ~ li:has( h5 ) 
+{
+    padding-left : 4rem ; 
+}
