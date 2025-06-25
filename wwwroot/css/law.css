@@ -5,6 +5,7 @@
     margin-top : 1rem ; 
     padding-top : 1rem ; 
     padding-left : .15rem ; 
+    padding-bottom : 2rem ; 
     font-size : 1.15rem ; 
     border-top-right-radius : 8px ; 
     border-top-left-radius : 8px ; 
@@ -43,6 +44,7 @@
 {
     text-align : left ; 
     font-size : 1.15rem ; 
+    padding-bottom : 0 ; 
 }
 #lawHeader .legislativeHistory::before 
 {
@@ -57,9 +59,13 @@
     flex-shrink : 0 ; 
     width : fit-content ; 
 }
-.TableofC li , .TableofC li h1 , .TableofC li h2 , .TableofC li h3 , .TableofC li h4 , .TableofC li h5 
+#TableofC li 
 {
     cursor : pointer ; 
+}
+#TableofC li:hover 
+{
+    color : #c03 ; 
 }
 div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h2 , div[ahhhhaaaahaha] #TableofC h3 , div[ahhhhaaaahaha] #TableofC h4 , div[ahhhhaaaahaha] #TableofC h5 
 {
