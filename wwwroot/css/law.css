@@ -57,6 +57,10 @@
     flex-shrink : 0 ; 
     width : fit-content ; 
 }
+.TableofC li 
+{
+    cursor : pointer ; 
+}
 div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h1 , div[ahhhhaaaahaha] #TableofC h2 , div[ahhhhaaaahaha] #TableofC h3 , div[ahhhhaaaahaha] #TableofC h4 , div[ahhhhaaaahaha] #TableofC h5 
 {
     font-family : "Noto Sans Mono" , "Songti TC" , "Noto Serif TC" , "Noto Serif JP" , "Noto Serif SC" , sans-serif ; 
