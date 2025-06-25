@@ -57,7 +57,7 @@
     flex-shrink : 0 ; 
     width : fit-content ; 
 }
-.TableofC li 
+.TableofC li , .TableofC li h1 , .TableofC li h2 , .TableofC li h3 , .TableofC li h4 , .TableofC li h5 
 {
     cursor : pointer ; 
 }
