@@ -127,6 +127,44 @@ else if( !string.IsNullOrEmpty( b ) )
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lc[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -151,7 +189,7 @@ else if( !string.IsNullOrEmpty( b ) )
                 </div>
                 <br />
                 @foreach( var art in lc[aa].LawArticles ) 
-                {                    
+                {
                     @if( art.ArticleType == "C" ) 
                     {
                         @if( art.ArticleContent[0] == '第' ) @*編*@
@@ -327,6 +365,44 @@ else if( !string.IsNullOrEmpty( b ) )
                                         <span>@( his.Split( "." )[0] + "." )</span>
                                         <span>@( his.Split( "." )[1] )</span>
                                     </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lex[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
                                 }
                             </ol>
                         </span>
@@ -531,6 +607,44 @@ else if( !string.IsNullOrEmpty( b ) )
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in ll[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -731,6 +845,44 @@ else if( !string.IsNullOrEmpty( b ) )
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lj[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -927,6 +1079,44 @@ else if( !string.IsNullOrEmpty( b ) )
                                         <span>@( his.Split( "." )[0] + "." )</span>
                                         <span>@( his.Split( "." )[1] )</span>
                                     </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lel[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
                                 }
                             </ol>
                         </span>
@@ -1138,6 +1328,44 @@ else
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lc[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -1342,6 +1570,44 @@ else
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lex[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -1538,6 +1804,44 @@ else
                                         <span>@( his.Split( "." )[0] + "." )</span>
                                         <span>@( his.Split( "." )[1] )</span>
                                     </li>
+                                }
+                            </ol>
+                        </span>
+                    </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in ll[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
                                 }
                             </ol>
                         </span>
@@ -1742,6 +2046,44 @@ else
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lj[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -1942,6 +2284,44 @@ else
                             </ol>
                         </span>
                     </li>
+                    <li id="TableofC">
+                        <span>目錄：</span>
+                        <span>
+                            <ol>
+                                @foreach( var art in lel[aa].LawArticles ) 
+                                {
+                                    @if( art.ArticleType == "C" ) 
+                                    {
+                                        @if( art.ArticleContent[0] == '第' ) @*編*@
+                                        {
+                                            <li onclick="document.getElementById('@h1[iCh1]').scrollIntoView({behavior:'smooth'})"><h1>@art.ArticleContent</h1></li>
+                                            iCh1 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[3] == '第' ) @*章*@
+                                        {
+                                            <li onclick="document.getElementById('@h2[iCh2]').scrollIntoView({behavior:'smooth'})"><h2>@art.ArticleContent</h2></li>
+                                            iCh2 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[6] == '第' ) @*節*@
+                                        {
+                                            <li onclick="document.getElementById('@h3[iCh3]').scrollIntoView({behavior:'smooth'})"><h3>@art.ArticleContent</h3></li>
+                                            iCh3 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[9] == '第' ) @*款*@
+                                        {
+                                            <li onclick="document.getElementById('@h4[iCh4]').scrollIntoView({behavior:'smooth'})"><h4>@art.ArticleContent</h4></li>
+                                            iCh4 ++ ; 
+                                        }
+                                        else if( art.ArticleContent[12] == '第' ) @*目*@
+                                        {
+                                            <li onclick="document.getElementById('@h5[iCh5]').scrollIntoView({behavior:'smooth'})"><h5>@art.ArticleContent</h5></li>
+                                            iCh5 ++ ; 
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </span>
+                    </li>
                 </ul>
                 <form action="laws/s" method="get">
                     <input type="search" name="a" value="@a" style="display:none;">
@@ -2134,6 +2514,11 @@ else
     public int ih3;
     public int ih4;
     public int ih5;
+    public int iCh1;
+    public int iCh2;
+    public int iCh3;
+    public int iCh4;
+    public int iCh5;
     public int ih6;
     public int ip;
     public int isubp;
