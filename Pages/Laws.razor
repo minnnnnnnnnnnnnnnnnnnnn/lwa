@@ -178,7 +178,6 @@ else
     {
         if( a.Value != null ) 
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo( "zh-TW" ) ; 
             if( (string)a.Value == "latest" ) 
             {
                 lq = lq.OrderByDescending( l => l.LawModifiedDate ).ToList() ; 
