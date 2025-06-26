@@ -46,28 +46,28 @@ else
                 <h1>行政法規</h1>
                 @for (int i = 0; i < iex; i++)
                 {
-                    <a href="#@i"><span class="abandoned">@lex[i].LawAbandonNote</span>@lex[i].LawName</a>
+                    <a href="#@( i + ic )"><span class="abandoned">@lex[i].LawAbandonNote</span>@lex[i].LawName</a>
                 }
             </div>
             <div id="C">
                 <h1>立法法規</h1>
                 @for (int i = 0; i < il; i++)
                 {
-                    <a href="#@i"><span class="abandoned">@ll[i].LawAbandonNote</span>@ll[i].LawName</a>
+                    <a href="#@( i + ic + iex )"><span class="abandoned">@ll[i].LawAbandonNote</span>@ll[i].LawName</a>
                 }
             </div>
             <div id="D">
                 <h1>司法法規</h1>
                 @for (int i = 0; i < ij; i++)
                 {
-                    <a href="#@i"><span class="abandoned">@lj[i].LawAbandonNote</span>@lj[i].LawName</a>
+                    <a href="#@( i + ic + iex + il )"><span class="abandoned">@lj[i].LawAbandonNote</span>@lj[i].LawName</a>
                 }
             </div>
             <div id="E">
                 <h1>選舉法規</h1>
                 @for (int i = 0; i < iel; i++)
                 {
-                    <a href="#@i"><span class="abandoned">@lel[i].LawAbandonNote</span>@lel[i].LawName</a>
+                    <a href="#@( i + ic + iex + il + ij )"><span class="abandoned">@lel[i].LawAbandonNote</span>@lel[i].LawName</a>
                 }
             </div>
         </span>
