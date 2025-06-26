@@ -44,6 +44,8 @@
     <option value="oldest">最後異動日期（舊 > 新）</option>
     <option value="AtoZ">筆劃（少 > 多）</option>
     <option value="ZtoA">筆劃（多 > 少）</option>
+    <option value="CtoO">位階（高 > 低）</option>
+    <option value="OtoC">位階（低 > 高）</option>
 </select>
 @if (laws == null)
 {
@@ -188,16 +190,60 @@ else
             }
             else if( (string)a.Value == "AtoZ" ) 
             {
-                lq = lq.OrderBy( l => l.LawName ).ToList() ; 
+                lq = lq.OrderBy( l => l.LawName , StringComparer.Create( new System.Globalization.CultureInfo( "zh-TW" ) , false ) ).ToList() ; 
             }
             else if( (string)a.Value == "ZtoA" ) 
             {
-                lq = lq.OrderByDescending( l => l.LawName ).ToList() ; 
+                lq = lq.OrderByDescending( l => l.LawName , StringComparer.Create( new System.Globalization.CultureInfo( "zh-TW" ) , false ) ).ToList() ; 
+            }
+            else if( (string)a.Value == "CtoO" ) 
+            {
+                lq = lq.OrderBy( l => l.LawLevel , new LvlCompare() ).ToList() ; 
+            }
+            else if( (string)a.Value == "OtoC" ) 
+            {
+                lq = lq.OrderByDescending( l => l.LawLevel , new LvlCompare() ).ToList() ; 
             }
             else if( (string)a.Value == "" ) 
             {
                 lq = lqDefault ; 
             }
+        }
+    }
+
+    public class LvlCompare : IComparer<string> 
+    {
+        public int Compare( string? x , string? y ) 
+        {
+            if( x == null && y == null ) 
+            {
+                return 0 ; 
+            }
+            if( x == null ) 
+            {
+                return -1 ; 
+            }
+            if( y == null ) 
+            {
+                return 1 ; 
+            }
+            if( x == "章程" ) 
+            {
+                return -1 ; 
+            }
+            if( y == "章程" ) 
+            {
+                return 1 ; 
+            }
+            if( y == "命令" ) 
+            {
+                return -1 ; 
+            }
+            if( x == "命令" ) 
+            {
+                return 1 ; 
+            }
+            return 0 ; 
         }
     }
 
