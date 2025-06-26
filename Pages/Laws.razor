@@ -39,6 +39,7 @@
     </p>
 </form>
 <select @onchange="Sort">
+    <option value="">預設</option>
     <option value="latest">最後異動日期（新 > 舊）</option>
     <option value="oldest">最後異動日期（舊 > 新）</option>
     <option value="AtoZ">筆劃（少 > 多）</option>
@@ -52,7 +53,7 @@ else
 {
     @if( lq.Count != 0 ) 
     {
-        @foreach( var l in lq.OrderBy( l => l.LawAbandonNote ).ThenBy( l => l.LawURL ) ) 
+        @foreach( var l in lq ) 
         {
             <a class="lawresult" href="@l.LawURL&c=@a&q=@b&l=@c&ab=@d">
                 <div>
@@ -113,6 +114,7 @@ else
     public string? c ; 
     public string? d ; 
     public List<L> lq = new List<L>(); 
+    public List<L> lqDefault = new List<L>(); 
     protected override void OnInitialized()
     {
         var uri = N.ToAbsoluteUri(N.Uri);
@@ -167,11 +169,38 @@ else
                 {}
                 lq = lqq ; 
             }
+            lq = lq.OrderBy( l => l.LawAbandonNote ).ToList() ; 
+            lqDefault = lq ; 
         }
     }
     
     public void Sort( ChangeEventArgs a ) 
-    {}
+    {
+        if( a.Value != null ) 
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo( "zh-TW" ) ; 
+            if( (string)a.Value == "latest" ) 
+            {
+                lq = lq.OrderByDescending( l => l.LawModifiedDate ).ToList() ; 
+            }
+            else if( (string)a.Value == "oldest" ) 
+            {
+                lq = lq.OrderBy( l => l.LawModifiedDate ).ToList() ; 
+            }
+            else if( (string)a.Value == "AtoZ" ) 
+            {
+                lq = lq.OrderBy( l => l.LawName ).ToList() ; 
+            }
+            else if( (string)a.Value == "ZtoA" ) 
+            {
+                lq = lq.OrderByDescending( l => l.LawName ).ToList() ; 
+            }
+            else if( (string)a.Value == "" ) 
+            {
+                lq = lqDefault ; 
+            }
+        }
+    }
 
     public class LawRoot
     {
